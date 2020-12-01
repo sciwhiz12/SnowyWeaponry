@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[34,)"
+license="MIT License"
+issueTrackerURL="https://github.com/sciwhiz12/SnowyWeaponry/issues"
+
+[[mods]]
+modId="snowyweaponry"
+version="${file.jarVersion}"
+displayName="Snowy Weaponry"
+displayURL="https://github.com/sciwhiz12/SnowyWeaponry"
+credits="To the wonderful folks at MMD for WinterJam"
+authors="§esciwhiz12§r"
+description='''
+Adds different snow-based weaponry. (and snow cones!)
+
+§oThis mod is an entry for §2MMD§r's §bWinterJam 2020§r.
+'''
+
+[[dependencies.snowyweaponry]]
+    modId="forge"
+    mandatory=true
+    versionRange="[34.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.snowyweaponry]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.3,1.17)"
+    ordering="NONE"
+    side="BOTH"
