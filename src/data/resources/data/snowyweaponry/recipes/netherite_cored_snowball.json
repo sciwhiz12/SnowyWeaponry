@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "cored_snowballs",
+  "ingredients": [
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "item": "minecraft:snowball"
+    },
+    {
+      "tag": "forge:nuggets/netherite"
+    }
+  ],
+  "result": {
+    "item": "snowyweaponry:netherite_cored_snowball",
+    "count": 3
+  }
+}

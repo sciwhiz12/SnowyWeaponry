@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cored_snowballs",
+  "pattern": [
+    "sss",
+    "sGs",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:snowball"
+    },
+    "G": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
+  "result": {
+    "item": "snowyweaponry:gold_cored_snowball",
+    "count": 8
+  }
+}

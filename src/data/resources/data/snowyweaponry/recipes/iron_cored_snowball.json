@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "cored_snowballs",
+  "pattern": [
+    "sss",
+    "sIs",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:snowball"
+    },
+    "I": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "result": {
+    "item": "snowyweaponry:iron_cored_snowball",
+    "count": 8
+  }
+}

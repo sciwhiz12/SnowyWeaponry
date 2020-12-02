@@ -1,0 +1,12 @@
+{
+  "death.attack.snowball": "%1$s was snowballed to death by %2$s",
+  "death.attack.snowball.item": "%1$s was snowballed to death by %2$s using %3$s",
+  "entity.snowyweaponry.cored_snowball": "Snowball",
+  "item.snowyweaponry.diamond_chunk": "Diamond Chunk",
+  "item.snowyweaponry.diamond_cored_snowball": "Diamond-cored Snowball",
+  "item.snowyweaponry.gold_cored_snowball": "Gold-cored Snowball",
+  "item.snowyweaponry.iron_cored_snowball": "Iron-cored Snowball",
+  "item.snowyweaponry.netherite_cored_snowball": "Netherite-cored Snowball",
+  "item.snowyweaponry.netherite_nugget": "Netherite Nugget",
+  "itemGroup.snowy_weapons": "Snowy Weapons"
+}
