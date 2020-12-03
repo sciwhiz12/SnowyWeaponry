@@ -3,6 +3,7 @@ package sciwhiz12.snowyweaponry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.EffectInstance;
@@ -44,7 +45,18 @@ public final class Registration {
                 .setRegistryName("diamond_cored_snowball"),
             new CoredSnowballItem(itemProps().maxStackSize(16).group(ITEM_GROUP), 4, 0,
                 () -> new EffectInstance(Effects.BLINDNESS, 40, 0, false, true, false))
-                .setRegistryName("netherite_cored_snowball")
+                .setRegistryName("netherite_cored_snowball"),
+
+            new Item(itemProps().maxStackSize(32).group(ITEM_GROUP)
+                .food(new Food.Builder().fastToEat().hunger(1).saturation(0.1F).build()))
+                .setRegistryName("wafer_cone"),
+            new Item(itemProps().maxStackSize(8).group(ITEM_GROUP)
+                .food(new Food.Builder().fastToEat().hunger(2).saturation(0.2F).build()))
+                .setRegistryName("snow_cone"),
+            new Item(itemProps().maxStackSize(8).group(ITEM_GROUP)
+                .food(new Food.Builder().fastToEat().hunger(4).saturation(1.0F).setAlwaysEdible()
+                    .effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 120, 0, false, true), 1).build()))
+                .setRegistryName("golden_snow_cone")
         );
     }
 

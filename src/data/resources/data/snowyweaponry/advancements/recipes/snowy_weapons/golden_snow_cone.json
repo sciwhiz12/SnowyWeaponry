@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "snowyweaponry:golden_snow_cone"
+    ]
+  },
+  "criteria": {
+    "has_snow_cone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "snowyweaponry:snow_cone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "snowyweaponry:golden_snow_cone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_snow_cone",
+      "has_the_recipe"
+    ]
+  ]
+}

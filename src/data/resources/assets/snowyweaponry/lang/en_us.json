@@ -5,8 +5,11 @@
   "item.snowyweaponry.diamond_chunk": "Diamond Chunk",
   "item.snowyweaponry.diamond_cored_snowball": "Diamond-cored Snowball",
   "item.snowyweaponry.gold_cored_snowball": "Gold-cored Snowball",
+  "item.snowyweaponry.golden_snow_cone": "Golden Snow Cone",
   "item.snowyweaponry.iron_cored_snowball": "Iron-cored Snowball",
   "item.snowyweaponry.netherite_cored_snowball": "Netherite-cored Snowball",
   "item.snowyweaponry.netherite_nugget": "Netherite Nugget",
+  "item.snowyweaponry.snow_cone": "Snow Cone",
+  "item.snowyweaponry.wafer_cone": "Wafer Cone",
   "itemGroup.snowy_weapons": "Snowy Weapons"
 }

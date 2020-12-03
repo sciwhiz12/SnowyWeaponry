@@ -24,6 +24,10 @@ public class Languages extends LanguageProvider {
         add(Items.DIAMOND_CORED_SNOWBALL, "Diamond-cored Snowball");
         add(Items.NETHERITE_CORED_SNOWBALL, "Netherite-cored Snowball");
 
+        add(Items.WAFER_CONE, "Wafer Cone");
+        add(Items.SNOW_CONE, "Snow Cone");
+        add(Items.GOLDEN_SNOW_CONE, "Golden Snow Cone");
+
         add(Reference.EntityTypes.CORED_SNOWBALL, "Snowball");
 
         add("death.attack.snowball", "%1$s was snowballed to death by %2$s");

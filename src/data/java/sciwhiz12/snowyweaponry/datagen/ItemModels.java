@@ -24,6 +24,10 @@ public class ItemModels extends ItemModelProvider {
         singleTextureItem(Items.GOLD_CORED_SNOWBALL);
         singleTextureItem(Items.DIAMOND_CORED_SNOWBALL);
         singleTextureItem(Items.NETHERITE_CORED_SNOWBALL);
+
+        singleTextureItem(Items.WAFER_CONE);
+        singleTextureItem(Items.SNOW_CONE);
+        singleTextureItem(Items.GOLDEN_SNOW_CONE);
     }
 
     void singleTextureItem(Item i) {

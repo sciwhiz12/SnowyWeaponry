@@ -1,20 +1,31 @@
 package sciwhiz12.snowyweaponry.datagen;
 
+import com.google.common.collect.Lists;
 import net.minecraft.advancements.criterion.ItemPredicate.Builder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.CompoundIngredient;
+import net.minecraftforge.common.crafting.NBTIngredient;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import sciwhiz12.snowyweaponry.Reference;
 
+import java.lang.reflect.Constructor;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static net.minecraft.advancements.criterion.InventoryChangeTrigger.Instance.forItems;
 
 public class Recipes extends RecipeProvider {
+    private static final Constructor<CompoundIngredient> COMPOUND_INGREDIENT_CTOR = ObfuscationReflectionHelper
+        .findConstructor(CompoundIngredient.class, List.class);
+
     public Recipes(DataGenerator generatorIn) {
         super(generatorIn);
     }
@@ -46,6 +57,8 @@ public class Recipes extends RecipeProvider {
             .build(consumer, "netherite_from_nuggets");
 
         registerSnowballs(consumer);
+
+        registerSnowCones(consumer);
     }
 
     void registerSnowballs(Consumer<IFinishedRecipe> consumer) {
@@ -86,5 +99,37 @@ public class Recipes extends RecipeProvider {
             .addCriterion("has_snowball", forItems(Items.SNOWBALL))
             .setGroup(cored_snowballs)
             .build(consumer);
+    }
+
+    void registerSnowCones(Consumer<IFinishedRecipe> consumer) {
+        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.WAFER_CONE, 4)
+            .addIngredient(Tags.Items.CROPS_WHEAT)
+            .addIngredient(Tags.Items.CROPS_WHEAT)
+            .addIngredient(Tags.Items.CROPS_WHEAT)
+            .addIngredient(Items.WATER_BUCKET)
+            .addCriterion("has_wheat", forItems(Builder.create().tag(Tags.Items.CROPS_WHEAT).build()))
+            .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.SNOW_CONE)
+            .addIngredient(Reference.Items.WAFER_CONE)
+            .addIngredient(Items.SNOWBALL)
+            .addIngredient(Items.SNOWBALL)
+            .addCriterion("has_wafer_cone", forItems(Reference.Items.WAFER_CONE))
+            .build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(Reference.Items.GOLDEN_SNOW_CONE)
+            .patternLine("ggg")
+            .patternLine("gSg")
+            .patternLine("ggg")
+            .key('g', Tags.Items.NUGGETS_GOLD)
+            .key('S', Reference.Items.SNOW_CONE)
+            .addCriterion("has_snow_cone", forItems(Reference.Items.SNOW_CONE))
+            .build(consumer);
+    }
+
+    private static CompoundIngredient compound(Ingredient... ingredients) {
+        return new CompoundIngredient(Lists.newArrayList(ingredients)) {};
+    }
+
+    private static NBTIngredient nbt(ItemStack stack) {
+        return new NBTIngredient(stack) {};
     }
 }

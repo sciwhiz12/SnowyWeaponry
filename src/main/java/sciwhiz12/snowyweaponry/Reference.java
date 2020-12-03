@@ -47,6 +47,10 @@ public final class Reference {
         public static final CoredSnowballItem GOLD_CORED_SNOWBALL = Null();
         public static final CoredSnowballItem DIAMOND_CORED_SNOWBALL = Null();
         public static final CoredSnowballItem NETHERITE_CORED_SNOWBALL = Null();
+
+        public static final Item WAFER_CONE = Null();
+        public static final Item SNOW_CONE = Null();
+        public static final Item GOLDEN_SNOW_CONE = Null();
     }
 
     @ObjectHolder(MODID)
