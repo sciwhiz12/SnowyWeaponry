@@ -6,6 +6,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
@@ -15,6 +17,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
 import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import sciwhiz12.snowyweaponry.item.PotionConeItem;
+import sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
 import static sciwhiz12.snowyweaponry.Reference.ITEM_GROUP;
 import static sciwhiz12.snowyweaponry.SnowyWeaponry.COMMON;
@@ -56,7 +60,10 @@ public final class Registration {
             new Item(itemProps().maxStackSize(8).group(ITEM_GROUP)
                 .food(new Food.Builder().fastToEat().hunger(4).saturation(1.0F).setAlwaysEdible()
                     .effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 120, 0, false, true), 1).build()))
-                .setRegistryName("golden_snow_cone")
+                .setRegistryName("golden_snow_cone"),
+            new PotionConeItem(itemProps().maxStackSize(8).group(ITEM_GROUP)
+                .food(new Food.Builder().fastToEat().hunger(2).saturation(0.3F).setAlwaysEdible().build()))
+                .setRegistryName("potion_snow_cone")
         );
     }
 
@@ -67,6 +74,14 @@ public final class Registration {
             build(EntityType.Builder.<CoredSnowballEntity>create(CoredSnowballEntity::new, EntityClassification.MISC)
                     .size(0.25F, 0.25F).trackingRange(4).func_233608_b_(10),
                 "cored_snowball")
+        );
+    }
+
+    @SubscribeEvent
+    static void onRegisterRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+        LOG.debug(COMMON, "Registering recipe serializers");
+        event.getRegistry().registerAll(
+            new SpecialRecipeSerializer<>(PotionConeRecipe::new).setRegistryName("potion_cone_recipe")
         );
     }
 

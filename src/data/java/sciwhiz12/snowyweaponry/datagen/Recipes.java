@@ -2,6 +2,7 @@ package sciwhiz12.snowyweaponry.datagen;
 
 import com.google.common.collect.Lists;
 import net.minecraft.advancements.criterion.ItemPredicate.Builder;
+import net.minecraft.data.CustomRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
@@ -15,6 +16,7 @@ import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.NBTIngredient;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import sciwhiz12.snowyweaponry.Reference;
+import sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
@@ -123,6 +125,8 @@ public class Recipes extends RecipeProvider {
             .key('S', Reference.Items.SNOW_CONE)
             .addCriterion("has_snow_cone", forItems(Reference.Items.SNOW_CONE))
             .build(consumer);
+        CustomRecipeBuilder.customRecipe(RecipeSerializers.POTION_CONE_RECIPE)
+            .build(consumer, String.valueOf(RecipeSerializers.POTION_CONE_RECIPE.getRegistryName()));
     }
 
     private static CompoundIngredient compound(Ingredient... ingredients) {

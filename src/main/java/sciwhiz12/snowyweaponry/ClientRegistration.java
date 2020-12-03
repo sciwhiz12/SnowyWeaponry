@@ -2,7 +2,9 @@ package sciwhiz12.snowyweaponry;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -28,6 +30,15 @@ public final class ClientRegistration {
     static void onClientSetup(FMLClientSetupEvent event) {
         LOG.debug(CLIENT, "Setting up on client");
         registerEntityRenderers(event.getMinecraftSupplier());
+    }
+
+    @SubscribeEvent
+    static void onColorHandlerItem(ColorHandlerEvent.Item event) {
+        LOG.debug(CLIENT, "Registering item colors");
+        event.getItemColors().register(
+            (stack, index) -> index != 1 ? -1 : PotionUtils.getColor(stack),
+            Reference.Items.POTION_SNOW_CONE
+        );
     }
 
     static void registerEntityRenderers(Supplier<Minecraft> minecraft) {

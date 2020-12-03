@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
@@ -15,6 +16,8 @@ import net.minecraftforge.registries.ObjectHolder;
 import sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
 import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
 import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import sciwhiz12.snowyweaponry.item.PotionConeItem;
+import sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
 import javax.annotation.Nullable;
 
@@ -51,6 +54,7 @@ public final class Reference {
         public static final Item WAFER_CONE = Null();
         public static final Item SNOW_CONE = Null();
         public static final Item GOLDEN_SNOW_CONE = Null();
+        public static final PotionConeItem POTION_SNOW_CONE = Null();
     }
 
     @ObjectHolder(MODID)
@@ -67,6 +71,13 @@ public final class Reference {
         public static DamageSource causeSnowballDamage(Entity source, @Nullable Entity indirectSource, int lootingLevel) {
             return (new CoredSnowballDamageSource("snowball", source, indirectSource, lootingLevel)).setProjectile();
         }
+    }
+
+    @ObjectHolder(MODID)
+    public static final class RecipeSerializers {
+        private RecipeSerializers() {} // Prevent instantiation
+
+        public static final SpecialRecipeSerializer<PotionConeRecipe> POTION_CONE_RECIPE = Null();
     }
 
     public static final class Tags {
