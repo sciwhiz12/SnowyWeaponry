@@ -14,6 +14,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import sciwhiz12.snowyweaponry.Reference;
@@ -52,7 +53,15 @@ public class CoredSnowballEntity extends ProjectileItemEntity {
                 this.world.addParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
             }
         }
+    }
 
+    @Override
+    protected ITextComponent getProfessionName() {
+        final ItemStack stack = this.getItem();
+        if (!stack.isEmpty()) {
+            return stack.getDisplayName();
+        }
+        return super.getProfessionName();
     }
 
     @Override
