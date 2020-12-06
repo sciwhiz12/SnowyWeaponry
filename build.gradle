@@ -17,7 +17,7 @@ apply plugin: 'maven-publish'
 version = getVersion()
 println('Mod version: ' + version)
 group = 'sciwhiz12.snowyweaponry'
-archivesBaseName = "snowyweaponry-{$mc_version}"
+archivesBaseName = "snowyweaponry-${mc_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -132,7 +132,7 @@ publishing {
 String getVersion() {
     try {
         final String branchName = grgit.branch.current().name
-        boolean non_main = !branchName.matches("\\d+.\\d+.x")
+        boolean non_main = !branchName.matches("\\d+.\\d+.x") && !branchName.equals("HEAD")
         if (non_main) println("Currently on non-main branch: " + branchName)
         String ver = grgit.describe(commit: grgit.head(), longDescr: non_main, tags: true)
         if (ver != null) {

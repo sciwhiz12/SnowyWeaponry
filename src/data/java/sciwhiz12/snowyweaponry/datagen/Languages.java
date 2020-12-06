@@ -23,6 +23,7 @@ public class Languages extends LanguageProvider {
         add(Items.GOLD_CORED_SNOWBALL, "Gold-cored Snowball");
         add(Items.DIAMOND_CORED_SNOWBALL, "Diamond-cored Snowball");
         add(Items.NETHERITE_CORED_SNOWBALL, "Netherite-cored Snowball");
+        add(Items.EXPLOSIVE_SNOWBALL, "Explosive Snowball");
 
         add(Items.WAFER_CONE, "Wafer Cone");
         add(Items.SNOW_CONE, "Snow Cone");
@@ -31,8 +32,7 @@ public class Languages extends LanguageProvider {
 
         add(Reference.EntityTypes.CORED_SNOWBALL, "Snowball");
 
-        add("death.attack.snowball", "%1$s was snowballed to death by %2$s");
-        add("death.attack.snowball.item", "%1$s was snowballed to death by %2$s using %3$s");
+        addDamageSourceTranslations();
 
         addPotionConeTranslations();
     }
@@ -63,4 +63,15 @@ public class Languages extends LanguageProvider {
         add(baseTranslationKey + ".effect.turtle_master", "Snow Cone of the Turtle Master");
         add(baseTranslationKey + ".effect.slow_falling", "Snow Cone of Slow Falling");
     }
-}
+
+    void addDamageSourceTranslations() {
+        // Regular -cored snowballs
+        add("death.attack.snowball", "%1$s was snowballed to death by %2$s");
+        add("death.attack.snowball.item", "%1$s was snowballed to death by %2$s using %3$s");
+
+        // Explosive snowballs
+        add("death.attack.snowball.explosion", "%1$s blew up into icy pieces");
+        add("death.attack.snowball.explosion.player", "%1$s was blown to icy pieces by %2$s");
+        add("death.attack.snowball.explosion.player.item", "%1$s was blown to icy pieces by %2$s using %3$s");
+    }
+ }

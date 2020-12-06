@@ -14,6 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import java.util.function.Supplier;
 
 import static sciwhiz12.snowyweaponry.Reference.EntityTypes.CORED_SNOWBALL;
+import static sciwhiz12.snowyweaponry.Reference.EntityTypes.EXPLOSIVE_SNOWBALL;
 import static sciwhiz12.snowyweaponry.SnowyWeaponry.CLIENT;
 import static sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
 
@@ -44,6 +45,8 @@ public final class ClientRegistration {
     static void registerEntityRenderers(Supplier<Minecraft> minecraft) {
         LOG.debug(CLIENT, "Registering entity renderers");
         RenderingRegistry.registerEntityRenderingHandler(CORED_SNOWBALL,
+            rendererManager -> new SpriteRenderer<>(rendererManager, minecraft.get().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(EXPLOSIVE_SNOWBALL,
             rendererManager -> new SpriteRenderer<>(rendererManager, minecraft.get().getItemRenderer()));
     }
 }

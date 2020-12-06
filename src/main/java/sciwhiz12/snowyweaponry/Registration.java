@@ -1,5 +1,6 @@
 package sciwhiz12.snowyweaponry;
 
+import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -15,12 +16,15 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
+import sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
 import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import sciwhiz12.snowyweaponry.item.PotionConeItem;
 import sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
-import static sciwhiz12.snowyweaponry.Reference.ITEM_GROUP;
+import static sciwhiz12.snowyweaponry.Reference.*;
 import static sciwhiz12.snowyweaponry.SnowyWeaponry.COMMON;
 import static sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
 
@@ -32,6 +36,20 @@ import static sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
 @EventBusSubscriber(modid = SnowyWeaponry.MODID, bus = Bus.MOD)
 public final class Registration {
     private Registration() {} // Prevent instantiation
+
+    @SubscribeEvent
+    static void onCommonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(Registration::registerDispenserBehavior);
+    }
+
+    static void registerDispenserBehavior() {
+        LOG.debug(COMMON, "Registering dispenser behavior for items");
+        DispenserBlock.registerDispenseBehavior(Items.IRON_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerDispenseBehavior(Items.GOLD_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerDispenseBehavior(Items.DIAMOND_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerDispenseBehavior(Items.NETHERITE_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerDispenseBehavior(Items.EXPLOSIVE_SNOWBALL, DispenseBehaviors.EXPLOSIVE_SNOWBALL);
+    }
 
     @SubscribeEvent
     static void onRegisterItems(RegistryEvent.Register<Item> event) {
@@ -50,6 +68,8 @@ public final class Registration {
             new CoredSnowballItem(itemProps().maxStackSize(16).group(ITEM_GROUP), 4, 0,
                 () -> new EffectInstance(Effects.BLINDNESS, 40, 0, false, true, false))
                 .setRegistryName("netherite_cored_snowball"),
+            new ExplosiveSnowballItem(itemProps().maxStackSize(8).group(ITEM_GROUP))
+                .setRegistryName("explosive_snowball"),
 
             new Item(itemProps().maxStackSize(32).group(ITEM_GROUP)
                 .food(new Food.Builder().fastToEat().hunger(1).saturation(0.1F).build()))
@@ -73,7 +93,10 @@ public final class Registration {
         event.getRegistry().registerAll(
             build(EntityType.Builder.<CoredSnowballEntity>create(CoredSnowballEntity::new, EntityClassification.MISC)
                     .size(0.25F, 0.25F).trackingRange(4).func_233608_b_(10),
-                "cored_snowball")
+                "cored_snowball"),
+            build(EntityType.Builder.<ExplosiveSnowballEntity>create(ExplosiveSnowballEntity::new, EntityClassification.MISC)
+                    .size(0.25F, 0.25F).trackingRange(4).func_233608_b_(10),
+                "explosive_snowball")
         );
     }
 
@@ -85,7 +108,6 @@ public final class Registration {
         );
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static <T extends Entity> EntityType<T> build(EntityType.Builder<T> builder, String entityName) {
         ResourceLocation name = new ResourceLocation(SnowyWeaponry.MODID, entityName);
         EntityType<T> type = builder.build(name.toString());

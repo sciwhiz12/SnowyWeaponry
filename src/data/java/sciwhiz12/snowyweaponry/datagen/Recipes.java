@@ -101,6 +101,15 @@ public class Recipes extends RecipeProvider {
             .addCriterion("has_snowball", forItems(Items.SNOWBALL))
             .setGroup(cored_snowballs)
             .build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.EXPLOSIVE_SNOWBALL, 3)
+            .addIngredient(Items.SNOWBALL)
+            .addIngredient(Items.SNOWBALL)
+            .addIngredient(Items.SNOWBALL)
+            .addIngredient(Tags.Items.GUNPOWDER)
+            .addIngredient(Tags.Items.GUNPOWDER)
+            .addCriterion("has_snowball", forItems(Items.SNOWBALL))
+            .setGroup(cored_snowballs)
+            .build(consumer);
     }
 
     void registerSnowCones(Consumer<IFinishedRecipe> consumer) {

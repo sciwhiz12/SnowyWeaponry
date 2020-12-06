@@ -1,7 +1,11 @@
 package sciwhiz12.snowyweaponry;
 
+import net.minecraft.dispenser.IPosition;
+import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -10,12 +14,16 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 import net.minecraftforge.registries.ObjectHolder;
 import sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
 import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
+import sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
 import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import sciwhiz12.snowyweaponry.item.PotionConeItem;
 import sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
@@ -50,6 +58,7 @@ public final class Reference {
         public static final CoredSnowballItem GOLD_CORED_SNOWBALL = Null();
         public static final CoredSnowballItem DIAMOND_CORED_SNOWBALL = Null();
         public static final CoredSnowballItem NETHERITE_CORED_SNOWBALL = Null();
+        public static final ExplosiveSnowballItem EXPLOSIVE_SNOWBALL = Null();
 
         public static final Item WAFER_CONE = Null();
         public static final Item SNOW_CONE = Null();
@@ -62,6 +71,7 @@ public final class Reference {
         private EntityTypes() {} // Prevent instantiation
 
         public static final EntityType<CoredSnowballEntity> CORED_SNOWBALL = Null();
+        public static final EntityType<ExplosiveSnowballEntity> EXPLOSIVE_SNOWBALL = Null();
     }
 
     @ObjectHolder(MODID)
@@ -70,6 +80,12 @@ public final class Reference {
 
         public static DamageSource causeSnowballDamage(Entity source, @Nullable Entity indirectSource, int lootingLevel) {
             return (new CoredSnowballDamageSource("snowball", source, indirectSource, lootingLevel)).setProjectile();
+        }
+
+        public static DamageSource causeSnowballExplosionDamage(@Nullable Entity entity) {
+            return entity instanceof LivingEntity ?
+                (new EntityDamageSource("snowball.explosion.player", entity)).setDifficultyScaled().setExplosion() :
+                (new DamageSource("snowball.explosion")).setDifficultyScaled().setExplosion();
         }
     }
 
@@ -89,5 +105,27 @@ public final class Reference {
             .createOptional(new ResourceLocation("forge", "nuggets/diamond"));
         public static final IOptionalNamedTag<Item> NUGGETS_NETHERITE = ItemTags
             .createOptional(new ResourceLocation("forge", "nuggets/netherite"));
+    }
+
+    public static final class DispenseBehaviors {
+        private DispenseBehaviors() {} // Prevent instantiation
+
+        public static final ProjectileDispenseBehavior CORED_SNOWBALL = new ProjectileDispenseBehavior() {
+            @Override
+            protected ProjectileEntity getProjectileEntity(World world, IPosition pos, ItemStack stack) {
+                CoredSnowballEntity entity = new CoredSnowballEntity(world, pos.getX(), pos.getY(), pos.getZ());
+                entity.setItem(stack);
+                return entity;
+            }
+        };
+
+        public static final ProjectileDispenseBehavior EXPLOSIVE_SNOWBALL = new ProjectileDispenseBehavior() {
+            @Override
+            protected ProjectileEntity getProjectileEntity(World world, IPosition pos, ItemStack stack) {
+                ExplosiveSnowballEntity entity = new ExplosiveSnowballEntity(world, pos.getX(), pos.getY(), pos.getZ());
+                entity.setItem(stack);
+                return entity;
+            }
+        };
     }
 }
