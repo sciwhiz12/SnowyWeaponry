@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "snowyweaponry:netherite_nugget"
+            "items": [
+              "snowyweaponry:netherite_nugget"
+            ]
           }
         ]
       }

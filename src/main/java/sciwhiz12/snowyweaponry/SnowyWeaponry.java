@@ -14,5 +14,6 @@ public class SnowyWeaponry {
     public static final Marker CLIENT = MarkerManager.getMarker("CLIENT");
     public static final Marker SERVER = MarkerManager.getMarker("SERVER");
 
-    public SnowyWeaponry() {}
+    public SnowyWeaponry() {
+    }
 }

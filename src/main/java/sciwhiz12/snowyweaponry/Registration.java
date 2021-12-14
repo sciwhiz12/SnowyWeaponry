@@ -1,17 +1,17 @@
 package sciwhiz12.snowyweaponry;
 
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.SpecialRecipeSerializer;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -35,7 +35,8 @@ import static sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
  */
 @EventBusSubscriber(modid = SnowyWeaponry.MODID, bus = Bus.MOD)
 public final class Registration {
-    private Registration() {} // Prevent instantiation
+    private Registration() {
+    } // Prevent instantiation
 
     @SubscribeEvent
     static void onCommonSetup(FMLCommonSetupEvent event) {
@@ -55,34 +56,34 @@ public final class Registration {
     static void onRegisterItems(RegistryEvent.Register<Item> event) {
         LOG.debug(COMMON, "Registering items");
         event.getRegistry().registerAll(
-            new Item(itemProps().stacksTo(64).tab(ItemGroup.TAB_MISC)).setRegistryName("diamond_chunk"),
-            new Item(itemProps().stacksTo(64).tab(ItemGroup.TAB_MISC)).setRegistryName("netherite_nugget"),
+            new Item(itemProps().stacksTo(64).tab(CreativeModeTab.TAB_MISC)).setRegistryName("diamond_chunk"),
+            new Item(itemProps().stacksTo(64).tab(CreativeModeTab.TAB_MISC)).setRegistryName("netherite_nugget"),
 
             new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 2, 0,
                 null).setRegistryName("iron_cored_snowball"),
             new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 1, 1,
                 null).setRegistryName("gold_cored_snowball"),
             new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 3, 0,
-                () -> new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 30, 0, false, true, false))
+                () -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0, false, true, false))
                 .setRegistryName("diamond_cored_snowball"),
             new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 4, 0,
-                () -> new EffectInstance(Effects.BLINDNESS, 40, 0, false, true, false))
+                () -> new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, true, false))
                 .setRegistryName("netherite_cored_snowball"),
             new ExplosiveSnowballItem(itemProps().stacksTo(8).tab(ITEM_GROUP))
                 .setRegistryName("explosive_snowball"),
 
             new Item(itemProps().stacksTo(32).tab(ITEM_GROUP)
-                .food(new Food.Builder().fast().nutrition(1).saturationMod(0.1F).build()))
+                .food(new FoodProperties.Builder().fast().nutrition(1).saturationMod(0.1F).build()))
                 .setRegistryName("wafer_cone"),
             new Item(itemProps().stacksTo(8).tab(ITEM_GROUP)
-                .food(new Food.Builder().fast().nutrition(2).saturationMod(0.2F).build()))
+                .food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(0.2F).build()))
                 .setRegistryName("snow_cone"),
             new Item(itemProps().stacksTo(8).tab(ITEM_GROUP)
-                .food(new Food.Builder().fast().nutrition(4).saturationMod(1.0F).alwaysEat()
-                    .effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 120, 0, false, true), 1).build()))
+                .food(new FoodProperties.Builder().fast().nutrition(4).saturationMod(1.0F).alwaysEat()
+                    .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 120, 0, false, true), 1).build()))
                 .setRegistryName("golden_snow_cone"),
             new PotionConeItem(itemProps().stacksTo(8).tab(ITEM_GROUP)
-                .food(new Food.Builder().fast().nutrition(2).saturationMod(0.3F).alwaysEat().build()))
+                .food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(0.3F).alwaysEat().build()))
                 .setRegistryName("potion_snow_cone")
         );
     }
@@ -91,20 +92,20 @@ public final class Registration {
     static void onRegisterEntities(RegistryEvent.Register<EntityType<?>> event) {
         LOG.debug(COMMON, "Registering entity types");
         event.getRegistry().registerAll(
-            build(EntityType.Builder.<CoredSnowballEntity>of(CoredSnowballEntity::new, EntityClassification.MISC)
+            build(EntityType.Builder.<CoredSnowballEntity>of(CoredSnowballEntity::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10),
                 "cored_snowball"),
-            build(EntityType.Builder.<ExplosiveSnowballEntity>of(ExplosiveSnowballEntity::new, EntityClassification.MISC)
+            build(EntityType.Builder.<ExplosiveSnowballEntity>of(ExplosiveSnowballEntity::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10),
                 "explosive_snowball")
         );
     }
 
     @SubscribeEvent
-    static void onRegisterRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+    static void onRegisterRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
         LOG.debug(COMMON, "Registering recipe serializers");
         event.getRegistry().registerAll(
-            new SpecialRecipeSerializer<>(PotionConeRecipe::new).setRegistryName("potion_cone_recipe")
+            new SimpleRecipeSerializer<>(PotionConeRecipe::new).setRegistryName("potion_cone_recipe")
         );
     }
 
@@ -115,5 +116,7 @@ public final class Registration {
         return type;
     }
 
-    private static Item.Properties itemProps() { return new Item.Properties(); }
+    private static Item.Properties itemProps() {
+        return new Item.Properties();
+    }
 }

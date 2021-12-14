@@ -1,7 +1,7 @@
 package sciwhiz12.snowyweaponry.util;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
@@ -17,12 +17,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class Util {
     // Prevent instantiation
-    private Util() {}
+    private Util() {
+    }
 
     /**
      * A fix for IntelliJ IDEA's "Constant conditions" inspection. Used for
-     * {@link net.minecraftforge.registries.ObjectHolder} and
-     * {@link net.minecraftforge.common.capabilities.CapabilityInject} fields.
+     * {@link net.minecraftforge.registries.ObjectHolder} fields.
      *
      * @return {@code null}
      */
@@ -44,12 +44,11 @@ public final class Util {
      * @param second       The second {@code LazyOptional}
      * @param defaultValue The default return value
      * @param func         The {@code BiFunction} to be applied
-     *
      * @return The result of the {@link BiFunction} if both {@link LazyOptional}s
      * are present, otherwise the default return value
      */
     public static <F, S, U> U mapIfBothPresent(LazyOptional<F> first, LazyOptional<S> second, U defaultValue,
-        BiFunction<F, S, U> func) {
+                                               BiFunction<F, S, U> func) {
         checkNotNull(first);
         checkNotNull(second);
         checkNotNull(func);
@@ -79,7 +78,6 @@ public final class Util {
      *
      * @param base   The base {@code ResourceLocation}
      * @param append The string to append to the location's path
-     *
      * @return The location with path appendage
      */
     public static ResourceLocation appendPath(ResourceLocation base, String append) {
@@ -88,7 +86,7 @@ public final class Util {
     }
 
     /**
-     * <p>Creates a {@link TranslationTextComponent} based on if the given amount is {@code 0}, {@code 1}, or more than
+     * <p>Creates a {@link TranslatableComponent} based on if the given amount is {@code 0}, {@code 1}, or more than
      * {@code 1}.</p>
      *
      * <p>This method uses the following logic for determining the translation key:
@@ -104,17 +102,16 @@ public final class Util {
      * @param translationKeyBase The base translation key
      * @param amount             The amount to use for determining the translation key
      * @param additionalInfo     The additional objects when construction the {@code TranslationTextComponent}
-     *
      * @return The resulting {@code TranslationTextComponent}
      */
-    public static TranslationTextComponent createAmountTooltip(String translationKeyBase, int amount,
-        Object... additionalInfo) {
+    public static TranslatableComponent createAmountTooltip(String translationKeyBase, int amount,
+                                                            Object... additionalInfo) {
         if (amount == 0) {
-            return new TranslationTextComponent(translationKeyBase + ".zero", amount, additionalInfo);
+            return new TranslatableComponent(translationKeyBase + ".zero", amount, additionalInfo);
         } else if (amount == 1) {
-            return new TranslationTextComponent(translationKeyBase + ".one", amount, additionalInfo);
+            return new TranslatableComponent(translationKeyBase + ".one", amount, additionalInfo);
         } else {
-            return new TranslationTextComponent(translationKeyBase, amount, additionalInfo);
+            return new TranslatableComponent(translationKeyBase, amount, additionalInfo);
         }
     }
 }

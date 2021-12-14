@@ -1,7 +1,7 @@
 package sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeRegistryTagsProvider;
 import net.minecraftforge.registries.ForgeRegistries;

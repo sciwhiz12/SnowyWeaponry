@@ -73,4 +73,4 @@ public class Languages extends LanguageProvider {
         add("death.attack.snowball.explosion.player", "%1$s was blown to icy pieces by %2$s");
         add("death.attack.snowball.explosion.player.item", "%1$s was blown to icy pieces by %2$s using %3$s");
     }
- }
+}

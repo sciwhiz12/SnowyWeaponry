@@ -1,17 +1,14 @@
 package sciwhiz12.snowyweaponry;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.SpriteRenderer;
-import net.minecraft.potion.PotionUtils;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-
-import java.util.function.Supplier;
 
 import static sciwhiz12.snowyweaponry.Reference.EntityTypes.CORED_SNOWBALL;
 import static sciwhiz12.snowyweaponry.Reference.EntityTypes.EXPLOSIVE_SNOWBALL;
@@ -25,12 +22,12 @@ import static sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
  */
 @EventBusSubscriber(modid = SnowyWeaponry.MODID, bus = Bus.MOD, value = Dist.CLIENT)
 public final class ClientRegistration {
-    private ClientRegistration() {} // Prevent instantiation
+    private ClientRegistration() {
+    } // Prevent instantiation
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
         LOG.debug(CLIENT, "Setting up on client");
-        registerEntityRenderers(event.getMinecraftSupplier());
     }
 
     @SubscribeEvent
@@ -42,11 +39,10 @@ public final class ClientRegistration {
         );
     }
 
-    static void registerEntityRenderers(Supplier<Minecraft> minecraft) {
+    @SubscribeEvent
+    static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         LOG.debug(CLIENT, "Registering entity renderers");
-        RenderingRegistry.registerEntityRenderingHandler(CORED_SNOWBALL,
-            rendererManager -> new SpriteRenderer<>(rendererManager, minecraft.get().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(EXPLOSIVE_SNOWBALL,
-            rendererManager -> new SpriteRenderer<>(rendererManager, minecraft.get().getItemRenderer()));
+        event.registerEntityRenderer(CORED_SNOWBALL, ThrownItemRenderer::new);
+        event.registerEntityRenderer(EXPLOSIVE_SNOWBALL, ThrownItemRenderer::new);
     }
 }

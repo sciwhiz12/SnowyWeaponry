@@ -1,15 +1,20 @@
 package sciwhiz12.snowyweaponry.datagen;
 
 import com.google.common.collect.Lists;
-import net.minecraft.advancements.criterion.ItemPredicate.Builder;
-import net.minecraft.data.*;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.advancements.critereon.ItemPredicate.Builder;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.SpecialRecipeBuilder;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.NBTIngredient;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import sciwhiz12.snowyweaponry.Reference;
 import sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
 
@@ -17,7 +22,7 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static net.minecraft.advancements.criterion.InventoryChangeTrigger.Instance.hasItems;
+import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
 
 public class Recipes extends RecipeProvider {
     private static final Constructor<CompoundIngredient> COMPOUND_INGREDIENT_CTOR = ObfuscationReflectionHelper
@@ -28,7 +33,7 @@ public class Recipes extends RecipeProvider {
     }
 
     @Override
-    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         ShapelessRecipeBuilder.shapeless(Reference.Items.DIAMOND_CHUNK, 9)
             .requires(Tags.Items.GEMS_DIAMOND)
             .unlockedBy("has_diamond", hasItems(Reference.Items.DIAMOND_CHUNK))
@@ -58,7 +63,7 @@ public class Recipes extends RecipeProvider {
         registerSnowCones(consumer);
     }
 
-    void registerSnowballs(Consumer<IFinishedRecipe> consumer) {
+    void registerSnowballs(Consumer<FinishedRecipe> consumer) {
         final String cored_snowballs = "cored_snowballs";
 
         ShapedRecipeBuilder.shaped(Reference.Items.IRON_CORED_SNOWBALL, 8)
@@ -107,7 +112,7 @@ public class Recipes extends RecipeProvider {
             .save(consumer);
     }
 
-    void registerSnowCones(Consumer<IFinishedRecipe> consumer) {
+    void registerSnowCones(Consumer<FinishedRecipe> consumer) {
         ShapelessRecipeBuilder.shapeless(Reference.Items.WAFER_CONE, 4)
             .requires(Tags.Items.CROPS_WHEAT)
             .requires(Tags.Items.CROPS_WHEAT)
@@ -129,15 +134,17 @@ public class Recipes extends RecipeProvider {
             .define('S', Reference.Items.SNOW_CONE)
             .unlockedBy("has_snow_cone", hasItems(Reference.Items.SNOW_CONE))
             .save(consumer);
-        CustomRecipeBuilder.special(RecipeSerializers.POTION_CONE_RECIPE)
+        SpecialRecipeBuilder.special(RecipeSerializers.POTION_CONE_RECIPE)
             .save(consumer, String.valueOf(RecipeSerializers.POTION_CONE_RECIPE.getRegistryName()));
     }
 
     private static CompoundIngredient compound(Ingredient... ingredients) {
-        return new CompoundIngredient(Lists.newArrayList(ingredients)) {};
+        return new CompoundIngredient(Lists.newArrayList(ingredients)) {
+        };
     }
 
     private static NBTIngredient nbt(ItemStack stack) {
-        return new NBTIngredient(stack) {};
+        return new NBTIngredient(stack) {
+        };
     }
 }

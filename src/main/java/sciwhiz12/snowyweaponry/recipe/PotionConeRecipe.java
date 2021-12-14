@@ -1,23 +1,23 @@
 package sciwhiz12.snowyweaponry.recipe;
 
-import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.SpecialRecipe;
-import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import sciwhiz12.snowyweaponry.Reference;
 
-public class PotionConeRecipe extends SpecialRecipe {
+public class PotionConeRecipe extends CustomRecipe {
     public PotionConeRecipe(ResourceLocation idIn) {
         super(idIn);
     }
 
     @Override
-    public boolean matches(CraftingInventory inv, World worldIn) {
+    public boolean matches(CraftingContainer inv, Level worldIn) {
         if ((inv.getWidth() * inv.getHeight()) < 5) {
             return false;
         }
@@ -45,7 +45,7 @@ public class PotionConeRecipe extends SpecialRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInventory inv) {
+    public ItemStack assemble(CraftingContainer inv) {
         ItemStack potion = ItemStack.EMPTY;
 
         for (int i = 0; i < inv.getWidth(); ++i) {
@@ -74,7 +74,7 @@ public class PotionConeRecipe extends SpecialRecipe {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return Reference.RecipeSerializers.POTION_CONE_RECIPE;
     }
 }
