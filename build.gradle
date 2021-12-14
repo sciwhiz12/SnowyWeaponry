@@ -1,25 +1,13 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-        classpath group: 'org.ajoberstar.grgit', name: 'grgit-gradle', 'version': '4.1.1'
-    }
+plugins {
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.ajoberstar.grgit'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+apply from: 'gradle/version.gradle'
 
-version = getVersion()
-println('Mod version: ' + version)
-group = 'sciwhiz12.snowyweaponry'
-archivesBaseName = "snowyweaponry-${mc_version}"
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+version = versions.getVersion()
+println "Mod version: $version"
 
 sourceSets {
     data
@@ -29,51 +17,40 @@ sourceSets {
     }
 }
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+print "Java: ${System.getProperty('java.version')}"
+print ", JVM: ${System.getProperty('java.vm.version')} (${System.getProperty('java.vendor')})"
+println ", Arch: ${System.getProperty('os.arch')}"
+
 minecraft {
     mappings channel: mappings_channel, version: mappings_version
 
     runs {
-        client {
-            workingDirectory project.file('run/client')
+        configureEach {
+            workingDirectory project.file('run/' + it.name) as File
 
             property 'forge.logging.markers', logging_markers
-            property 'forge.logging.console.level', 'debug'
+            property 'forge.logging.console.level', logging_console
 
-            mods {
-                snowyweaponry {
-                    source sourceSets.main
-                }
+            ideaModule "${project.name}.main"
+            mods.register(modid as String) {
+                source sourceSets.main as SourceSet
             }
+        }
+
+        client {
         }
 
         server {
-            workingDirectory project.file('run/server')
-
-            property 'forge.logging.markers', logging_markers
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                snowyweaponry {
-                    source sourceSets.main
-                }
-            }
         }
 
         data {
-            workingDirectory project.file('run/data')
-
-            property 'forge.logging.markers', logging_markers
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'snowyweaponry', '--all'
+            args '--mod', modid, '--all'
             args '--output', sourceSets.data.resources.srcDirs[0].toString()
             args '--existing', sourceSets.main.resources.srcDirs[0].toString()
 
-            mods {
-                snowyweaponry {
-                    sources sourceSets.main, sourceSets.data
-                }
+            ideaModule "${project.name}.data"
+            mods.named(modid as String) {
+                sources sourceSets.main as SourceSet, sourceSets.data as SourceSet
             }
         }
     }
@@ -89,59 +66,51 @@ dependencies {
     dataImplementation sourceSets.main.output
 }
 
-def commit_id = "unknown"
-def git_timestamp = "unknown"
-try {
-    commit_id = grgit.head().id
-    def datetime = grgit.head().dateTime
-    git_timestamp = datetime.toLocalDateTime().toString() + datetime.getOffset().toString().replace(':', '')
-} catch (Exception e) {
-    logger.error("Error while trying to get commit info: {}", e.toString())
-}
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"   : "snowyweaponry",
-                "Specification-Vendor"  : "sciwhiz12",
-                "Implementation-Title"  : project.name,
-                "Implementation-Version": "${version}",
-                "Implementation-Vendor" : "sciwhiz12",
-                "Build-Timestamp"       : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "Git-Commit"            : commit_id,
-                "Git-Commit-Timestamp"  : git_timestamp
-        ])
-    }
-    includeEmptyDirs false
+java {
+    archivesBaseName = "${project.name}-${mc_version}"
+    toolchain.languageVersion = JavaLanguageVersion.of(8)
+    withSourcesJar()
 }
 
-jar.finalizedBy('reobfJar')
+var manifestAttributes = [
+        'Specification-Title'   : modid,
+        'Specification-Vendor'  : author,
+        'Specification-Version' : versions.getRawVersion(),
+        'Implementation-Title'  : project.name,
+        'Implementation-Version': versions.getVersion(),
+        'Implementation-Vendor' : author,
+        "Git-Commit"            : versions.getCommitId(),
+        "Git-Commit-Timestamp"  : versions.getCommitTimestamp()
+] as LinkedHashMap
+
+tasks.withType(Jar).configureEach {
+    manifest.attributes(manifestAttributes)
+    includeEmptyDirs false
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.named('jar', Jar).configure {
+    finalizedBy 'reobfJar'
+}
+
+// noinspection UnnecessaryQualifiedReference
+tasks.withType(net.minecraftforge.gradle.userdev.tasks.RenameJarInPlace) {
+    args.add('--stable')
+}
 
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
+    publications.create('mavenJava', MavenPublication) {
+        from components.java
+
+        it.artifactId = project.name
+        it.version = "$mc_version-${versions.getRawVersion()}${versions.isSnapshot() ? '-SNAPSHOT' : ''}"
     }
+
     repositories {
         maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+            name 'projectLocal'
+            url "file://${project.file('repo').absolutePath}"
         }
     }
-}
-
-String getVersion() {
-    try {
-        final String branchName = grgit.branch.current().name
-        boolean non_main = !branchName.matches("\\d+.\\d+.x") && !branchName.equals("HEAD")
-        if (non_main) println("Currently on non-main branch: " + branchName)
-        String ver = grgit.describe(commit: grgit.head(), longDescr: non_main, tags: true)
-        if (ver != null) {
-            if (non_main) ver = ver + "@" + branchName
-            if (ver.startsWith("v")) return ver.substring(1)
-            return ver
-        }
-    } catch (Exception e) {
-        logger.error("Error while getting version information: {}", e)
-    }
-    return "unknown"
 }
