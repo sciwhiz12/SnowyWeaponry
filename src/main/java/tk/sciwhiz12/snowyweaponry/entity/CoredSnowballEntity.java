@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.NetworkHooks;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 
@@ -73,11 +74,10 @@ public class CoredSnowballEntity extends ThrowableItemProjectile {
             damage += 2; // Fire mobs damage modifier
         }
 
-        if (stack.getItem() instanceof CoredSnowballItem) {
-            CoredSnowballItem item = ((CoredSnowballItem) stack.getItem());
+        if (stack.getItem() instanceof CoredSnowballItem item) {
             damage = item.getDamage();
             looting = item.getLootingLevel();
-            MobEffectInstance effect = item.getHitEffect();
+            @Nullable MobEffectInstance effect = item.getHitEffect();
             if (effect != null && entity instanceof LivingEntity) {
                 ((LivingEntity) entity).addEffect(new MobEffectInstance(effect));
             }

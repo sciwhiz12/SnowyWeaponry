@@ -3,8 +3,8 @@ package tk.sciwhiz12.snowyweaponry.util;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.util.LazyOptional;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
@@ -26,7 +26,7 @@ public final class Util {
      *
      * @return {@code null}
      */
-    @Nonnull
+    @NonNull
     public static <T> T Null() {
         //noinspection ConstantConditions
         return null;

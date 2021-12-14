@@ -10,9 +10,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class CoredSnowballItem extends Item {

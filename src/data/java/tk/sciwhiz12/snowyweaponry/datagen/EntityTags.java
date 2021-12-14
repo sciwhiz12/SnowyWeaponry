@@ -8,7 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class EntityTags extends ForgeRegistryTagsProvider<EntityType<?>> {
     public EntityTags(DataGenerator generatorIn, @Nullable ExistingFileHelper existingFileHelper) {

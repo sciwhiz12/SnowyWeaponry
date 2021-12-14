@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 @EventBusSubscriber(modid = SnowyWeaponry.MODID, bus = Bus.FORGE)
 public class CoredSnowballDamageSource extends IndirectEntityDamageSource {

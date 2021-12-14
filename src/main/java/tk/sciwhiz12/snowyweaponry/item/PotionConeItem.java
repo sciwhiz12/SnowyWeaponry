@@ -18,7 +18,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.List;
 
 public class PotionConeItem extends Item {
@@ -35,7 +35,7 @@ public class PotionConeItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity living) {
-        Player player = living instanceof Player ? (Player) living : null;
+        @Nullable Player player = living instanceof Player ? (Player) living : null;
         if (player instanceof ServerPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
         }

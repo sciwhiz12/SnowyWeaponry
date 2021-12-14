@@ -28,7 +28,7 @@ import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import tk.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import tk.sciwhiz12.snowyweaponry.util.Util;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Holds references to constants and objects created and registered by this mod.
