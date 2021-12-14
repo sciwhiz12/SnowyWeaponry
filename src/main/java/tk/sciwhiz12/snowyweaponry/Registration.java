@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry;
+package tk.sciwhiz12.snowyweaponry;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -17,16 +17,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
-import sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
-import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
-import sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
-import sciwhiz12.snowyweaponry.item.PotionConeItem;
-import sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
-
-import static sciwhiz12.snowyweaponry.Reference.*;
-import static sciwhiz12.snowyweaponry.SnowyWeaponry.COMMON;
-import static sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
+import tk.sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import tk.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
+import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
+import tk.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
 /**
  * Main class for registering objects of this mod.
@@ -44,45 +40,45 @@ public final class Registration {
     }
 
     static void registerDispenserBehavior() {
-        LOG.debug(COMMON, "Registering dispenser behavior for items");
-        DispenserBlock.registerBehavior(Items.IRON_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.GOLD_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.DIAMOND_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.NETHERITE_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.EXPLOSIVE_SNOWBALL, DispenseBehaviors.EXPLOSIVE_SNOWBALL);
+        SnowyWeaponry.LOG.debug(SnowyWeaponry.COMMON, "Registering dispenser behavior for items");
+        DispenserBlock.registerBehavior(Reference.Items.IRON_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Reference.Items.GOLD_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Reference.Items.DIAMOND_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Reference.Items.NETHERITE_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Reference.Items.EXPLOSIVE_SNOWBALL, Reference.DispenseBehaviors.EXPLOSIVE_SNOWBALL);
     }
 
     @SubscribeEvent
     static void onRegisterItems(RegistryEvent.Register<Item> event) {
-        LOG.debug(COMMON, "Registering items");
+        SnowyWeaponry.LOG.debug(SnowyWeaponry.COMMON, "Registering items");
         event.getRegistry().registerAll(
             new Item(itemProps().stacksTo(64).tab(CreativeModeTab.TAB_MISC)).setRegistryName("diamond_chunk"),
             new Item(itemProps().stacksTo(64).tab(CreativeModeTab.TAB_MISC)).setRegistryName("netherite_nugget"),
 
-            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 2, 0,
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(Reference.ITEM_GROUP), 2, 0,
                 null).setRegistryName("iron_cored_snowball"),
-            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 1, 1,
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(Reference.ITEM_GROUP), 1, 1,
                 null).setRegistryName("gold_cored_snowball"),
-            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 3, 0,
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(Reference.ITEM_GROUP), 3, 0,
                 () -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0, false, true, false))
                 .setRegistryName("diamond_cored_snowball"),
-            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 4, 0,
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(Reference.ITEM_GROUP), 4, 0,
                 () -> new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, true, false))
                 .setRegistryName("netherite_cored_snowball"),
-            new ExplosiveSnowballItem(itemProps().stacksTo(8).tab(ITEM_GROUP))
+            new ExplosiveSnowballItem(itemProps().stacksTo(8).tab(Reference.ITEM_GROUP))
                 .setRegistryName("explosive_snowball"),
 
-            new Item(itemProps().stacksTo(32).tab(ITEM_GROUP)
+            new Item(itemProps().stacksTo(32).tab(Reference.ITEM_GROUP)
                 .food(new FoodProperties.Builder().fast().nutrition(1).saturationMod(0.1F).build()))
                 .setRegistryName("wafer_cone"),
-            new Item(itemProps().stacksTo(8).tab(ITEM_GROUP)
+            new Item(itemProps().stacksTo(8).tab(Reference.ITEM_GROUP)
                 .food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(0.2F).build()))
                 .setRegistryName("snow_cone"),
-            new Item(itemProps().stacksTo(8).tab(ITEM_GROUP)
+            new Item(itemProps().stacksTo(8).tab(Reference.ITEM_GROUP)
                 .food(new FoodProperties.Builder().fast().nutrition(4).saturationMod(1.0F).alwaysEat()
                     .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 120, 0, false, true), 1).build()))
                 .setRegistryName("golden_snow_cone"),
-            new PotionConeItem(itemProps().stacksTo(8).tab(ITEM_GROUP)
+            new PotionConeItem(itemProps().stacksTo(8).tab(Reference.ITEM_GROUP)
                 .food(new FoodProperties.Builder().fast().nutrition(2).saturationMod(0.3F).alwaysEat().build()))
                 .setRegistryName("potion_snow_cone")
         );
@@ -90,7 +86,7 @@ public final class Registration {
 
     @SubscribeEvent
     static void onRegisterEntities(RegistryEvent.Register<EntityType<?>> event) {
-        LOG.debug(COMMON, "Registering entity types");
+        SnowyWeaponry.LOG.debug(SnowyWeaponry.COMMON, "Registering entity types");
         event.getRegistry().registerAll(
             build(EntityType.Builder.<CoredSnowballEntity>of(CoredSnowballEntity::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10),
@@ -103,7 +99,7 @@ public final class Registration {
 
     @SubscribeEvent
     static void onRegisterRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
-        LOG.debug(COMMON, "Registering recipe serializers");
+        SnowyWeaponry.LOG.debug(SnowyWeaponry.COMMON, "Registering recipe serializers");
         event.getRegistry().registerAll(
             new SimpleRecipeSerializer<>(PotionConeRecipe::new).setRegistryName("potion_cone_recipe")
         );

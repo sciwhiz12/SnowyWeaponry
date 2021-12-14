@@ -1,12 +1,12 @@
-package sciwhiz12.snowyweaponry.datagen;
+package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeRegistryTagsProvider;
 import net.minecraftforge.registries.ForgeRegistries;
-import sciwhiz12.snowyweaponry.Reference;
-import sciwhiz12.snowyweaponry.SnowyWeaponry;
+import tk.sciwhiz12.snowyweaponry.Reference;
+import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 import javax.annotation.Nullable;
 

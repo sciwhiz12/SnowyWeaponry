@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.datagen;
+package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -8,8 +8,8 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 
-import static sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
-import static sciwhiz12.snowyweaponry.SnowyWeaponry.MODID;
+import static tk.sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
+import static tk.sciwhiz12.snowyweaponry.SnowyWeaponry.MODID;
 
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGen {

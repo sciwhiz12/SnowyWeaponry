@@ -1,10 +1,10 @@
-package sciwhiz12.snowyweaponry.datagen;
+package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
-import sciwhiz12.snowyweaponry.Reference;
-import sciwhiz12.snowyweaponry.Reference.Items;
-import sciwhiz12.snowyweaponry.SnowyWeaponry;
+import tk.sciwhiz12.snowyweaponry.Reference;
+import tk.sciwhiz12.snowyweaponry.Reference.Items;
+import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 public class Languages extends LanguageProvider {
     public Languages(DataGenerator gen) {

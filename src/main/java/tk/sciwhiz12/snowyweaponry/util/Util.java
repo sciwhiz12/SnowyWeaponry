@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.util;
+package tk.sciwhiz12.snowyweaponry.util;
 
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;

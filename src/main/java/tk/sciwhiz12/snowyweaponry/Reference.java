@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry;
+package tk.sciwhiz12.snowyweaponry;
 
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
@@ -19,18 +19,16 @@ import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 import net.minecraftforge.registries.ObjectHolder;
-import sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
-import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
-import sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
-import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
-import sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
-import sciwhiz12.snowyweaponry.item.PotionConeItem;
-import sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
+import tk.sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
+import tk.sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import tk.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
+import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
+import tk.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
+import tk.sciwhiz12.snowyweaponry.util.Util;
 
 import javax.annotation.Nullable;
-
-import static sciwhiz12.snowyweaponry.SnowyWeaponry.MODID;
-import static sciwhiz12.snowyweaponry.util.Util.Null;
 
 /**
  * Holds references to constants and objects created and registered by this mod.
@@ -48,36 +46,36 @@ public final class Reference {
         }
     };
 
-    @ObjectHolder(MODID)
+    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class Items {
         private Items() {
         } // Prevent instantiation
 
-        public static final Item DIAMOND_CHUNK = Null();
-        public static final Item NETHERITE_NUGGET = Null();
+        public static final Item DIAMOND_CHUNK = Util.Null();
+        public static final Item NETHERITE_NUGGET = Util.Null();
 
-        public static final CoredSnowballItem IRON_CORED_SNOWBALL = Null();
-        public static final CoredSnowballItem GOLD_CORED_SNOWBALL = Null();
-        public static final CoredSnowballItem DIAMOND_CORED_SNOWBALL = Null();
-        public static final CoredSnowballItem NETHERITE_CORED_SNOWBALL = Null();
-        public static final ExplosiveSnowballItem EXPLOSIVE_SNOWBALL = Null();
+        public static final CoredSnowballItem IRON_CORED_SNOWBALL = Util.Null();
+        public static final CoredSnowballItem GOLD_CORED_SNOWBALL = Util.Null();
+        public static final CoredSnowballItem DIAMOND_CORED_SNOWBALL = Util.Null();
+        public static final CoredSnowballItem NETHERITE_CORED_SNOWBALL = Util.Null();
+        public static final ExplosiveSnowballItem EXPLOSIVE_SNOWBALL = Util.Null();
 
-        public static final Item WAFER_CONE = Null();
-        public static final Item SNOW_CONE = Null();
-        public static final Item GOLDEN_SNOW_CONE = Null();
-        public static final PotionConeItem POTION_SNOW_CONE = Null();
+        public static final Item WAFER_CONE = Util.Null();
+        public static final Item SNOW_CONE = Util.Null();
+        public static final Item GOLDEN_SNOW_CONE = Util.Null();
+        public static final PotionConeItem POTION_SNOW_CONE = Util.Null();
     }
 
-    @ObjectHolder(MODID)
+    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class EntityTypes {
         private EntityTypes() {
         } // Prevent instantiation
 
-        public static final EntityType<CoredSnowballEntity> CORED_SNOWBALL = Null();
-        public static final EntityType<ExplosiveSnowballEntity> EXPLOSIVE_SNOWBALL = Null();
+        public static final EntityType<CoredSnowballEntity> CORED_SNOWBALL = Util.Null();
+        public static final EntityType<ExplosiveSnowballEntity> EXPLOSIVE_SNOWBALL = Util.Null();
     }
 
-    @ObjectHolder(MODID)
+    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class DamageSources {
         private DamageSources() {
         } // Prevent instantiation
@@ -93,19 +91,19 @@ public final class Reference {
         }
     }
 
-    @ObjectHolder(MODID)
+    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class RecipeSerializers {
         private RecipeSerializers() {
         } // Prevent instantiation
 
-        public static final SimpleRecipeSerializer<PotionConeRecipe> POTION_CONE_RECIPE = Null();
+        public static final SimpleRecipeSerializer<PotionConeRecipe> POTION_CONE_RECIPE = Util.Null();
     }
 
     public static final class Tags {
         private Tags() {
         } // Prevent instantiation
 
-        public static final Tag.Named<EntityType<?>> FIRE_MOBS = EntityTypeTags.bind(MODID + ":fire_mobs");
+        public static final Tag.Named<EntityType<?>> FIRE_MOBS = EntityTypeTags.bind(SnowyWeaponry.MODID + ":fire_mobs");
 
         public static final IOptionalNamedTag<Item> NUGGETS_DIAMOND = ItemTags
             .createOptional(new ResourceLocation("forge", "nuggets/diamond"));

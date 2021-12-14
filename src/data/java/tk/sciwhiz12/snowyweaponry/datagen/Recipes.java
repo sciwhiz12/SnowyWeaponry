@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.datagen;
+package tk.sciwhiz12.snowyweaponry.datagen;
 
 import com.google.common.collect.Lists;
 import net.minecraft.advancements.critereon.ItemPredicate.Builder;
@@ -15,8 +15,8 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.NBTIngredient;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import sciwhiz12.snowyweaponry.Reference;
-import sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
+import tk.sciwhiz12.snowyweaponry.Reference;
+import tk.sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
 
 import java.lang.reflect.Constructor;
 import java.util.List;

@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.entity;
+package tk.sciwhiz12.snowyweaponry.entity;
 
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -14,8 +14,8 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.NetworkHooks;
-import sciwhiz12.snowyweaponry.Reference.DamageSources;
-import sciwhiz12.snowyweaponry.Reference.EntityTypes;
+import tk.sciwhiz12.snowyweaponry.Reference.DamageSources;
+import tk.sciwhiz12.snowyweaponry.Reference.EntityTypes;
 
 public class ExplosiveSnowballEntity extends ThrowableItemProjectile {
     public static final float EXPLOSION_POWER = 1.2F;

@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.recipe;
+package tk.sciwhiz12.snowyweaponry.recipe;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -9,7 +9,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import sciwhiz12.snowyweaponry.Reference;
+import tk.sciwhiz12.snowyweaponry.Reference;
 
 public class PotionConeRecipe extends CustomRecipe {
     public PotionConeRecipe(ResourceLocation idIn) {

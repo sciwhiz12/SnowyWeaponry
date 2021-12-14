@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.entity;
+package tk.sciwhiz12.snowyweaponry.entity;
 
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -17,10 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.NetworkHooks;
-import sciwhiz12.snowyweaponry.Reference;
-import sciwhiz12.snowyweaponry.Reference.EntityTypes;
-import sciwhiz12.snowyweaponry.Reference.Tags;
-import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import tk.sciwhiz12.snowyweaponry.Reference;
+import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 
 public class CoredSnowballEntity extends ThrowableItemProjectile {
     public CoredSnowballEntity(EntityType<CoredSnowballEntity> entityType, Level world) {
@@ -28,11 +26,11 @@ public class CoredSnowballEntity extends ThrowableItemProjectile {
     }
 
     public CoredSnowballEntity(Level world, LivingEntity thrower) {
-        super(EntityTypes.CORED_SNOWBALL, thrower, world);
+        super(Reference.EntityTypes.CORED_SNOWBALL, thrower, world);
     }
 
     public CoredSnowballEntity(Level world, double x, double y, double z) {
-        super(EntityTypes.CORED_SNOWBALL, x, y, z, world);
+        super(Reference.EntityTypes.CORED_SNOWBALL, x, y, z, world);
     }
 
     @Override
@@ -71,7 +69,7 @@ public class CoredSnowballEntity extends ThrowableItemProjectile {
 
         int damage = 0;
         int looting = 0;
-        if (Tags.FIRE_MOBS.contains(entity.getType())) {
+        if (Reference.Tags.FIRE_MOBS.contains(entity.getType())) {
             damage += 2; // Fire mobs damage modifier
         }
 

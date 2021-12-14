@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.item;
+package tk.sciwhiz12.snowyweaponry.item;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;

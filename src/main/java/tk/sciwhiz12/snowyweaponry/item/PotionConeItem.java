@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.item;
+package tk.sciwhiz12.snowyweaponry.item;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.NonNullList;

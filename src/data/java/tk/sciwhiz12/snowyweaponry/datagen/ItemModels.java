@@ -1,4 +1,4 @@
-package sciwhiz12.snowyweaponry.datagen;
+package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -6,8 +6,8 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import sciwhiz12.snowyweaponry.Reference.Items;
-import sciwhiz12.snowyweaponry.SnowyWeaponry;
+import tk.sciwhiz12.snowyweaponry.Reference.Items;
+import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 import static java.util.Objects.requireNonNull;
 import static net.minecraft.client.renderer.block.model.ItemModelGenerator.LAYERS;
