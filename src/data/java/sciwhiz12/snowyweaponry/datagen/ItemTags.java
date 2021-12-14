@@ -10,8 +10,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import sciwhiz12.snowyweaponry.Reference;
 import sciwhiz12.snowyweaponry.SnowyWeaponry;
 
-import java.nio.file.Path;
 import javax.annotation.Nullable;
+import java.nio.file.Path;
 
 public class ItemTags extends TagsProvider<Item> {
     @SuppressWarnings("deprecation")
@@ -20,19 +20,19 @@ public class ItemTags extends TagsProvider<Item> {
     }
 
     @Override
-    protected void registerTags() {
-        getOrCreateBuilder(Tags.Items.NUGGETS)
+    protected void addTags() {
+        tag(Tags.Items.NUGGETS)
             .addTag(Reference.Tags.NUGGETS_DIAMOND)
             .addTag(Reference.Tags.NUGGETS_NETHERITE);
 
-        getOrCreateBuilder(Reference.Tags.NUGGETS_DIAMOND)
+        tag(Reference.Tags.NUGGETS_DIAMOND)
             .add(Reference.Items.DIAMOND_CHUNK);
-        getOrCreateBuilder(Reference.Tags.NUGGETS_NETHERITE)
+        tag(Reference.Tags.NUGGETS_NETHERITE)
             .add(Reference.Items.NETHERITE_NUGGET);
     }
 
     // Copied from ItemTagsProvider#makePath
-    protected Path makePath(ResourceLocation id) {
+    protected Path getPath(ResourceLocation id) {
         return this.generator.getOutputFolder().resolve("data/" + id.getNamespace() + "/tags/items/" + id.getPath() + ".json");
     }
 

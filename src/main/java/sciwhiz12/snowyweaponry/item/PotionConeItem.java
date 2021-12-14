@@ -18,8 +18,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.List;
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class PotionConeItem extends Item {
     public static final int DURATION_DIVISOR = 8;
@@ -30,54 +30,54 @@ public class PotionConeItem extends Item {
 
     @Override
     public ItemStack getDefaultInstance() {
-        return PotionUtils.addPotionToItemStack(super.getDefaultInstance(), Potions.REGENERATION);
+        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.REGENERATION);
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity living) {
+    public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity living) {
         PlayerEntity player = living instanceof PlayerEntity ? (PlayerEntity) living : null;
         if (player instanceof ServerPlayerEntity) {
             CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
         }
 
-        if (!worldIn.isRemote) {
-            for (EffectInstance effect : PotionUtils.getEffectsFromStack(stack)) {
-                living.addPotionEffect(
-                    new EffectInstance(effect.getPotion(), Math.max(effect.getDuration() / DURATION_DIVISOR, 1),
-                        effect.getAmplifier(), effect.isAmbient(), effect.doesShowParticles())
+        if (!worldIn.isClientSide) {
+            for (EffectInstance effect : PotionUtils.getMobEffects(stack)) {
+                living.addEffect(
+                    new EffectInstance(effect.getEffect(), Math.max(effect.getDuration() / DURATION_DIVISOR, 1),
+                        effect.getAmplifier(), effect.isAmbient(), effect.isVisible())
                 );
             }
         }
 
         if (player != null) {
-            player.addStat(Stats.ITEM_USED.get(this));
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
 
-        return super.onItemUseFinish(stack, worldIn, living);
+        return super.finishUsingItem(stack, worldIn, living);
     }
 
     @Override
-    public String getTranslationKey(ItemStack stack) {
-        return PotionUtils.getPotionFromItem(stack).getNamePrefixed(this.getTranslationKey() + ".effect.");
+    public String getDescriptionId(ItemStack stack) {
+        return PotionUtils.getPotion(stack).getName(this.getDescriptionId() + ".effect.");
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         PotionUtils.addPotionTooltip(stack, tooltip, 1.0F / DURATION_DIVISOR);
     }
 
     @Override
-    public boolean hasEffect(ItemStack stack) {
-        return super.hasEffect(stack) || !PotionUtils.getEffectsFromStack(stack).isEmpty();
+    public boolean isFoil(ItemStack stack) {
+        return super.isFoil(stack) || !PotionUtils.getMobEffects(stack).isEmpty();
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (!this.isInGroup(group)) return;
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+        if (!this.allowdedIn(group)) return;
 
         for (Potion potion : ForgeRegistries.POTION_TYPES) {
             if (potion != Potions.EMPTY) {
-                items.add(PotionUtils.addPotionToItemStack(new ItemStack(this), potion));
+                items.add(PotionUtils.setPotion(new ItemStack(this), potion));
             }
         }
     }

@@ -4,9 +4,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 
+import javax.annotation.Nonnull;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

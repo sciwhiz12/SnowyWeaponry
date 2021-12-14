@@ -44,45 +44,45 @@ public final class Registration {
 
     static void registerDispenserBehavior() {
         LOG.debug(COMMON, "Registering dispenser behavior for items");
-        DispenserBlock.registerDispenseBehavior(Items.IRON_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerDispenseBehavior(Items.GOLD_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerDispenseBehavior(Items.DIAMOND_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerDispenseBehavior(Items.NETHERITE_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerDispenseBehavior(Items.EXPLOSIVE_SNOWBALL, DispenseBehaviors.EXPLOSIVE_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.IRON_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.GOLD_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.DIAMOND_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.NETHERITE_CORED_SNOWBALL, DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.EXPLOSIVE_SNOWBALL, DispenseBehaviors.EXPLOSIVE_SNOWBALL);
     }
 
     @SubscribeEvent
     static void onRegisterItems(RegistryEvent.Register<Item> event) {
         LOG.debug(COMMON, "Registering items");
         event.getRegistry().registerAll(
-            new Item(itemProps().maxStackSize(64).group(ItemGroup.MISC)).setRegistryName("diamond_chunk"),
-            new Item(itemProps().maxStackSize(64).group(ItemGroup.MISC)).setRegistryName("netherite_nugget"),
+            new Item(itemProps().stacksTo(64).tab(ItemGroup.TAB_MISC)).setRegistryName("diamond_chunk"),
+            new Item(itemProps().stacksTo(64).tab(ItemGroup.TAB_MISC)).setRegistryName("netherite_nugget"),
 
-            new CoredSnowballItem(itemProps().maxStackSize(16).group(ITEM_GROUP), 2, 0,
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 2, 0,
                 null).setRegistryName("iron_cored_snowball"),
-            new CoredSnowballItem(itemProps().maxStackSize(16).group(ITEM_GROUP), 1, 1,
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 1, 1,
                 null).setRegistryName("gold_cored_snowball"),
-            new CoredSnowballItem(itemProps().maxStackSize(16).group(ITEM_GROUP), 3, 0,
-                () -> new EffectInstance(Effects.SLOWNESS, 30, 0, false, true, false))
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 3, 0,
+                () -> new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 30, 0, false, true, false))
                 .setRegistryName("diamond_cored_snowball"),
-            new CoredSnowballItem(itemProps().maxStackSize(16).group(ITEM_GROUP), 4, 0,
+            new CoredSnowballItem(itemProps().stacksTo(16).tab(ITEM_GROUP), 4, 0,
                 () -> new EffectInstance(Effects.BLINDNESS, 40, 0, false, true, false))
                 .setRegistryName("netherite_cored_snowball"),
-            new ExplosiveSnowballItem(itemProps().maxStackSize(8).group(ITEM_GROUP))
+            new ExplosiveSnowballItem(itemProps().stacksTo(8).tab(ITEM_GROUP))
                 .setRegistryName("explosive_snowball"),
 
-            new Item(itemProps().maxStackSize(32).group(ITEM_GROUP)
-                .food(new Food.Builder().fastToEat().hunger(1).saturation(0.1F).build()))
+            new Item(itemProps().stacksTo(32).tab(ITEM_GROUP)
+                .food(new Food.Builder().fast().nutrition(1).saturationMod(0.1F).build()))
                 .setRegistryName("wafer_cone"),
-            new Item(itemProps().maxStackSize(8).group(ITEM_GROUP)
-                .food(new Food.Builder().fastToEat().hunger(2).saturation(0.2F).build()))
+            new Item(itemProps().stacksTo(8).tab(ITEM_GROUP)
+                .food(new Food.Builder().fast().nutrition(2).saturationMod(0.2F).build()))
                 .setRegistryName("snow_cone"),
-            new Item(itemProps().maxStackSize(8).group(ITEM_GROUP)
-                .food(new Food.Builder().fastToEat().hunger(4).saturation(1.0F).setAlwaysEdible()
+            new Item(itemProps().stacksTo(8).tab(ITEM_GROUP)
+                .food(new Food.Builder().fast().nutrition(4).saturationMod(1.0F).alwaysEat()
                     .effect(() -> new EffectInstance(Effects.FIRE_RESISTANCE, 120, 0, false, true), 1).build()))
                 .setRegistryName("golden_snow_cone"),
-            new PotionConeItem(itemProps().maxStackSize(8).group(ITEM_GROUP)
-                .food(new Food.Builder().fastToEat().hunger(2).saturation(0.3F).setAlwaysEdible().build()))
+            new PotionConeItem(itemProps().stacksTo(8).tab(ITEM_GROUP)
+                .food(new Food.Builder().fast().nutrition(2).saturationMod(0.3F).alwaysEat().build()))
                 .setRegistryName("potion_snow_cone")
         );
     }
@@ -91,11 +91,11 @@ public final class Registration {
     static void onRegisterEntities(RegistryEvent.Register<EntityType<?>> event) {
         LOG.debug(COMMON, "Registering entity types");
         event.getRegistry().registerAll(
-            build(EntityType.Builder.<CoredSnowballEntity>create(CoredSnowballEntity::new, EntityClassification.MISC)
-                    .size(0.25F, 0.25F).trackingRange(4).func_233608_b_(10),
+            build(EntityType.Builder.<CoredSnowballEntity>of(CoredSnowballEntity::new, EntityClassification.MISC)
+                    .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10),
                 "cored_snowball"),
-            build(EntityType.Builder.<ExplosiveSnowballEntity>create(ExplosiveSnowballEntity::new, EntityClassification.MISC)
-                    .size(0.25F, 0.25F).trackingRange(4).func_233608_b_(10),
+            build(EntityType.Builder.<ExplosiveSnowballEntity>of(ExplosiveSnowballEntity::new, EntityClassification.MISC)
+                    .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10),
                 "explosive_snowball")
         );
     }

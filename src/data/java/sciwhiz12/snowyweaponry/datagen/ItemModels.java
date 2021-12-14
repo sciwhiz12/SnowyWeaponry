@@ -6,11 +6,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import sciwhiz12.snowyweaponry.Reference.Items;
 import sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 import static java.util.Objects.requireNonNull;
 import static net.minecraft.client.renderer.model.ItemModelGenerator.LAYERS;
-import static sciwhiz12.snowyweaponry.Reference.Items;
 
 public class ItemModels extends ItemModelProvider {
     private final ResourceLocation ITEM_GENERATED = mcLoc("item/generated");

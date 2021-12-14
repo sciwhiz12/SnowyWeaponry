@@ -1,6 +1,5 @@
 package sciwhiz12.snowyweaponry.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
@@ -11,16 +10,12 @@ import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-
-import javax.annotation.Nullable;
-
-import static sciwhiz12.snowyweaponry.Reference.DamageSources;
-import static sciwhiz12.snowyweaponry.Reference.EntityTypes;
+import sciwhiz12.snowyweaponry.Reference.DamageSources;
+import sciwhiz12.snowyweaponry.Reference.EntityTypes;
 
 public class ExplosiveSnowballEntity extends ProjectileItemEntity {
     public static final float EXPLOSION_POWER = 1.2F;
@@ -43,40 +38,40 @@ public class ExplosiveSnowballEntity extends ProjectileItemEntity {
     }
 
     @Override
-    public void handleStatusUpdate(byte id) {
+    public void handleEntityEvent(byte id) {
         if (id == 3) {
-            ItemStack stack = this.func_213882_k();
+            ItemStack stack = this.getItemRaw();
             IParticleData particle = stack.isEmpty() ?
                 ParticleTypes.ITEM_SNOWBALL :
                 new ItemParticleData(ParticleTypes.ITEM, stack);
 
             for (int i = 0; i < 8; ++i) {
-                this.world.addParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(particle, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
 
     @Override
-    protected void onImpact(RayTraceResult result) {
-        super.onImpact(result);
-        if (!this.world.isRemote) {
-            this.world.createExplosion(this,
-                DamageSources.causeSnowballExplosionDamage(this.func_234616_v_()),
+    protected void onHit(RayTraceResult result) {
+        super.onHit(result);
+        if (!this.level.isClientSide) {
+            this.level.explode(this,
+                DamageSources.causeSnowballExplosionDamage(this.getOwner()),
                 null,
-                this.getPosX(),
-                this.getPosY(),
-                this.getPosZ(),
+                this.getX(),
+                this.getY(),
+                this.getZ(),
                 EXPLOSION_POWER,
                 false,
                 Explosion.Mode.NONE);
 
-            this.world.setEntityState(this, (byte) 3);
+            this.level.broadcastEntityEvent(this, (byte) 3);
             this.remove();
         }
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

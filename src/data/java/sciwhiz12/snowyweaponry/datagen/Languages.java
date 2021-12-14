@@ -3,9 +3,8 @@ package sciwhiz12.snowyweaponry.datagen;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 import sciwhiz12.snowyweaponry.Reference;
+import sciwhiz12.snowyweaponry.Reference.Items;
 import sciwhiz12.snowyweaponry.SnowyWeaponry;
-
-import static sciwhiz12.snowyweaponry.Reference.Items;
 
 public class Languages extends LanguageProvider {
     public Languages(DataGenerator gen) {
@@ -38,7 +37,7 @@ public class Languages extends LanguageProvider {
     }
 
     void addPotionConeTranslations() {
-        final String baseTranslationKey = Items.POTION_SNOW_CONE.getTranslationKey();
+        final String baseTranslationKey = Items.POTION_SNOW_CONE.getDescriptionId();
 
         add(baseTranslationKey + ".effect.empty", "Uncraftable Dipped Snow Cone");
         add(baseTranslationKey + ".effect.water", "Wet Snow Cone");

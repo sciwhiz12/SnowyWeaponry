@@ -18,10 +18,9 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import sciwhiz12.snowyweaponry.Reference;
+import sciwhiz12.snowyweaponry.Reference.EntityTypes;
 import sciwhiz12.snowyweaponry.Reference.Tags;
 import sciwhiz12.snowyweaponry.item.CoredSnowballItem;
-
-import static sciwhiz12.snowyweaponry.Reference.EntityTypes;
 
 public class CoredSnowballEntity extends ProjectileItemEntity {
     public CoredSnowballEntity(EntityType<CoredSnowballEntity> entityType, World world) {
@@ -42,31 +41,31 @@ public class CoredSnowballEntity extends ProjectileItemEntity {
     }
 
     @Override
-    public void handleStatusUpdate(byte id) {
+    public void handleEntityEvent(byte id) {
         if (id == 3) {
-            ItemStack stack = this.func_213882_k();
+            ItemStack stack = this.getItemRaw();
             IParticleData particle = stack.isEmpty() ?
                 ParticleTypes.ITEM_SNOWBALL :
                 new ItemParticleData(ParticleTypes.ITEM, stack);
 
             for (int i = 0; i < 8; ++i) {
-                this.world.addParticle(particle, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(particle, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
     }
 
     @Override
-    protected ITextComponent getProfessionName() {
+    protected ITextComponent getTypeName() {
         final ItemStack stack = this.getItem();
         if (!stack.isEmpty()) {
-            return stack.getDisplayName();
+            return stack.getHoverName();
         }
-        return super.getProfessionName();
+        return super.getTypeName();
     }
 
     @Override
-    protected void onEntityHit(EntityRayTraceResult entityTrace) {
-        super.onEntityHit(entityTrace);
+    protected void onHitEntity(EntityRayTraceResult entityTrace) {
+        super.onHitEntity(entityTrace);
         ItemStack stack = this.getItem();
         Entity entity = entityTrace.getEntity();
 
@@ -82,24 +81,24 @@ public class CoredSnowballEntity extends ProjectileItemEntity {
             looting = item.getLootingLevel();
             EffectInstance effect = item.getHitEffect();
             if (effect != null && entity instanceof LivingEntity) {
-                ((LivingEntity) entity).addPotionEffect(new EffectInstance(effect));
+                ((LivingEntity) entity).addEffect(new EffectInstance(effect));
             }
         }
 
-        entity.attackEntityFrom(Reference.DamageSources.causeSnowballDamage(this, this.func_234616_v_(), looting), damage);
+        entity.hurt(Reference.DamageSources.causeSnowballDamage(this, this.getOwner(), looting), damage);
     }
 
     @Override
-    protected void onImpact(RayTraceResult result) {
-        super.onImpact(result);
-        if (!this.world.isRemote) {
-            this.world.setEntityState(this, (byte) 3);
+    protected void onHit(RayTraceResult result) {
+        super.onHit(result);
+        if (!this.level.isClientSide) {
+            this.level.broadcastEntityEvent(this, (byte) 3);
             this.remove();
         }
     }
 
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

@@ -12,8 +12,8 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
 
-import java.util.function.Supplier;
 import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class CoredSnowballItem extends Item {
     private final int thrownDamage;
@@ -42,24 +42,24 @@ public class CoredSnowballItem extends Item {
         return hitEffect != null ? hitEffect.get() : null;
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getHeldItem(hand);
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-        world.playSound(null, player.getPosX(), player.getPosY(), player.getPosZ(), SoundEvents.ENTITY_SNOWBALL_THROW,
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW,
             SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 
-        if (!world.isRemote) {
+        if (!world.isClientSide) {
             CoredSnowballEntity entity = new CoredSnowballEntity(world, player);
             entity.setItem(stack);
-            entity.func_234612_a_(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
-            world.addEntity(entity);
+            entity.shootFromRotation(player, player.xRot, player.yRot, 0.0F, 1.5F, 1.0F);
+            world.addFreshEntity(entity);
         }
 
-        player.addStat(Stats.ITEM_USED.get(this));
-        if (!player.abilities.isCreativeMode) {
+        player.awardStat(Stats.ITEM_USED.get(this));
+        if (!player.abilities.instabuild) {
             stack.shrink(1);
         }
 
-        return ActionResult.func_233538_a_(stack, world.isRemote());
+        return ActionResult.sidedSuccess(stack, world.isClientSide());
     }
 }

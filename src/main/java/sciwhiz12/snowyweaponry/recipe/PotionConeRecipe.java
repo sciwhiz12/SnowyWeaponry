@@ -25,7 +25,7 @@ public class PotionConeRecipe extends SpecialRecipe {
         int cones = 0;
         for (int i = 0; i < inv.getWidth(); ++i) {
             for (int j = 0; j < inv.getHeight(); ++j) {
-                ItemStack itemstack = inv.getStackInSlot(i + j * inv.getWidth());
+                ItemStack itemstack = inv.getItem(i + j * inv.getWidth());
                 Item item = itemstack.getItem();
                 if (item == Items.POTION || item == Items.SPLASH_POTION) {
                     if (!hasPotion) {
@@ -45,12 +45,12 @@ public class PotionConeRecipe extends SpecialRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(CraftingInventory inv) {
+    public ItemStack assemble(CraftingInventory inv) {
         ItemStack potion = ItemStack.EMPTY;
 
         for (int i = 0; i < inv.getWidth(); ++i) {
             for (int j = 0; j < inv.getHeight(); ++j) {
-                ItemStack stack = inv.getStackInSlot(i + j * inv.getWidth());
+                ItemStack stack = inv.getItem(i + j * inv.getWidth());
                 Item item = stack.getItem();
                 if (item == Items.POTION || item == Items.SPLASH_POTION) {
                     potion = stack;
@@ -62,14 +62,14 @@ public class PotionConeRecipe extends SpecialRecipe {
             return ItemStack.EMPTY;
         } else {
             ItemStack ret = new ItemStack(Reference.Items.POTION_SNOW_CONE, 4);
-            PotionUtils.addPotionToItemStack(ret, PotionUtils.getPotionFromItem(potion));
-            PotionUtils.appendEffects(ret, PotionUtils.getFullEffectsFromItem(potion));
+            PotionUtils.setPotion(ret, PotionUtils.getPotion(potion));
+            PotionUtils.setCustomEffects(ret, PotionUtils.getCustomEffects(potion));
             return ret;
         }
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return width * height >= 5;
     }
 

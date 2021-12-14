@@ -42,7 +42,7 @@ public final class Reference {
 
     public static final ItemGroup ITEM_GROUP = new ItemGroup("snowy_weapons") {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(Items.GOLD_CORED_SNOWBALL);
         }
     };
@@ -84,8 +84,8 @@ public final class Reference {
 
         public static DamageSource causeSnowballExplosionDamage(@Nullable Entity entity) {
             return entity instanceof LivingEntity ?
-                (new EntityDamageSource("snowball.explosion.player", entity)).setDifficultyScaled().setExplosion() :
-                (new DamageSource("snowball.explosion")).setDifficultyScaled().setExplosion();
+                (new EntityDamageSource("snowball.explosion.player", entity)).setScalesWithDifficulty().setExplosion() :
+                (new DamageSource("snowball.explosion")).setScalesWithDifficulty().setExplosion();
         }
     }
 
@@ -99,7 +99,7 @@ public final class Reference {
     public static final class Tags {
         private Tags() {} // Prevent instantiation
 
-        public static final ITag.INamedTag<EntityType<?>> FIRE_MOBS = EntityTypeTags.getTagById(MODID + ":fire_mobs");
+        public static final ITag.INamedTag<EntityType<?>> FIRE_MOBS = EntityTypeTags.bind(MODID + ":fire_mobs");
 
         public static final IOptionalNamedTag<Item> NUGGETS_DIAMOND = ItemTags
             .createOptional(new ResourceLocation("forge", "nuggets/diamond"));
@@ -112,8 +112,8 @@ public final class Reference {
 
         public static final ProjectileDispenseBehavior CORED_SNOWBALL = new ProjectileDispenseBehavior() {
             @Override
-            protected ProjectileEntity getProjectileEntity(World world, IPosition pos, ItemStack stack) {
-                CoredSnowballEntity entity = new CoredSnowballEntity(world, pos.getX(), pos.getY(), pos.getZ());
+            protected ProjectileEntity getProjectile(World world, IPosition pos, ItemStack stack) {
+                CoredSnowballEntity entity = new CoredSnowballEntity(world, pos.x(), pos.y(), pos.z());
                 entity.setItem(stack);
                 return entity;
             }
@@ -121,8 +121,8 @@ public final class Reference {
 
         public static final ProjectileDispenseBehavior EXPLOSIVE_SNOWBALL = new ProjectileDispenseBehavior() {
             @Override
-            protected ProjectileEntity getProjectileEntity(World world, IPosition pos, ItemStack stack) {
-                ExplosiveSnowballEntity entity = new ExplosiveSnowballEntity(world, pos.getX(), pos.getY(), pos.getZ());
+            protected ProjectileEntity getProjectile(World world, IPosition pos, ItemStack stack) {
+                ExplosiveSnowballEntity entity = new ExplosiveSnowballEntity(world, pos.x(), pos.y(), pos.z());
                 entity.setItem(stack);
                 return entity;
             }

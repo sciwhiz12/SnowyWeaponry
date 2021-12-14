@@ -2,12 +2,7 @@ package sciwhiz12.snowyweaponry.datagen;
 
 import com.google.common.collect.Lists;
 import net.minecraft.advancements.criterion.ItemPredicate.Builder;
-import net.minecraft.data.CustomRecipeBuilder;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.data.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -22,7 +17,7 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static net.minecraft.advancements.criterion.InventoryChangeTrigger.Instance.forItems;
+import static net.minecraft.advancements.criterion.InventoryChangeTrigger.Instance.hasItems;
 
 public class Recipes extends RecipeProvider {
     private static final Constructor<CompoundIngredient> COMPOUND_INGREDIENT_CTOR = ObfuscationReflectionHelper
@@ -33,30 +28,30 @@ public class Recipes extends RecipeProvider {
     }
 
     @Override
-    protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.DIAMOND_CHUNK, 9)
-            .addIngredient(Tags.Items.GEMS_DIAMOND)
-            .addCriterion("has_diamond", forItems(Reference.Items.DIAMOND_CHUNK))
-            .build(consumer);
-        ShapedRecipeBuilder.shapedRecipe(Items.DIAMOND)
-            .patternLine("nnn")
-            .patternLine("nnn")
-            .patternLine("nnn")
-            .key('n', Reference.Tags.NUGGETS_DIAMOND)
-            .addCriterion("has_diamond_nuggets", forItems(Builder.create().tag(Reference.Tags.NUGGETS_DIAMOND).build()))
-            .build(consumer, "diamond_from_nuggets");
+    protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+        ShapelessRecipeBuilder.shapeless(Reference.Items.DIAMOND_CHUNK, 9)
+            .requires(Tags.Items.GEMS_DIAMOND)
+            .unlockedBy("has_diamond", hasItems(Reference.Items.DIAMOND_CHUNK))
+            .save(consumer);
+        ShapedRecipeBuilder.shaped(Items.DIAMOND)
+            .pattern("nnn")
+            .pattern("nnn")
+            .pattern("nnn")
+            .define('n', Reference.Tags.NUGGETS_DIAMOND)
+            .unlockedBy("has_diamond_nuggets", hasItems(Builder.item().of(Reference.Tags.NUGGETS_DIAMOND).build()))
+            .save(consumer, "diamond_from_nuggets");
 
-        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.NETHERITE_NUGGET, 9)
-            .addIngredient(Tags.Items.INGOTS_NETHERITE)
-            .addCriterion("has_netherite", forItems(Reference.Items.NETHERITE_NUGGET))
-            .build(consumer);
-        ShapedRecipeBuilder.shapedRecipe(Items.NETHERITE_INGOT)
-            .patternLine("nnn")
-            .patternLine("nnn")
-            .patternLine("nnn")
-            .key('n', Reference.Tags.NUGGETS_NETHERITE)
-            .addCriterion("has_netherite_nuggets", forItems(Builder.create().tag(Reference.Tags.NUGGETS_NETHERITE).build()))
-            .build(consumer, "netherite_from_nuggets");
+        ShapelessRecipeBuilder.shapeless(Reference.Items.NETHERITE_NUGGET, 9)
+            .requires(Tags.Items.INGOTS_NETHERITE)
+            .unlockedBy("has_netherite", hasItems(Reference.Items.NETHERITE_NUGGET))
+            .save(consumer);
+        ShapedRecipeBuilder.shaped(Items.NETHERITE_INGOT)
+            .pattern("nnn")
+            .pattern("nnn")
+            .pattern("nnn")
+            .define('n', Reference.Tags.NUGGETS_NETHERITE)
+            .unlockedBy("has_netherite_nuggets", hasItems(Builder.item().of(Reference.Tags.NUGGETS_NETHERITE).build()))
+            .save(consumer, "netherite_from_nuggets");
 
         registerSnowballs(consumer);
 
@@ -66,76 +61,76 @@ public class Recipes extends RecipeProvider {
     void registerSnowballs(Consumer<IFinishedRecipe> consumer) {
         final String cored_snowballs = "cored_snowballs";
 
-        ShapedRecipeBuilder.shapedRecipe(Reference.Items.IRON_CORED_SNOWBALL, 8)
-            .patternLine("sss")
-            .patternLine("sIs")
-            .patternLine("sss")
-            .key('s', Items.SNOWBALL)
-            .key('I', Tags.Items.NUGGETS_IRON)
-            .addCriterion("has_snowball", forItems(Items.SNOWBALL))
-            .setGroup(cored_snowballs)
-            .build(consumer);
-        ShapedRecipeBuilder.shapedRecipe(Reference.Items.GOLD_CORED_SNOWBALL, 8)
-            .patternLine("sss")
-            .patternLine("sGs")
-            .patternLine("sss")
-            .key('s', Items.SNOWBALL)
-            .key('G', Tags.Items.NUGGETS_GOLD)
-            .addCriterion("has_snowball", forItems(Items.SNOWBALL))
-            .setGroup(cored_snowballs)
-            .build(consumer);
-        ShapedRecipeBuilder.shapedRecipe(Reference.Items.DIAMOND_CORED_SNOWBALL, 8)
-            .patternLine("sss")
-            .patternLine("sDs")
-            .patternLine("sss")
-            .key('s', Items.SNOWBALL)
-            .key('D', Reference.Tags.NUGGETS_DIAMOND)
-            .addCriterion("has_snowball", forItems(Items.SNOWBALL))
-            .setGroup(cored_snowballs)
-            .build(consumer);
-        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.NETHERITE_CORED_SNOWBALL, 3)
-            .addIngredient(Items.SNOWBALL)
-            .addIngredient(Items.SNOWBALL)
-            .addIngredient(Items.SNOWBALL)
-            .addIngredient(Reference.Tags.NUGGETS_NETHERITE)
-            .addCriterion("has_snowball", forItems(Items.SNOWBALL))
-            .setGroup(cored_snowballs)
-            .build(consumer);
-        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.EXPLOSIVE_SNOWBALL, 3)
-            .addIngredient(Items.SNOWBALL)
-            .addIngredient(Items.SNOWBALL)
-            .addIngredient(Items.SNOWBALL)
-            .addIngredient(Tags.Items.GUNPOWDER)
-            .addIngredient(Tags.Items.GUNPOWDER)
-            .addCriterion("has_snowball", forItems(Items.SNOWBALL))
-            .setGroup(cored_snowballs)
-            .build(consumer);
+        ShapedRecipeBuilder.shaped(Reference.Items.IRON_CORED_SNOWBALL, 8)
+            .pattern("sss")
+            .pattern("sIs")
+            .pattern("sss")
+            .define('s', Items.SNOWBALL)
+            .define('I', Tags.Items.NUGGETS_IRON)
+            .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
+            .group(cored_snowballs)
+            .save(consumer);
+        ShapedRecipeBuilder.shaped(Reference.Items.GOLD_CORED_SNOWBALL, 8)
+            .pattern("sss")
+            .pattern("sGs")
+            .pattern("sss")
+            .define('s', Items.SNOWBALL)
+            .define('G', Tags.Items.NUGGETS_GOLD)
+            .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
+            .group(cored_snowballs)
+            .save(consumer);
+        ShapedRecipeBuilder.shaped(Reference.Items.DIAMOND_CORED_SNOWBALL, 8)
+            .pattern("sss")
+            .pattern("sDs")
+            .pattern("sss")
+            .define('s', Items.SNOWBALL)
+            .define('D', Reference.Tags.NUGGETS_DIAMOND)
+            .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
+            .group(cored_snowballs)
+            .save(consumer);
+        ShapelessRecipeBuilder.shapeless(Reference.Items.NETHERITE_CORED_SNOWBALL, 3)
+            .requires(Items.SNOWBALL)
+            .requires(Items.SNOWBALL)
+            .requires(Items.SNOWBALL)
+            .requires(Reference.Tags.NUGGETS_NETHERITE)
+            .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
+            .group(cored_snowballs)
+            .save(consumer);
+        ShapelessRecipeBuilder.shapeless(Reference.Items.EXPLOSIVE_SNOWBALL, 3)
+            .requires(Items.SNOWBALL)
+            .requires(Items.SNOWBALL)
+            .requires(Items.SNOWBALL)
+            .requires(Tags.Items.GUNPOWDER)
+            .requires(Tags.Items.GUNPOWDER)
+            .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
+            .group(cored_snowballs)
+            .save(consumer);
     }
 
     void registerSnowCones(Consumer<IFinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.WAFER_CONE, 4)
-            .addIngredient(Tags.Items.CROPS_WHEAT)
-            .addIngredient(Tags.Items.CROPS_WHEAT)
-            .addIngredient(Tags.Items.CROPS_WHEAT)
-            .addIngredient(Items.WATER_BUCKET)
-            .addCriterion("has_wheat", forItems(Builder.create().tag(Tags.Items.CROPS_WHEAT).build()))
-            .build(consumer);
-        ShapelessRecipeBuilder.shapelessRecipe(Reference.Items.SNOW_CONE)
-            .addIngredient(Reference.Items.WAFER_CONE)
-            .addIngredient(Items.SNOWBALL)
-            .addIngredient(Items.SNOWBALL)
-            .addCriterion("has_wafer_cone", forItems(Reference.Items.WAFER_CONE))
-            .build(consumer);
-        ShapedRecipeBuilder.shapedRecipe(Reference.Items.GOLDEN_SNOW_CONE)
-            .patternLine("ggg")
-            .patternLine("gSg")
-            .patternLine("ggg")
-            .key('g', Tags.Items.NUGGETS_GOLD)
-            .key('S', Reference.Items.SNOW_CONE)
-            .addCriterion("has_snow_cone", forItems(Reference.Items.SNOW_CONE))
-            .build(consumer);
-        CustomRecipeBuilder.customRecipe(RecipeSerializers.POTION_CONE_RECIPE)
-            .build(consumer, String.valueOf(RecipeSerializers.POTION_CONE_RECIPE.getRegistryName()));
+        ShapelessRecipeBuilder.shapeless(Reference.Items.WAFER_CONE, 4)
+            .requires(Tags.Items.CROPS_WHEAT)
+            .requires(Tags.Items.CROPS_WHEAT)
+            .requires(Tags.Items.CROPS_WHEAT)
+            .requires(Items.WATER_BUCKET)
+            .unlockedBy("has_wheat", hasItems(Builder.item().of(Tags.Items.CROPS_WHEAT).build()))
+            .save(consumer);
+        ShapelessRecipeBuilder.shapeless(Reference.Items.SNOW_CONE)
+            .requires(Reference.Items.WAFER_CONE)
+            .requires(Items.SNOWBALL)
+            .requires(Items.SNOWBALL)
+            .unlockedBy("has_wafer_cone", hasItems(Reference.Items.WAFER_CONE))
+            .save(consumer);
+        ShapedRecipeBuilder.shaped(Reference.Items.GOLDEN_SNOW_CONE)
+            .pattern("ggg")
+            .pattern("gSg")
+            .pattern("ggg")
+            .define('g', Tags.Items.NUGGETS_GOLD)
+            .define('S', Reference.Items.SNOW_CONE)
+            .unlockedBy("has_snow_cone", hasItems(Reference.Items.SNOW_CONE))
+            .save(consumer);
+        CustomRecipeBuilder.special(RecipeSerializers.POTION_CONE_RECIPE)
+            .save(consumer, String.valueOf(RecipeSerializers.POTION_CONE_RECIPE.getRegistryName()));
     }
 
     private static CompoundIngredient compound(Ingredient... ingredients) {
