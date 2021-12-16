@@ -17,8 +17,8 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-
 import org.checkerframework.checker.nullness.qual.Nullable;
+
 import java.util.List;
 
 public class PotionConeItem extends Item {

@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
 import java.nio.file.Path;
 
 public class ItemTags extends TagsProvider<Item> {
