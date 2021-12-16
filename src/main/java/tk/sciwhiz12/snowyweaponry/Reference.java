@@ -19,6 +19,7 @@ import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 import net.minecraftforge.registries.ObjectHolder;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
 import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
 import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
@@ -27,8 +28,6 @@ import tk.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import tk.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import tk.sciwhiz12.snowyweaponry.util.Util;
-
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Holds references to constants and objects created and registered by this mod.
@@ -75,7 +74,6 @@ public final class Reference {
         public static final EntityType<ExplosiveSnowball> EXPLOSIVE_SNOWBALL = Util.Null();
     }
 
-    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class DamageSources {
         private DamageSources() {
         } // Prevent instantiation
