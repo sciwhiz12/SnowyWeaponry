@@ -6,11 +6,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.Reference;
+import tk.sciwhiz12.snowyweaponry.Reference.Items;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 
 public class CoredSnowball extends Snowball {
@@ -26,6 +28,11 @@ public class CoredSnowball extends Snowball {
     public CoredSnowball(Level world, LivingEntity thrower) {
         this(world, thrower.getX(), thrower.getEyeY() - 0.1D, thrower.getZ());
         setOwner(thrower);
+    }
+
+    @Override
+    protected Item getDefaultItem() {
+        return Items.IRON_CORED_SNOWBALL;
     }
 
     @Override
