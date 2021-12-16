@@ -12,20 +12,20 @@ import net.minecraft.world.level.Level;
 import tk.sciwhiz12.snowyweaponry.Reference;
 
 public class PotionConeRecipe extends CustomRecipe {
-    public PotionConeRecipe(ResourceLocation idIn) {
-        super(idIn);
+    public PotionConeRecipe(ResourceLocation id) {
+        super(id);
     }
 
     @Override
-    public boolean matches(CraftingContainer inv, Level worldIn) {
-        if ((inv.getWidth() * inv.getHeight()) < 5) {
+    public boolean matches(CraftingContainer container, Level level) {
+        if ((container.getWidth() * container.getHeight()) < 5) {
             return false;
         }
         boolean hasPotion = false;
         int cones = 0;
-        for (int i = 0; i < inv.getWidth(); ++i) {
-            for (int j = 0; j < inv.getHeight(); ++j) {
-                ItemStack itemstack = inv.getItem(i + j * inv.getWidth());
+        for (int i = 0; i < container.getWidth(); ++i) {
+            for (int j = 0; j < container.getHeight(); ++j) {
+                ItemStack itemstack = container.getItem(i + j * container.getWidth());
                 Item item = itemstack.getItem();
                 if (item == Items.POTION || item == Items.SPLASH_POTION) {
                     if (!hasPotion) {
@@ -45,12 +45,12 @@ public class PotionConeRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer inv) {
+    public ItemStack assemble(CraftingContainer container) {
         ItemStack potion = ItemStack.EMPTY;
 
-        for (int i = 0; i < inv.getWidth(); ++i) {
-            for (int j = 0; j < inv.getHeight(); ++j) {
-                ItemStack stack = inv.getItem(i + j * inv.getWidth());
+        for (int i = 0; i < container.getWidth(); ++i) {
+            for (int j = 0; j < container.getHeight(); ++j) {
+                ItemStack stack = container.getItem(i + j * container.getWidth());
                 Item item = stack.getItem();
                 if (item == Items.POTION || item == Items.SPLASH_POTION) {
                     potion = stack;

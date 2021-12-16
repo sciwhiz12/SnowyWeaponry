@@ -80,8 +80,8 @@ public final class Reference {
         private DamageSources() {
         } // Prevent instantiation
 
-        public static DamageSource causeSnowballDamage(Entity source, @Nullable Entity indirectSource, int lootingLevel) {
-            return (new CoredSnowballDamageSource("snowball", source, indirectSource, lootingLevel)).setProjectile();
+        public static DamageSource causeSnowballDamage(Entity entity, @Nullable Entity owner, int lootingLevel) {
+            return (new CoredSnowballDamageSource("snowball", entity, owner, lootingLevel)).setProjectile();
         }
 
         public static DamageSource causeSnowballExplosionDamage(@Nullable Entity entity) {

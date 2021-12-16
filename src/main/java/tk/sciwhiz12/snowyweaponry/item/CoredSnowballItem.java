@@ -21,9 +21,9 @@ public class CoredSnowballItem extends Item {
     @Nullable
     private final Supplier<MobEffectInstance> hitEffect;
 
-    public CoredSnowballItem(Item.Properties builder, int thrownDamage, int lootingLevel,
+    public CoredSnowballItem(Item.Properties properties, int thrownDamage, int lootingLevel,
                              @Nullable Supplier<MobEffectInstance> hitEffect) {
-        super(builder);
+        super(properties);
         this.thrownDamage = thrownDamage;
         this.lootingLevel = lootingLevel;
         this.hitEffect = hitEffect;
@@ -42,17 +42,17 @@ public class CoredSnowballItem extends Item {
         return hitEffect != null ? hitEffect.get() : null;
     }
 
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW,
-            SoundSource.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW,
+            SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
 
-        if (!world.isClientSide) {
-            CoredSnowball entity = new CoredSnowball(world, player);
+        if (!level.isClientSide) {
+            CoredSnowball entity = new CoredSnowball(level, player);
             entity.setItem(stack);
             entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
-            world.addFreshEntity(entity);
+            level.addFreshEntity(entity);
         }
 
         player.awardStat(Stats.ITEM_USED.get(this));
@@ -60,6 +60,6 @@ public class CoredSnowballItem extends Item {
             stack.shrink(1);
         }
 
-        return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
     }
 }

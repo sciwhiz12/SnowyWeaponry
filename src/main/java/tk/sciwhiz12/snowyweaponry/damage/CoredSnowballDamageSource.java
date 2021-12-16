@@ -6,16 +6,15 @@ import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
-
 import org.checkerframework.checker.nullness.qual.Nullable;
+import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 @EventBusSubscriber(modid = SnowyWeaponry.MODID, bus = Bus.FORGE)
 public class CoredSnowballDamageSource extends IndirectEntityDamageSource {
     private final int lootingLevel;
 
-    public CoredSnowballDamageSource(String damageTypeIn, Entity source, @Nullable Entity indirectEntityIn, int lootingLevel) {
-        super(damageTypeIn, source, indirectEntityIn);
+    public CoredSnowballDamageSource(String msgId, Entity entity, @Nullable Entity owner, int lootingLevel) {
+        super(msgId, entity, owner);
         this.lootingLevel = lootingLevel;
     }
 

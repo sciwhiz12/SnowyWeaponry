@@ -24,8 +24,8 @@ import java.util.List;
 public class PotionConeItem extends Item {
     public static final int DURATION_DIVISOR = 8;
 
-    public PotionConeItem(Item.Properties builder) {
-        super(builder);
+    public PotionConeItem(Item.Properties properties) {
+        super(properties);
     }
 
     @Override
@@ -34,15 +34,15 @@ public class PotionConeItem extends Item {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity living) {
-        @Nullable Player player = living instanceof Player ? (Player) living : null;
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+        @Nullable Player player = user instanceof Player ? (Player) user : null;
         if (player instanceof ServerPlayer) {
             CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
         }
 
-        if (!worldIn.isClientSide) {
+        if (!level.isClientSide) {
             for (MobEffectInstance effect : PotionUtils.getMobEffects(stack)) {
-                living.addEffect(
+                user.addEffect(
                     new MobEffectInstance(effect.getEffect(), Math.max(effect.getDuration() / DURATION_DIVISOR, 1),
                         effect.getAmplifier(), effect.isAmbient(), effect.isVisible())
                 );
@@ -53,7 +53,7 @@ public class PotionConeItem extends Item {
             player.awardStat(Stats.ITEM_USED.get(this));
         }
 
-        return super.finishUsingItem(stack, worldIn, living);
+        return super.finishUsingItem(stack, level, user);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class PotionConeItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         PotionUtils.addPotionTooltip(stack, tooltip, 1.0F / DURATION_DIVISOR);
     }
 
@@ -72,8 +72,8 @@ public class PotionConeItem extends Item {
     }
 
     @Override
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-        if (!this.allowdedIn(group)) return;
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (!this.allowdedIn(tab)) return;
 
         for (Potion potion : ForgeRegistries.POTIONS) {
             if (potion != Potions.EMPTY) {

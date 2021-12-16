@@ -16,17 +16,17 @@ import tk.sciwhiz12.snowyweaponry.Reference.Items;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 
 public class CoredSnowball extends Snowball {
-    public CoredSnowball(EntityType<CoredSnowball> entityType, Level world) {
-        super(entityType, world);
+    public CoredSnowball(EntityType<CoredSnowball> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public CoredSnowball(Level world, double x, double y, double z) {
-        super(Reference.EntityTypes.CORED_SNOWBALL, world);
+    public CoredSnowball(Level level, double x, double y, double z) {
+        super(Reference.EntityTypes.CORED_SNOWBALL, level);
         setPos(x, y, z);
     }
 
-    public CoredSnowball(Level world, LivingEntity thrower) {
-        this(world, thrower.getX(), thrower.getEyeY() - 0.1D, thrower.getZ());
+    public CoredSnowball(Level level, LivingEntity thrower) {
+        this(level, thrower.getX(), thrower.getEyeY() - 0.1D, thrower.getZ());
         setOwner(thrower);
     }
 
@@ -45,9 +45,9 @@ public class CoredSnowball extends Snowball {
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult entityTrace) {
+    protected void onHitEntity(EntityHitResult result) {
         ItemStack stack = this.getItem();
-        Entity entity = entityTrace.getEntity();
+        Entity entity = result.getEntity();
 
         int damage = 0;
         int looting = 0;
