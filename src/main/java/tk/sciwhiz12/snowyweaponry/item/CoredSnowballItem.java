@@ -11,7 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import tk.sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
 
 import java.util.function.Supplier;
 
@@ -49,7 +49,7 @@ public class CoredSnowballItem extends Item {
             SoundSource.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
 
         if (!world.isClientSide) {
-            CoredSnowballEntity entity = new CoredSnowballEntity(world, player);
+            CoredSnowball entity = new CoredSnowball(world, player);
             entity.setItem(stack);
             entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             world.addFreshEntity(entity);

@@ -20,8 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 import net.minecraftforge.registries.ObjectHolder;
 import tk.sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
-import tk.sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
-import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
+import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
@@ -71,8 +71,8 @@ public final class Reference {
         private EntityTypes() {
         } // Prevent instantiation
 
-        public static final EntityType<CoredSnowballEntity> CORED_SNOWBALL = Util.Null();
-        public static final EntityType<ExplosiveSnowballEntity> EXPLOSIVE_SNOWBALL = Util.Null();
+        public static final EntityType<CoredSnowball> CORED_SNOWBALL = Util.Null();
+        public static final EntityType<ExplosiveSnowball> EXPLOSIVE_SNOWBALL = Util.Null();
     }
 
     @ObjectHolder(SnowyWeaponry.MODID)
@@ -118,7 +118,7 @@ public final class Reference {
         public static final AbstractProjectileDispenseBehavior CORED_SNOWBALL = new AbstractProjectileDispenseBehavior() {
             @Override
             protected Projectile getProjectile(Level world, Position pos, ItemStack stack) {
-                CoredSnowballEntity entity = new CoredSnowballEntity(world, pos.x(), pos.y(), pos.z());
+                CoredSnowball entity = new CoredSnowball(world, pos.x(), pos.y(), pos.z());
                 entity.setItem(stack);
                 return entity;
             }
@@ -127,7 +127,7 @@ public final class Reference {
         public static final AbstractProjectileDispenseBehavior EXPLOSIVE_SNOWBALL = new AbstractProjectileDispenseBehavior() {
             @Override
             protected Projectile getProjectile(Level world, Position pos, ItemStack stack) {
-                ExplosiveSnowballEntity entity = new ExplosiveSnowballEntity(world, pos.x(), pos.y(), pos.z());
+                ExplosiveSnowball entity = new ExplosiveSnowball(world, pos.x(), pos.y(), pos.z());
                 entity.setItem(stack);
                 return entity;
             }

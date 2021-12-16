@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 
 public class ExplosiveSnowballItem extends Item {
     public ExplosiveSnowballItem(Item.Properties builder) {
@@ -23,7 +23,7 @@ public class ExplosiveSnowballItem extends Item {
             SoundSource.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
 
         if (!world.isClientSide) {
-            ExplosiveSnowballEntity entity = new ExplosiveSnowballEntity(world, player);
+            ExplosiveSnowball entity = new ExplosiveSnowball(world, player);
             entity.setItem(stack);
             entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             world.addFreshEntity(entity);

@@ -17,8 +17,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import tk.sciwhiz12.snowyweaponry.entity.CoredSnowballEntity;
-import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowballEntity;
+import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
+import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
@@ -88,10 +88,10 @@ public final class Registration {
     static void onRegisterEntities(RegistryEvent.Register<EntityType<?>> event) {
         SnowyWeaponry.LOG.debug(SnowyWeaponry.COMMON, "Registering entity types");
         event.getRegistry().registerAll(
-            build(EntityType.Builder.<CoredSnowballEntity>of(CoredSnowballEntity::new, MobCategory.MISC)
+            build(EntityType.Builder.<CoredSnowball>of(CoredSnowball::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10),
                 "cored_snowball"),
-            build(EntityType.Builder.<ExplosiveSnowballEntity>of(ExplosiveSnowballEntity::new, MobCategory.MISC)
+            build(EntityType.Builder.<ExplosiveSnowball>of(ExplosiveSnowball::new, MobCategory.MISC)
                     .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10),
                 "explosive_snowball")
         );
