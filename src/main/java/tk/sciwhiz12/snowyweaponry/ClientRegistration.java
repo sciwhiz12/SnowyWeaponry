@@ -8,7 +8,6 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 /**
  * Class for registering <strong>client-side only</strong> objects of this mod.
@@ -19,11 +18,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public final class ClientRegistration {
     private ClientRegistration() {
     } // Prevent instantiation
-
-    @SubscribeEvent
-    static void onClientSetup(FMLClientSetupEvent event) {
-        SnowyWeaponry.LOG.debug(SnowyWeaponry.CLIENT, "Setting up on client");
-    }
 
     @SubscribeEvent
     static void onColorHandlerItem(ColorHandlerEvent.Item event) {
