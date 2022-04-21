@@ -3,9 +3,7 @@ package tk.sciwhiz12.snowyweaponry;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.Entity;
@@ -17,8 +15,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.Tags.IOptionalNamedTag;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.tags.ITagManager;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
 import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
@@ -28,6 +29,8 @@ import tk.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import tk.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import tk.sciwhiz12.snowyweaponry.util.Util;
+
+import java.util.Objects;
 
 /**
  * Holds references to constants and objects created and registered by this mod.
@@ -101,12 +104,17 @@ public final class Reference {
         private Tags() {
         } // Prevent instantiation
 
-        public static final Tag.Named<EntityType<?>> FIRE_MOBS = EntityTypeTags.bind(SnowyWeaponry.MODID + ":fire_mobs");
+        public static final TagKey<EntityType<?>> FIRE_MOBS = tags(ForgeRegistries.ENTITIES)
+                .createTagKey(SnowyWeaponry.loc("fire_mobs"));
 
-        public static final IOptionalNamedTag<Item> NUGGETS_DIAMOND = ItemTags
-            .createOptional(new ResourceLocation("forge", "nuggets/diamond"));
-        public static final IOptionalNamedTag<Item> NUGGETS_NETHERITE = ItemTags
-            .createOptional(new ResourceLocation("forge", "nuggets/netherite"));
+        public static final TagKey<Item> NUGGETS_DIAMOND = tags(ForgeRegistries.ITEMS)
+                .createTagKey(new ResourceLocation("forge", "nuggets/diamond"));
+        public static final TagKey<Item> NUGGETS_NETHERITE = tags(ForgeRegistries.ITEMS)
+                .createTagKey(new ResourceLocation("forge", "nuggets/netherite"));
+
+        private static <T extends IForgeRegistryEntry<T>> ITagManager<T> tags(IForgeRegistry<T> registry) {
+            return Objects.requireNonNull(registry.tags());
+        }
     }
 
     public static final class DispenseBehaviors {

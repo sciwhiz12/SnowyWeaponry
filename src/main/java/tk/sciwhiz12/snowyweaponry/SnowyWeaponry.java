@@ -1,5 +1,6 @@
 package tk.sciwhiz12.snowyweaponry;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,5 +16,9 @@ public class SnowyWeaponry {
     public static final Marker SERVER = MarkerManager.getMarker("SERVER");
 
     public SnowyWeaponry() {
+    }
+    
+    public static ResourceLocation loc(String path) {
+        return new ResourceLocation(MODID, path);
     }
 }
