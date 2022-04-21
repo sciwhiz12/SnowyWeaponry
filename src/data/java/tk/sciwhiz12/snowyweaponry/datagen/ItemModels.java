@@ -21,20 +21,20 @@ public class ItemModels extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        singleTextureItem(Items.DIAMOND_CHUNK);
-        singleTextureItem(Items.NETHERITE_NUGGET);
+        singleTextureItem(Items.DIAMOND_CHUNK.get());
+        singleTextureItem(Items.NETHERITE_NUGGET.get());
 
-        singleTextureItem(Items.IRON_CORED_SNOWBALL);
-        singleTextureItem(Items.GOLD_CORED_SNOWBALL);
-        singleTextureItem(Items.DIAMOND_CORED_SNOWBALL);
-        singleTextureItem(Items.NETHERITE_CORED_SNOWBALL);
-        singleTextureItem(Items.EXPLOSIVE_SNOWBALL);
+        singleTextureItem(Items.IRON_CORED_SNOWBALL.get());
+        singleTextureItem(Items.GOLD_CORED_SNOWBALL.get());
+        singleTextureItem(Items.DIAMOND_CORED_SNOWBALL.get());
+        singleTextureItem(Items.NETHERITE_CORED_SNOWBALL.get());
+        singleTextureItem(Items.EXPLOSIVE_SNOWBALL.get());
 
-        singleTextureItem(Items.WAFER_CONE);
-        singleTextureItem(Items.SNOW_CONE);
-        singleTextureItem(Items.GOLDEN_SNOW_CONE);
+        singleTextureItem(Items.WAFER_CONE.get());
+        singleTextureItem(Items.SNOW_CONE.get());
+        singleTextureItem(Items.GOLDEN_SNOW_CONE.get());
 
-        itemWithOverlay(Items.POTION_SNOW_CONE, Items.SNOW_CONE, "potion_snow_cone_overlay");
+        itemWithOverlay(Items.POTION_SNOW_CONE.get(), Items.SNOW_CONE.get(), "potion_snow_cone_overlay");
     }
 
     void singleTextureItem(Item item) {

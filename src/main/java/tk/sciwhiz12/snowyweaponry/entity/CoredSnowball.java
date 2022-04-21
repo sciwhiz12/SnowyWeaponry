@@ -21,7 +21,7 @@ public class CoredSnowball extends Snowball {
     }
 
     public CoredSnowball(Level level, double x, double y, double z) {
-        super(Reference.EntityTypes.CORED_SNOWBALL, level);
+        super(Reference.EntityTypes.CORED_SNOWBALL.get(), level);
         setPos(x, y, z);
     }
 
@@ -32,7 +32,7 @@ public class CoredSnowball extends Snowball {
 
     @Override
     protected Item getDefaultItem() {
-        return Items.IRON_CORED_SNOWBALL;
+        return Items.IRON_CORED_SNOWBALL.get();
     }
 
     @Override

@@ -24,14 +24,14 @@ public final class ClientRegistration {
         SnowyWeaponry.LOG.debug(SnowyWeaponry.CLIENT, "Registering item colors");
         event.getItemColors().register(
                 (stack, index) -> index != 1 ? -1 : PotionUtils.getColor(stack),
-                Reference.Items.POTION_SNOW_CONE
+                Reference.Items.POTION_SNOW_CONE.get()
         );
     }
 
     @SubscribeEvent
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         SnowyWeaponry.LOG.debug(SnowyWeaponry.CLIENT, "Registering entity renderers");
-        event.registerEntityRenderer(Reference.EntityTypes.CORED_SNOWBALL, ThrownItemRenderer::new);
-        event.registerEntityRenderer(Reference.EntityTypes.EXPLOSIVE_SNOWBALL, ThrownItemRenderer::new);
+        event.registerEntityRenderer(Reference.EntityTypes.CORED_SNOWBALL.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(Reference.EntityTypes.EXPLOSIVE_SNOWBALL.get(), ThrownItemRenderer::new);
     }
 }

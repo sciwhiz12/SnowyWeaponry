@@ -6,19 +6,25 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleRecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.tags.ITagManager;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
@@ -28,12 +34,12 @@ import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import tk.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import tk.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
-import tk.sciwhiz12.snowyweaponry.util.Util;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
- * Holds references to constants and objects created and registered by this mod.
+ * Registers and holds references to constants and objects created and registered by this mod.
  *
  * @author SciWhiz12
  */
@@ -44,37 +50,116 @@ public final class Reference {
     public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab("snowy_weapons") {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(Items.GOLD_CORED_SNOWBALL);
+            return new ItemStack(Items.GOLD_CORED_SNOWBALL.get());
         }
     };
 
-    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class Items {
         private Items() {
         } // Prevent instantiation
 
-        public static final Item DIAMOND_CHUNK = Util.Null();
-        public static final Item NETHERITE_NUGGET = Util.Null();
+        static final DeferredRegister<Item> REGISTER = DeferredRegister.create(ForgeRegistries.ITEMS, SnowyWeaponry.MODID);
 
-        public static final CoredSnowballItem IRON_CORED_SNOWBALL = Util.Null();
-        public static final CoredSnowballItem GOLD_CORED_SNOWBALL = Util.Null();
-        public static final CoredSnowballItem DIAMOND_CORED_SNOWBALL = Util.Null();
-        public static final CoredSnowballItem NETHERITE_CORED_SNOWBALL = Util.Null();
-        public static final ExplosiveSnowballItem EXPLOSIVE_SNOWBALL = Util.Null();
+        public static final RegistryObject<Item> DIAMOND_CHUNK = REGISTER.register("diamond_chunk", () ->
+                new Item(itemProps()
+                        .stacksTo(64)
+                        .tab(CreativeModeTab.TAB_MISC)));
+        public static final RegistryObject<Item> NETHERITE_NUGGET = REGISTER.register("netherite_nugget", () ->
+                new Item(itemProps()
+                        .stacksTo(64)
+                        .tab(CreativeModeTab.TAB_MISC)));
 
-        public static final Item WAFER_CONE = Util.Null();
-        public static final Item SNOW_CONE = Util.Null();
-        public static final Item GOLDEN_SNOW_CONE = Util.Null();
-        public static final PotionConeItem POTION_SNOW_CONE = Util.Null();
+        public static final RegistryObject<CoredSnowballItem> IRON_CORED_SNOWBALL = REGISTER.register("iron_cored_snowball", () ->
+                new CoredSnowballItem(itemProps()
+                        .stacksTo(16)
+                        .tab(Reference.ITEM_GROUP),
+                        2, 0, null));
+        public static final RegistryObject<CoredSnowballItem> GOLD_CORED_SNOWBALL = REGISTER.register("gold_cored_snowball", () ->
+                new CoredSnowballItem(itemProps()
+                        .stacksTo(16)
+                        .tab(Reference.ITEM_GROUP),
+                        1, 1, null));
+        public static final RegistryObject<CoredSnowballItem> DIAMOND_CORED_SNOWBALL = REGISTER.register("diamond_cored_snowball", () ->
+                new CoredSnowballItem(itemProps()
+                        .stacksTo(16)
+                        .tab(Reference.ITEM_GROUP),
+                        3, 0, () ->
+                        new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0, false, true, false)));
+        public static final RegistryObject<CoredSnowballItem> NETHERITE_CORED_SNOWBALL = REGISTER.register("netherite_cored_snowball", () ->
+                new CoredSnowballItem(itemProps()
+                        .stacksTo(16)
+                        .tab(Reference.ITEM_GROUP),
+                        4, 0, () ->
+                        new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, true, false)));
+        public static final RegistryObject<ExplosiveSnowballItem> EXPLOSIVE_SNOWBALL = REGISTER.register("explosive_snowball", () ->
+                new ExplosiveSnowballItem(itemProps()
+                        .stacksTo(8)
+                        .tab(Reference.ITEM_GROUP)));
+
+        public static final RegistryObject<Item> WAFER_CONE = REGISTER.register("wafer_cone", () ->
+                new Item(itemProps()
+                        .stacksTo(32)
+                        .tab(Reference.ITEM_GROUP)
+                        .food(new FoodProperties.Builder()
+                                .fast()
+                                .nutrition(1)
+                                .saturationMod(0.1F)
+                                .build())));
+        public static final RegistryObject<Item> SNOW_CONE = REGISTER.register("snow_cone", () -> new Item(itemProps()
+                .stacksTo(8)
+                .tab(Reference.ITEM_GROUP)
+                .food(new FoodProperties.Builder()
+                        .fast()
+                        .nutrition(2)
+                        .saturationMod(0.2F)
+                        .build())));
+        public static final RegistryObject<Item> GOLDEN_SNOW_CONE = REGISTER.register("golden_snow_cone", () ->
+                new Item(itemProps()
+                        .stacksTo(8)
+                        .tab(Reference.ITEM_GROUP)
+                        .food(new FoodProperties.Builder()
+                                .fast()
+                                .nutrition(4)
+                                .saturationMod(1.0F)
+                                .alwaysEat()
+                                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 120, 0, false, true), 1)
+                                .build())));
+        public static final RegistryObject<PotionConeItem> POTION_SNOW_CONE = REGISTER.register("potion_snow_cone", () ->
+                new PotionConeItem(itemProps()
+                        .stacksTo(8)
+                        .tab(Reference.ITEM_GROUP)
+                        .food(new FoodProperties.Builder()
+                                .fast()
+                                .nutrition(2)
+                                .saturationMod(0.3F)
+                                .alwaysEat()
+                                .build())));
+
+        private static Item.Properties itemProps() {
+            return new Item.Properties();
+        }
     }
 
-    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class EntityTypes {
         private EntityTypes() {
         } // Prevent instantiation
 
-        public static final EntityType<CoredSnowball> CORED_SNOWBALL = Util.Null();
-        public static final EntityType<ExplosiveSnowball> EXPLOSIVE_SNOWBALL = Util.Null();
+        static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.ENTITIES, SnowyWeaponry.MODID);
+
+        public static final RegistryObject<EntityType<CoredSnowball>> CORED_SNOWBALL = register("cored_snowball", () ->
+                EntityType.Builder.<CoredSnowball>of(CoredSnowball::new, MobCategory.MISC)
+                        .sized(0.25F, 0.25F)
+                        .clientTrackingRange(4)
+                        .updateInterval(10));
+        public static final RegistryObject<EntityType<ExplosiveSnowball>> EXPLOSIVE_SNOWBALL = register("explosive_snowball", () ->
+                EntityType.Builder.<ExplosiveSnowball>of(ExplosiveSnowball::new, MobCategory.MISC)
+                        .sized(0.25F, 0.25F)
+                        .clientTrackingRange(4)
+                        .updateInterval(10));
+        
+        private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Supplier<EntityType.Builder<T>> builder) {
+            return REGISTER.register(name, () -> builder.get().build(SnowyWeaponry.loc(name).toString()));
+        }
     }
 
     public static final class DamageSources {
@@ -92,12 +177,14 @@ public final class Reference {
         }
     }
 
-    @ObjectHolder(SnowyWeaponry.MODID)
     public static final class RecipeSerializers {
         private RecipeSerializers() {
         } // Prevent instantiation
 
-        public static final SimpleRecipeSerializer<PotionConeRecipe> POTION_CONE_RECIPE = Util.Null();
+        static final DeferredRegister<RecipeSerializer<?>> REGISTER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SnowyWeaponry.MODID);
+
+        public static final RegistryObject<SimpleRecipeSerializer<PotionConeRecipe>> POTION_CONE_RECIPE = REGISTER.register("potion_cone_recipe", () ->
+                new SimpleRecipeSerializer<>(PotionConeRecipe::new));
     }
 
     public static final class Tags {

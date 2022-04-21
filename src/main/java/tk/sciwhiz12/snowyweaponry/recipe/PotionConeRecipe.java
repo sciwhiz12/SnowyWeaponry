@@ -33,7 +33,7 @@ public class PotionConeRecipe extends CustomRecipe {
                     } else {
                         return false;
                     }
-                } else if (item == Reference.Items.SNOW_CONE) {
+                } else if (item == Reference.Items.SNOW_CONE.get()) {
                     if (cones++ > 4) {
                         return false;
                     }
@@ -61,7 +61,7 @@ public class PotionConeRecipe extends CustomRecipe {
         if (potion.isEmpty()) {
             return ItemStack.EMPTY;
         } else {
-            ItemStack ret = new ItemStack(Reference.Items.POTION_SNOW_CONE, 4);
+            ItemStack ret = new ItemStack(Reference.Items.POTION_SNOW_CONE.get(), 4);
             PotionUtils.setPotion(ret, PotionUtils.getPotion(potion));
             PotionUtils.setCustomEffects(ret, PotionUtils.getCustomEffects(potion));
             return ret;
@@ -75,6 +75,6 @@ public class PotionConeRecipe extends CustomRecipe {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return Reference.RecipeSerializers.POTION_CONE_RECIPE;
+        return Reference.RecipeSerializers.POTION_CONE_RECIPE.get();
     }
 }

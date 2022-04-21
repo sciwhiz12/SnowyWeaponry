@@ -15,21 +15,21 @@ public class Languages extends LanguageProvider {
     protected void addTranslations() {
         add("itemGroup.snowy_weapons", "Snowy Weapons");
 
-        add(Items.DIAMOND_CHUNK, "Diamond Chunk");
-        add(Items.NETHERITE_NUGGET, "Netherite Nugget");
+        add(Items.DIAMOND_CHUNK.get(), "Diamond Chunk");
+        add(Items.NETHERITE_NUGGET.get(), "Netherite Nugget");
 
-        add(Items.IRON_CORED_SNOWBALL, "Iron-cored Snowball");
-        add(Items.GOLD_CORED_SNOWBALL, "Gold-cored Snowball");
-        add(Items.DIAMOND_CORED_SNOWBALL, "Diamond-cored Snowball");
-        add(Items.NETHERITE_CORED_SNOWBALL, "Netherite-cored Snowball");
-        add(Items.EXPLOSIVE_SNOWBALL, "Explosive Snowball");
+        add(Items.IRON_CORED_SNOWBALL.get(), "Iron-cored Snowball");
+        add(Items.GOLD_CORED_SNOWBALL.get(), "Gold-cored Snowball");
+        add(Items.DIAMOND_CORED_SNOWBALL.get(), "Diamond-cored Snowball");
+        add(Items.NETHERITE_CORED_SNOWBALL.get(), "Netherite-cored Snowball");
+        add(Items.EXPLOSIVE_SNOWBALL.get(), "Explosive Snowball");
 
-        add(Items.WAFER_CONE, "Wafer Cone");
-        add(Items.SNOW_CONE, "Snow Cone");
-        add(Items.GOLDEN_SNOW_CONE, "Golden Snow Cone");
-        add(Items.POTION_SNOW_CONE, "Dipped Snow Cone");
+        add(Items.WAFER_CONE.get(), "Wafer Cone");
+        add(Items.SNOW_CONE.get(), "Snow Cone");
+        add(Items.GOLDEN_SNOW_CONE.get(), "Golden Snow Cone");
+        add(Items.POTION_SNOW_CONE.get(), "Dipped Snow Cone");
 
-        add(Reference.EntityTypes.CORED_SNOWBALL, "Snowball");
+        add(Reference.EntityTypes.CORED_SNOWBALL.get(), "Snowball");
 
         addDamageSourceTranslations();
 
@@ -37,7 +37,7 @@ public class Languages extends LanguageProvider {
     }
 
     void addPotionConeTranslations() {
-        final String baseTranslationKey = Items.POTION_SNOW_CONE.getDescriptionId();
+        final String baseTranslationKey = Items.POTION_SNOW_CONE.get().getDescriptionId();
 
         add(baseTranslationKey + ".effect.empty", "Uncraftable Dipped Snow Cone");
         add(baseTranslationKey + ".effect.water", "Wet Snow Cone");

@@ -34,9 +34,9 @@ public class Recipes extends RecipeProvider {
 
     @Override
     protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapeless(Reference.Items.DIAMOND_CHUNK, 9)
+        ShapelessRecipeBuilder.shapeless(Reference.Items.DIAMOND_CHUNK.get(), 9)
             .requires(Tags.Items.GEMS_DIAMOND)
-            .unlockedBy("has_diamond", hasItems(Reference.Items.DIAMOND_CHUNK))
+            .unlockedBy("has_diamond", hasItems(Reference.Items.DIAMOND_CHUNK.get()))
             .save(consumer);
         ShapedRecipeBuilder.shaped(Items.DIAMOND)
             .pattern("nnn")
@@ -46,9 +46,9 @@ public class Recipes extends RecipeProvider {
             .unlockedBy("has_diamond_nuggets", hasItems(Builder.item().of(Reference.Tags.NUGGETS_DIAMOND).build()))
             .save(consumer, "diamond_from_nuggets");
 
-        ShapelessRecipeBuilder.shapeless(Reference.Items.NETHERITE_NUGGET, 9)
+        ShapelessRecipeBuilder.shapeless(Reference.Items.NETHERITE_NUGGET.get(), 9)
             .requires(Tags.Items.INGOTS_NETHERITE)
-            .unlockedBy("has_netherite", hasItems(Reference.Items.NETHERITE_NUGGET))
+            .unlockedBy("has_netherite", hasItems(Reference.Items.NETHERITE_NUGGET.get()))
             .save(consumer);
         ShapedRecipeBuilder.shaped(Items.NETHERITE_INGOT)
             .pattern("nnn")
@@ -66,7 +66,7 @@ public class Recipes extends RecipeProvider {
     void registerSnowballs(Consumer<FinishedRecipe> consumer) {
         final String cored_snowballs = "cored_snowballs";
 
-        ShapedRecipeBuilder.shaped(Reference.Items.IRON_CORED_SNOWBALL, 8)
+        ShapedRecipeBuilder.shaped(Reference.Items.IRON_CORED_SNOWBALL.get(), 8)
             .pattern("sss")
             .pattern("sIs")
             .pattern("sss")
@@ -75,7 +75,7 @@ public class Recipes extends RecipeProvider {
             .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
             .group(cored_snowballs)
             .save(consumer);
-        ShapedRecipeBuilder.shaped(Reference.Items.GOLD_CORED_SNOWBALL, 8)
+        ShapedRecipeBuilder.shaped(Reference.Items.GOLD_CORED_SNOWBALL.get(), 8)
             .pattern("sss")
             .pattern("sGs")
             .pattern("sss")
@@ -84,7 +84,7 @@ public class Recipes extends RecipeProvider {
             .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
             .group(cored_snowballs)
             .save(consumer);
-        ShapedRecipeBuilder.shaped(Reference.Items.DIAMOND_CORED_SNOWBALL, 8)
+        ShapedRecipeBuilder.shaped(Reference.Items.DIAMOND_CORED_SNOWBALL.get(), 8)
             .pattern("sss")
             .pattern("sDs")
             .pattern("sss")
@@ -93,7 +93,7 @@ public class Recipes extends RecipeProvider {
             .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
             .group(cored_snowballs)
             .save(consumer);
-        ShapelessRecipeBuilder.shapeless(Reference.Items.NETHERITE_CORED_SNOWBALL, 3)
+        ShapelessRecipeBuilder.shapeless(Reference.Items.NETHERITE_CORED_SNOWBALL.get(), 3)
             .requires(Items.SNOWBALL)
             .requires(Items.SNOWBALL)
             .requires(Items.SNOWBALL)
@@ -101,7 +101,7 @@ public class Recipes extends RecipeProvider {
             .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
             .group(cored_snowballs)
             .save(consumer);
-        ShapelessRecipeBuilder.shapeless(Reference.Items.EXPLOSIVE_SNOWBALL, 3)
+        ShapelessRecipeBuilder.shapeless(Reference.Items.EXPLOSIVE_SNOWBALL.get(), 3)
             .requires(Items.SNOWBALL)
             .requires(Items.SNOWBALL)
             .requires(Items.SNOWBALL)
@@ -113,29 +113,29 @@ public class Recipes extends RecipeProvider {
     }
 
     void registerSnowCones(Consumer<FinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapeless(Reference.Items.WAFER_CONE, 4)
+        ShapelessRecipeBuilder.shapeless(Reference.Items.WAFER_CONE.get(), 4)
             .requires(Tags.Items.CROPS_WHEAT)
             .requires(Tags.Items.CROPS_WHEAT)
             .requires(Tags.Items.CROPS_WHEAT)
             .requires(Items.WATER_BUCKET)
             .unlockedBy("has_wheat", hasItems(Builder.item().of(Tags.Items.CROPS_WHEAT).build()))
             .save(consumer);
-        ShapelessRecipeBuilder.shapeless(Reference.Items.SNOW_CONE)
-            .requires(Reference.Items.WAFER_CONE)
+        ShapelessRecipeBuilder.shapeless(Reference.Items.SNOW_CONE.get())
+            .requires(Reference.Items.WAFER_CONE.get())
             .requires(Items.SNOWBALL)
             .requires(Items.SNOWBALL)
-            .unlockedBy("has_wafer_cone", hasItems(Reference.Items.WAFER_CONE))
+            .unlockedBy("has_wafer_cone", hasItems(Reference.Items.WAFER_CONE.get()))
             .save(consumer);
-        ShapedRecipeBuilder.shaped(Reference.Items.GOLDEN_SNOW_CONE)
+        ShapedRecipeBuilder.shaped(Reference.Items.GOLDEN_SNOW_CONE.get())
             .pattern("ggg")
             .pattern("gSg")
             .pattern("ggg")
             .define('g', Tags.Items.NUGGETS_GOLD)
-            .define('S', Reference.Items.SNOW_CONE)
-            .unlockedBy("has_snow_cone", hasItems(Reference.Items.SNOW_CONE))
+            .define('S', Reference.Items.SNOW_CONE.get())
+            .unlockedBy("has_snow_cone", hasItems(Reference.Items.SNOW_CONE.get()))
             .save(consumer);
-        SpecialRecipeBuilder.special(RecipeSerializers.POTION_CONE_RECIPE)
-            .save(consumer, String.valueOf(RecipeSerializers.POTION_CONE_RECIPE.getRegistryName()));
+        SpecialRecipeBuilder.special(RecipeSerializers.POTION_CONE_RECIPE.get())
+            .save(consumer, String.valueOf(RecipeSerializers.POTION_CONE_RECIPE.get().getRegistryName()));
     }
 
     private static CompoundIngredient compound(Ingredient... ingredients) {

@@ -19,7 +19,7 @@ public class ExplosiveSnowball extends Snowball {
     }
 
     public ExplosiveSnowball(Level level, double x, double y, double z) {
-        this(EntityTypes.EXPLOSIVE_SNOWBALL, level);
+        this(EntityTypes.EXPLOSIVE_SNOWBALL.get(), level);
         setPos(x, y, z);
     }
 
@@ -30,7 +30,7 @@ public class ExplosiveSnowball extends Snowball {
 
     @Override
     protected Item getDefaultItem() {
-        return Reference.Items.EXPLOSIVE_SNOWBALL;
+        return Reference.Items.EXPLOSIVE_SNOWBALL.get();
     }
 
     @Override
