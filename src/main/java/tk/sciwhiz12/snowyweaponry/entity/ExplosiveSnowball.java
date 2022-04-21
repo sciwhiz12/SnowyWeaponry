@@ -38,14 +38,14 @@ public class ExplosiveSnowball extends Snowball {
         super.onHit(result);
         if (!this.level.isClientSide) {
             this.level.explode(this,
-                DamageSources.causeSnowballExplosionDamage(this.getOwner()),
-                null,
-                this.getX(),
-                this.getY(),
-                this.getZ(),
-                EXPLOSION_POWER,
-                false,
-                Explosion.BlockInteraction.NONE);
+                    DamageSources.causeSnowballExplosionDamage(this.getOwner()),
+                    null,
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    EXPLOSION_POWER,
+                    false,
+                    Explosion.BlockInteraction.NONE);
         }
     }
 }

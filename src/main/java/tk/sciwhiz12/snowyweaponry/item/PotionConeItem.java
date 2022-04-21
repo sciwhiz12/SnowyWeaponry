@@ -43,8 +43,8 @@ public class PotionConeItem extends Item {
         if (!level.isClientSide) {
             for (MobEffectInstance effect : PotionUtils.getMobEffects(stack)) {
                 user.addEffect(
-                    new MobEffectInstance(effect.getEffect(), Math.max(effect.getDuration() / DURATION_DIVISOR, 1),
-                        effect.getAmplifier(), effect.isAmbient(), effect.isVisible())
+                        new MobEffectInstance(effect.getEffect(), Math.max(effect.getDuration() / DURATION_DIVISOR, 1),
+                                effect.getAmplifier(), effect.isAmbient(), effect.isVisible())
                 );
             }
         }

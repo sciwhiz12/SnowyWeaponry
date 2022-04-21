@@ -87,8 +87,8 @@ public final class Reference {
 
         public static DamageSource causeSnowballExplosionDamage(@Nullable Entity entity) {
             return entity instanceof LivingEntity ?
-                (new EntityDamageSource("snowball.explosion.player", entity)).setScalesWithDifficulty().setExplosion() :
-                (new DamageSource("snowball.explosion")).setScalesWithDifficulty().setExplosion();
+                    (new EntityDamageSource("snowball.explosion.player", entity)).setScalesWithDifficulty().setExplosion() :
+                    (new DamageSource("snowball.explosion")).setScalesWithDifficulty().setExplosion();
         }
     }
 

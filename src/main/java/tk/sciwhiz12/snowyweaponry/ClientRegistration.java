@@ -23,8 +23,8 @@ public final class ClientRegistration {
     static void onColorHandlerItem(ColorHandlerEvent.Item event) {
         SnowyWeaponry.LOG.debug(SnowyWeaponry.CLIENT, "Registering item colors");
         event.getItemColors().register(
-            (stack, index) -> index != 1 ? -1 : PotionUtils.getColor(stack),
-            Reference.Items.POTION_SNOW_CONE
+                (stack, index) -> index != 1 ? -1 : PotionUtils.getColor(stack),
+                Reference.Items.POTION_SNOW_CONE
         );
     }
 

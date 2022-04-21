@@ -17,7 +17,7 @@ public class SnowyWeaponry {
 
     public SnowyWeaponry() {
     }
-    
+
     public static ResourceLocation loc(String path) {
         return new ResourceLocation(MODID, path);
     }

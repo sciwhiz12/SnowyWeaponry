@@ -20,7 +20,7 @@ public class ExplosiveSnowballItem extends Item {
         ItemStack stack = player.getItemInHand(hand);
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW,
-            SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
+                SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
 
         if (!level.isClientSide) {
             ExplosiveSnowball entity = new ExplosiveSnowball(level, player);
