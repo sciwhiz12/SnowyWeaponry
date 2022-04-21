@@ -1,3 +1,4 @@
+# Eclipse
 bin
 *.launch
 .settings
@@ -5,15 +6,19 @@ bin
 .classpath
 .project
 
+# IntelliJ IDEA
 out
 *.ipr
 *.iws
 *.iml
 .idea
 
+# Gradle
 build
 .gradle
 
-eclipse
+# ForgeGradle
 run
-logs
+
+# Maven publishing
+repo
