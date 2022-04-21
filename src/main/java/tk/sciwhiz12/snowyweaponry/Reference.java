@@ -73,12 +73,12 @@ public final class Reference {
                 new CoredSnowballItem(itemProps()
                         .stacksTo(16)
                         .tab(Reference.ITEM_GROUP),
-                        2, 0, null));
+                        2, 0));
         public static final RegistryObject<CoredSnowballItem> GOLD_CORED_SNOWBALL = REGISTER.register("gold_cored_snowball", () ->
                 new CoredSnowballItem(itemProps()
                         .stacksTo(16)
                         .tab(Reference.ITEM_GROUP),
-                        1, 1, null));
+                        1, 1));
         public static final RegistryObject<CoredSnowballItem> DIAMOND_CORED_SNOWBALL = REGISTER.register("diamond_cored_snowball", () ->
                 new CoredSnowballItem(itemProps()
                         .stacksTo(16)

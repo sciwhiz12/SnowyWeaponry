@@ -29,6 +29,10 @@ public class CoredSnowballItem extends Item {
         this.hitEffect = hitEffect;
     }
 
+    public CoredSnowballItem(Item.Properties properties, int thrownDamage, int lootingLevel) {
+        this(properties, thrownDamage, lootingLevel, null);
+    }
+
     public int getDamage() {
         return thrownDamage;
     }
