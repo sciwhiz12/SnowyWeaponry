@@ -17,7 +17,7 @@ public final class ClientRegistration {
 
     @SubscribeEvent
     static void onColorHandlerItem(ColorHandlerEvent.Item event) {
-        SnowyWeaponry.LOG.debug(SnowyWeaponry.CLIENT, "Registering item colors");
+        SnowyWeaponry.LOG.debug("Registering item colors");
         event.getItemColors().register(
                 (stack, index) -> index != 1 ? -1 : PotionUtils.getColor(stack),
                 Reference.Items.POTION_SNOW_CONE.get()
@@ -26,7 +26,7 @@ public final class ClientRegistration {
 
     @SubscribeEvent
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        SnowyWeaponry.LOG.debug(SnowyWeaponry.CLIENT, "Registering entity renderers");
+        SnowyWeaponry.LOG.debug("Registering entity renderers");
         event.registerEntityRenderer(Reference.EntityTypes.CORED_SNOWBALL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(Reference.EntityTypes.EXPLOSIVE_SNOWBALL.get(), ThrownItemRenderer::new);
     }

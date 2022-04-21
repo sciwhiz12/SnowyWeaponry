@@ -14,7 +14,7 @@ public final class Registration {
     }
 
     static void registerDispenserBehavior() {
-        SnowyWeaponry.LOG.debug(SnowyWeaponry.COMMON, "Registering dispenser behavior for items");
+        SnowyWeaponry.LOG.debug("Registering dispenser behavior for items");
         DispenserBlock.registerBehavior(Reference.Items.IRON_CORED_SNOWBALL.get(), Reference.DispenseBehaviors.CORED_SNOWBALL);
         DispenserBlock.registerBehavior(Reference.Items.GOLD_CORED_SNOWBALL.get(), Reference.DispenseBehaviors.CORED_SNOWBALL);
         DispenserBlock.registerBehavior(Reference.Items.DIAMOND_CORED_SNOWBALL.get(), Reference.DispenseBehaviors.CORED_SNOWBALL);
