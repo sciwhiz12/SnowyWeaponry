@@ -22,13 +22,13 @@ public class ItemTags extends TagsProvider<Item> {
     @Override
     protected void addTags() {
         tag(Tags.Items.NUGGETS)
-            .addTag(Reference.Tags.NUGGETS_DIAMOND)
-            .addTag(Reference.Tags.NUGGETS_NETHERITE);
+                .addTag(Reference.Tags.NUGGETS_DIAMOND)
+                .addTag(Reference.Tags.NUGGETS_NETHERITE);
 
         tag(Reference.Tags.NUGGETS_DIAMOND)
-            .add(Reference.Items.DIAMOND_CHUNK.get());
+                .add(Reference.Items.DIAMOND_CHUNK.get());
         tag(Reference.Tags.NUGGETS_NETHERITE)
-            .add(Reference.Items.NETHERITE_NUGGET.get());
+                .add(Reference.Items.NETHERITE_NUGGET.get());
     }
 
     // Copied from ItemTagsProvider#makePath

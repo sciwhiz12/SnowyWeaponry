@@ -17,7 +17,7 @@ public class EntityTags extends ForgeRegistryTagsProvider<EntityType<?>> {
     @Override
     protected void addTags() {
         tag(Reference.Tags.FIRE_MOBS)
-            .add(EntityType.BLAZE);
+                .add(EntityType.BLAZE);
     }
 
     @Override

@@ -40,10 +40,10 @@ public class ItemModels extends ItemModelProvider {
     void singleTextureItem(Item item) {
         final ResourceLocation itemName = requireNonNull(item.getRegistryName());
         singleTexture(
-            itemName.getPath(),
-            ITEM_GENERATED,
-            LAYERS.get(0),
-            modLoc(ModelProvider.ITEM_FOLDER + "/" + itemName.getPath())
+                itemName.getPath(),
+                ITEM_GENERATED,
+                LAYERS.get(0),
+                modLoc(ModelProvider.ITEM_FOLDER + "/" + itemName.getPath())
         );
     }
 
@@ -52,7 +52,7 @@ public class ItemModels extends ItemModelProvider {
         final ResourceLocation itemName = requireNonNull(item.getRegistryName());
         final ResourceLocation baseItemName = requireNonNull(baseItem.getRegistryName());
         withExistingParent(itemName.getPath(), ITEM_GENERATED)
-            .texture(LAYERS.get(0), modLoc(ModelProvider.ITEM_FOLDER + "/" + baseItemName.getPath()))
-            .texture(LAYERS.get(1), modLoc(ModelProvider.ITEM_FOLDER + "/" + overlayTexture));
+                .texture(LAYERS.get(0), modLoc(ModelProvider.ITEM_FOLDER + "/" + baseItemName.getPath()))
+                .texture(LAYERS.get(1), modLoc(ModelProvider.ITEM_FOLDER + "/" + overlayTexture));
     }
 }
