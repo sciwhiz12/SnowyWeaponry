@@ -59,8 +59,8 @@ public class CoredSnowball extends Snowball {
             damage = item.getDamage();
             looting = item.getLootingLevel();
             @Nullable MobEffectInstance effect = item.getHitEffect();
-            if (effect != null && entity instanceof LivingEntity) {
-                ((LivingEntity) entity).addEffect(new MobEffectInstance(effect));
+            if (effect != null && entity instanceof LivingEntity livingEntity) {
+                livingEntity.addEffect(new MobEffectInstance(effect));
             }
         }
 

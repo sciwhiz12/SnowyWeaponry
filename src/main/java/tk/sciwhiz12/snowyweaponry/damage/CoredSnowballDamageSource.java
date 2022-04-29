@@ -20,9 +20,9 @@ public class CoredSnowballDamageSource extends IndirectEntityDamageSource {
 
     @SubscribeEvent
     static void onLootingLevel(LootingLevelEvent event) {
-        if (event.getDamageSource() instanceof CoredSnowballDamageSource) {
+        if (event.getDamageSource() instanceof CoredSnowballDamageSource source) {
             int originalLooting = event.getLootingLevel();
-            int snowballLooting = ((CoredSnowballDamageSource) event.getDamageSource()).getLootingLevel();
+            int snowballLooting = source.getLootingLevel();
             event.setLootingLevel(originalLooting + snowballLooting);
         }
     }
