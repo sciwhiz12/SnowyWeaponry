@@ -107,8 +107,11 @@ tasks.named('jar', Jar).configure {
 }
 
 // noinspection UnnecessaryQualifiedReference
-tasks.withType(net.minecraftforge.gradle.userdev.tasks.RenameJarInPlace) {
-    args.add('--stable')
+tasks.withType(net.minecraftforge.gradle.userdev.tasks.RenameJarInPlace).configureEach {
+    // Check if the tool is SpecialSource, just in case FG changes to using ForgeAutoRenamingTool in the future
+    if (it.tool.get().contains('SpecialSource')) {
+        args.add('--stable')
+    }
 }
 
 publishing {
