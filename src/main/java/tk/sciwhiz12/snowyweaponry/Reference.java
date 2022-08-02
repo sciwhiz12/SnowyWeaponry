@@ -23,7 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.tags.ITagManager;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -144,7 +143,7 @@ public final class Reference {
         private EntityTypes() {
         } // Prevent instantiation
 
-        static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.ENTITIES, SnowyWeaponry.MODID);
+        static final DeferredRegister<EntityType<?>> REGISTER = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SnowyWeaponry.MODID);
 
         public static final RegistryObject<EntityType<CoredSnowball>> CORED_SNOWBALL = register("cored_snowball", () ->
                 EntityType.Builder.<CoredSnowball>of(CoredSnowball::new, MobCategory.MISC)
@@ -191,7 +190,7 @@ public final class Reference {
         private Tags() {
         } // Prevent instantiation
 
-        public static final TagKey<EntityType<?>> FIRE_MOBS = tags(ForgeRegistries.ENTITIES)
+        public static final TagKey<EntityType<?>> FIRE_MOBS = tags(ForgeRegistries.ENTITY_TYPES)
                 .createTagKey(SnowyWeaponry.loc("fire_mobs"));
 
         public static final TagKey<Item> NUGGETS_DIAMOND = tags(ForgeRegistries.ITEMS)
@@ -199,7 +198,7 @@ public final class Reference {
         public static final TagKey<Item> NUGGETS_NETHERITE = tags(ForgeRegistries.ITEMS)
                 .createTagKey(new ResourceLocation("forge", "nuggets/netherite"));
 
-        private static <T extends IForgeRegistryEntry<T>> ITagManager<T> tags(IForgeRegistry<T> registry) {
+        private static <T> ITagManager<T> tags(IForgeRegistry<T> registry) {
             return Objects.requireNonNull(registry.tags());
         }
     }

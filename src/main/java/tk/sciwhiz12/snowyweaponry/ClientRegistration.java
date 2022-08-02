@@ -2,8 +2,8 @@ package tk.sciwhiz12.snowyweaponry;
 
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
@@ -16,9 +16,9 @@ public final class ClientRegistration {
     } // Prevent instantiation
 
     @SubscribeEvent
-    static void onColorHandlerItem(ColorHandlerEvent.Item event) {
+    static void onColorHandlerItem(RegisterColorHandlersEvent.Item event) {
         SnowyWeaponry.LOG.debug("Registering item colors");
-        event.getItemColors().register(
+        event.register(
                 (stack, index) -> index != 1 ? -1 : PotionUtils.getColor(stack),
                 Reference.Items.POTION_SNOW_CONE.get()
         );

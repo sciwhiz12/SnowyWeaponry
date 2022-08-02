@@ -73,7 +73,7 @@ public class PotionConeItem extends Item {
 
     @Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
-        if (!this.allowdedIn(tab)) return;
+        if (!this.allowedIn(tab)) return;
 
         for (Potion potion : ForgeRegistries.POTIONS) {
             if (potion != Potions.EMPTY) {
