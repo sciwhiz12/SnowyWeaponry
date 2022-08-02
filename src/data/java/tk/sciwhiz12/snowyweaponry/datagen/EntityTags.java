@@ -11,7 +11,7 @@ import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 public class EntityTags extends ForgeRegistryTagsProvider<EntityType<?>> {
     public EntityTags(DataGenerator generatorIn, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generatorIn, ForgeRegistries.ENTITIES, SnowyWeaponry.MODID, existingFileHelper);
+        super(generatorIn, ForgeRegistries.ENTITY_TYPES, SnowyWeaponry.MODID, existingFileHelper);
     }
 
     @Override

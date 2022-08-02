@@ -124,6 +124,6 @@ public class Recipes extends RecipeProvider {
                 .unlockedBy("has_snow_cone", hasItems(Reference.Items.SNOW_CONE.get()))
                 .save(consumer);
         special(RecipeSerializers.POTION_CONE_RECIPE.get())
-                .save(consumer, String.valueOf(RecipeSerializers.POTION_CONE_RECIPE.get().getRegistryName()));
+                .save(consumer, RecipeSerializers.POTION_CONE_RECIPE.getId().toString());
     }
 }

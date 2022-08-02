@@ -2,9 +2,9 @@ package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import static tk.sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
 import static tk.sciwhiz12.snowyweaponry.SnowyWeaponry.MODID;
@@ -17,16 +17,11 @@ public class DataGen {
         DataGenerator gen = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        if (event.includeClient()) {
-            LOG.debug("Adding data providers for client assets");
-            gen.addProvider(new Languages(gen));
-            gen.addProvider(new ItemModels(gen, helper));
-        }
-        if (event.includeServer()) {
-            LOG.debug("Adding data providers for server data");
-            gen.addProvider(new Recipes(gen));
-            gen.addProvider(new ItemTags(gen, helper));
-            gen.addProvider(new EntityTags(gen, helper));
-        }
+        gen.addProvider(event.includeClient(), new Languages(gen));
+        gen.addProvider(event.includeClient(), new ItemModels(gen, helper));
+
+        gen.addProvider(event.includeServer(), new Recipes(gen));
+        gen.addProvider(event.includeServer(), new ItemTags(gen, helper));
+        gen.addProvider(event.includeServer(), new EntityTags(gen, helper));
     }
 }

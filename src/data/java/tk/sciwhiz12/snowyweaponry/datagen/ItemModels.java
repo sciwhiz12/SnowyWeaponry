@@ -6,6 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import tk.sciwhiz12.snowyweaponry.Reference.Items;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
@@ -38,7 +39,7 @@ public class ItemModels extends ItemModelProvider {
     }
 
     void singleTextureItem(Item item) {
-        final ResourceLocation itemName = requireNonNull(item.getRegistryName());
+        final ResourceLocation itemName = name(item);
         singleTexture(
                 itemName.getPath(),
                 ITEM_GENERATED,
@@ -49,10 +50,14 @@ public class ItemModels extends ItemModelProvider {
 
     @SuppressWarnings("SameParameterValue")
     void itemWithOverlay(Item item, Item baseItem, String overlayTexture) {
-        final ResourceLocation itemName = requireNonNull(item.getRegistryName());
-        final ResourceLocation baseItemName = requireNonNull(baseItem.getRegistryName());
+        final ResourceLocation itemName = name(item);
+        final ResourceLocation baseItemName = name(baseItem);
         withExistingParent(itemName.getPath(), ITEM_GENERATED)
                 .texture(LAYERS.get(0), modLoc(ModelProvider.ITEM_FOLDER + "/" + baseItemName.getPath()))
                 .texture(LAYERS.get(1), modLoc(ModelProvider.ITEM_FOLDER + "/" + overlayTexture));
+    }
+    
+    private static ResourceLocation name(Item item) {
+        return requireNonNull(ForgeRegistries.ITEMS.getKey(item));
     }
 }
