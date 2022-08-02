@@ -3,15 +3,13 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id 'org.spongepowered.mixin' version '0.7.+'
+    id 'tk.sciwhiz12.gradle.simplversion' version '0.1.0'
 }
-apply from: 'gradle/version.gradle'
 
 versions {
-    customPrefix = mc_version
-    incrementPositionIfSnapshot(-2) // Second to last version: #.#.(#).#
-    skipIncrementForClassifiers('alpha', 'beta', 'pre', 'rc')
+    stripPattern = /^\d+\.\d+\.[\dx]+-/
 }
-version = versions.getVersion()
+version = versions.version
 println "Mod version: $version"
 
 sourceSets {
@@ -80,12 +78,12 @@ java {
 var manifestAttributes = [
         'Specification-Title'   : modid,
         'Specification-Vendor'  : author,
-        'Specification-Version' : versions.getRawVersion(),
+        'Specification-Version' : versions.rawVersion,
         'Implementation-Title'  : project.name,
-        'Implementation-Version': versions.getVersion(),
+        'Implementation-Version': project.version,
         'Implementation-Vendor' : author,
-        "Git-Commit"            : versions.getCommitId(),
-        "Git-Commit-Timestamp"  : versions.getCommitTimestamp()
+        "Git-Commit"            : versions.fullCommitId,
+        "Git-Commit-Timestamp"  : versions.commitTimestamp
 ] as LinkedHashMap
 
 tasks.withType(Jar).configureEach {
@@ -119,7 +117,7 @@ publishing {
         from components.java
 
         it.artifactId = project.name
-        it.version = "$mc_version-${versions.getRawVersion()}${versions.isSnapshot() ? '-SNAPSHOT' : ''}"
+        it.version = "$mc_version-$versions.simpleVersion"
     }
 
     repositories {
