@@ -1,21 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "cored_snowballs",
+  "key": {
+    "D": {
+      "tag": "forge:nuggets/diamond"
+    },
+    "s": {
+      "item": "minecraft:snowball"
+    }
+  },
   "pattern": [
     "sss",
     "sDs",
     "sss"
   ],
-  "key": {
-    "s": {
-      "item": "minecraft:snowball"
-    },
-    "D": {
-      "tag": "forge:nuggets/diamond"
-    }
-  },
   "result": {
-    "item": "snowyweaponry:diamond_cored_snowball",
-    "count": 8
+    "count": 8,
+    "item": "snowyweaponry:diamond_cored_snowball"
   }
 }

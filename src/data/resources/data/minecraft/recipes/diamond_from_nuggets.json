@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "nnn",
-    "nnn",
-    "nnn"
-  ],
   "key": {
     "n": {
       "tag": "forge:nuggets/diamond"
     }
   },
+  "pattern": [
+    "nnn",
+    "nnn",
+    "nnn"
+  ],
   "result": {
     "item": "minecraft:diamond"
   }
