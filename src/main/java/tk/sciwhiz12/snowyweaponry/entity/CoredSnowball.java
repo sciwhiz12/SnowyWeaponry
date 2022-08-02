@@ -52,7 +52,7 @@ public class CoredSnowball extends Snowball {
         int damage = 0;
         int looting = 0;
         if (entity.getType().is(Reference.Tags.FIRE_MOBS)) {
-            damage += 2; // Fire mobs damage modifier
+            damage += 3; // Fire mobs damage modifier
         }
 
         if (stack.getItem() instanceof CoredSnowballItem item) {
