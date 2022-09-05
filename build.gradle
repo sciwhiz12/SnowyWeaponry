@@ -63,10 +63,25 @@ configurations {
     dataImplementation.extendsFrom implementation
 }
 
+repositories {
+    maven { // Repository for JEI
+        name = 'Progwml6'
+        url = 'https://dvs1.progwml6.com/files/maven/'
+    }
+    maven { // Fallback repository for JEI
+        name = 'ModMaven'
+        url = 'https://modmaven.dev'
+    }
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
     dataImplementation sourceSets.main.output
+
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 }
 
 java {
