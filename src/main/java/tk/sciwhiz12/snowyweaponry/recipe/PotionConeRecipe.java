@@ -1,5 +1,6 @@
 package tk.sciwhiz12.snowyweaponry.recipe;
 
+import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
@@ -66,6 +67,22 @@ public class PotionConeRecipe extends CustomRecipe {
             PotionUtils.setCustomEffects(ret, PotionUtils.getCustomEffects(potion));
             return ret;
         }
+    }
+
+    @Override
+    public NonNullList<ItemStack> getRemainingItems(CraftingContainer container) {
+        NonNullList<ItemStack> remaining = NonNullList.withSize(container.getContainerSize(), ItemStack.EMPTY);
+
+        for (int i = 0; i < remaining.size(); ++i) {
+            ItemStack item = container.getItem(i);
+            if (item.hasCraftingRemainingItem()) {
+                remaining.set(i, item.getCraftingRemainingItem());
+            } else if (item.is(Items.POTION)) { // Special case: remaining item for potion bottle is a glass bottle 
+                remaining.set(i, new ItemStack(Items.GLASS_BOTTLE));
+            }
+        }
+
+        return remaining;
     }
 
     @Override
