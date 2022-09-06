@@ -7,10 +7,8 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,7 +19,6 @@ import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static net.minecraft.world.item.crafting.Ingredient.EMPTY;
 
@@ -52,24 +49,19 @@ public class JeiIntegration implements IModPlugin {
         final Ingredient cone = Ingredient.of(Reference.Items.SNOW_CONE.get());
 
         return ForgeRegistries.POTIONS.getValues().stream()
-                .flatMap(potion -> Stream.of(
-                        createPotionConeRecipe(potion, cone, Items.POTION),
-                        createPotionConeRecipe(potion, cone, Items.SPLASH_POTION)
-                ))
+                .<CraftingRecipe>map(potion -> {
+                    final ItemStack input = PotionUtils.setPotion(new ItemStack(Items.POTION), potion);
+                    final Ingredient potionIngredient = PartialNBTIngredient.of(input.getOrCreateTag(), Items.POTION, Items.SPLASH_POTION);
+                    final ItemStack output = PotionUtils.setPotion(new ItemStack(Reference.Items.POTION_SNOW_CONE.get(), 4), potion);
+
+                    final NonNullList<Ingredient> inputs = NonNullList.of(EMPTY,
+                            EMPTY, cone, EMPTY,
+                            cone, potionIngredient, cone,
+                            EMPTY, cone, EMPTY
+                    );
+                    return new ShapedRecipe(SnowyWeaponry.loc(output.getDescriptionId()),
+                            output.getDescriptionId(), 3, 3, inputs, output);
+                })
                 .toList();
-    }
-
-    private static CraftingRecipe createPotionConeRecipe(Potion potion, Ingredient cone, Item potionItem) {
-        final ItemStack input = PotionUtils.setPotion(new ItemStack(potionItem), potion);
-        final Ingredient potionIngredient = PartialNBTIngredient.of(potionItem, input.getOrCreateTag());
-        final ItemStack output = PotionUtils.setPotion(new ItemStack(Reference.Items.POTION_SNOW_CONE.get(), 4), potion);
-
-        final NonNullList<Ingredient> inputs = NonNullList.of(EMPTY,
-                EMPTY, cone, EMPTY,
-                cone, potionIngredient, cone,
-                EMPTY, cone, EMPTY
-        );
-        return new ShapedRecipe(SnowyWeaponry.loc(output.getDescriptionId()),
-                output.getDescriptionId(), 3, 3, inputs, output);
     }
 }
