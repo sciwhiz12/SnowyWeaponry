@@ -2,7 +2,6 @@ modLoader="javafml"
 loaderVersion="[40,)"
 license="MIT License"
 issueTrackerURL="https://github.com/sciwhiz12/SnowyWeaponry/issues"
-showAsResourcePack=true
 
 [[mods]]
 modId="snowyweaponry"
