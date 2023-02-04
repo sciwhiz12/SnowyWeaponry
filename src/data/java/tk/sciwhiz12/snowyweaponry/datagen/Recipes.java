@@ -1,8 +1,9 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.advancements.critereon.ItemPredicate.Builder;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
@@ -17,17 +18,17 @@ import static net.minecraft.data.recipes.ShapelessRecipeBuilder.shapeless;
 import static net.minecraft.data.recipes.SpecialRecipeBuilder.special;
 
 public class Recipes extends RecipeProvider {
-    public Recipes(DataGenerator generator) {
-        super(generator);
+    public Recipes(PackOutput output) {
+        super(output);
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        shapeless(Reference.Items.DIAMOND_CHUNK.get(), 9)
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        shapeless(RecipeCategory.MISC, Reference.Items.DIAMOND_CHUNK.get(), 9)
                 .requires(Tags.Items.GEMS_DIAMOND)
                 .unlockedBy("has_diamond", hasItems(Reference.Items.DIAMOND_CHUNK.get()))
                 .save(consumer);
-        shaped(Items.DIAMOND)
+        shaped(RecipeCategory.MISC, Items.DIAMOND)
                 .pattern("nnn")
                 .pattern("nnn")
                 .pattern("nnn")
@@ -35,11 +36,11 @@ public class Recipes extends RecipeProvider {
                 .unlockedBy("has_diamond_nuggets", hasItems(Builder.item().of(Reference.Tags.NUGGETS_DIAMOND).build()))
                 .save(consumer, "diamond_from_nuggets");
 
-        shapeless(Reference.Items.NETHERITE_NUGGET.get(), 9)
+        shapeless(RecipeCategory.MISC, Reference.Items.NETHERITE_NUGGET.get(), 9)
                 .requires(Tags.Items.INGOTS_NETHERITE)
                 .unlockedBy("has_netherite", hasItems(Reference.Items.NETHERITE_NUGGET.get()))
                 .save(consumer);
-        shaped(Items.NETHERITE_INGOT)
+        shaped(RecipeCategory.MISC, Items.NETHERITE_INGOT)
                 .pattern("nnn")
                 .pattern("nnn")
                 .pattern("nnn")
@@ -55,7 +56,7 @@ public class Recipes extends RecipeProvider {
     void registerSnowballs(Consumer<FinishedRecipe> consumer) {
         final String cored_snowballs = "cored_snowballs";
 
-        shaped(Reference.Items.IRON_CORED_SNOWBALL.get(), 8)
+        shaped(RecipeCategory.COMBAT, Reference.Items.IRON_CORED_SNOWBALL.get(), 8)
                 .pattern("sss")
                 .pattern("sIs")
                 .pattern("sss")
@@ -64,7 +65,7 @@ public class Recipes extends RecipeProvider {
                 .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
                 .group(cored_snowballs)
                 .save(consumer);
-        shaped(Reference.Items.GOLD_CORED_SNOWBALL.get(), 8)
+        shaped(RecipeCategory.COMBAT, Reference.Items.GOLD_CORED_SNOWBALL.get(), 8)
                 .pattern("sss")
                 .pattern("sGs")
                 .pattern("sss")
@@ -73,7 +74,7 @@ public class Recipes extends RecipeProvider {
                 .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
                 .group(cored_snowballs)
                 .save(consumer);
-        shaped(Reference.Items.DIAMOND_CORED_SNOWBALL.get(), 8)
+        shaped(RecipeCategory.COMBAT, Reference.Items.DIAMOND_CORED_SNOWBALL.get(), 8)
                 .pattern("sss")
                 .pattern("sDs")
                 .pattern("sss")
@@ -82,7 +83,7 @@ public class Recipes extends RecipeProvider {
                 .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
                 .group(cored_snowballs)
                 .save(consumer);
-        shapeless(Reference.Items.NETHERITE_CORED_SNOWBALL.get(), 3)
+        shapeless(RecipeCategory.COMBAT, Reference.Items.NETHERITE_CORED_SNOWBALL.get(), 3)
                 .requires(Items.SNOWBALL)
                 .requires(Items.SNOWBALL)
                 .requires(Items.SNOWBALL)
@@ -90,7 +91,7 @@ public class Recipes extends RecipeProvider {
                 .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
                 .group(cored_snowballs)
                 .save(consumer);
-        shapeless(Reference.Items.EXPLOSIVE_SNOWBALL.get(), 3)
+        shapeless(RecipeCategory.COMBAT, Reference.Items.EXPLOSIVE_SNOWBALL.get(), 3)
                 .requires(Items.SNOWBALL)
                 .requires(Items.SNOWBALL)
                 .requires(Items.SNOWBALL)
@@ -102,20 +103,20 @@ public class Recipes extends RecipeProvider {
     }
 
     void registerSnowCones(Consumer<FinishedRecipe> consumer) {
-        shapeless(Reference.Items.WAFER_CONE.get(), 4)
+        shapeless(RecipeCategory.FOOD, Reference.Items.WAFER_CONE.get(), 4)
                 .requires(Tags.Items.CROPS_WHEAT)
                 .requires(Tags.Items.CROPS_WHEAT)
                 .requires(Tags.Items.CROPS_WHEAT)
                 .requires(Items.WATER_BUCKET)
                 .unlockedBy("has_wheat", hasItems(Builder.item().of(Tags.Items.CROPS_WHEAT).build()))
                 .save(consumer);
-        shapeless(Reference.Items.SNOW_CONE.get())
+        shapeless(RecipeCategory.FOOD, Reference.Items.SNOW_CONE.get())
                 .requires(Reference.Items.WAFER_CONE.get())
                 .requires(Items.SNOWBALL)
                 .requires(Items.SNOWBALL)
                 .unlockedBy("has_wafer_cone", hasItems(Reference.Items.WAFER_CONE.get()))
                 .save(consumer);
-        shaped(Reference.Items.GOLDEN_SNOW_CONE.get())
+        shaped(RecipeCategory.FOOD, Reference.Items.GOLDEN_SNOW_CONE.get())
                 .pattern("ggg")
                 .pattern("gSg")
                 .pattern("ggg")

@@ -4,7 +4,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import tk.sciwhiz12.snowyweaponry.Reference;
@@ -45,7 +44,7 @@ public class ExplosiveSnowball extends Snowball {
                     this.getZ(),
                     EXPLOSION_POWER,
                     false,
-                    Explosion.BlockInteraction.NONE);
+                    Level.ExplosionInteraction.NONE);
         }
     }
 }

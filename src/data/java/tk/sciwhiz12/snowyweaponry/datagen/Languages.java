@@ -1,14 +1,14 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.Reference.Items;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 public class Languages extends LanguageProvider {
-    public Languages(DataGenerator gen) {
-        super(gen, SnowyWeaponry.MODID, "en_us");
+    public Languages(PackOutput output) {
+        super(output, SnowyWeaponry.MODID, "en_us");
     }
 
     @Override

@@ -2,6 +2,7 @@ modLoader="javafml"
 loaderVersion="[40,)"
 license="MIT License"
 issueTrackerURL="https://github.com/sciwhiz12/SnowyWeaponry/issues"
+showAsResourcePack=true
 
 [[mods]]
 modId="snowyweaponry"
@@ -19,13 +20,13 @@ Adds different snow-based weaponry. (and snow cones!)
 [[dependencies.snowyweaponry]]
     modId="forge"
     mandatory=true
-    versionRange="[43.1.0,)"
+    versionRange="[44.1.0,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.snowyweaponry]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.2,1.20)"
+    versionRange="[1.19.3,1.19.4)"
     ordering="NONE"
     side="BOTH"

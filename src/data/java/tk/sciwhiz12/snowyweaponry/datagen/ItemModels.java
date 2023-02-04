@@ -1,6 +1,6 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -16,8 +16,8 @@ import static net.minecraft.client.renderer.block.model.ItemModelGenerator.LAYER
 public class ItemModels extends ItemModelProvider {
     private final ResourceLocation ITEM_GENERATED = mcLoc("item/generated");
 
-    public ItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, SnowyWeaponry.MODID, existingFileHelper);
+    public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, SnowyWeaponry.MODID, existingFileHelper);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class ItemModels extends ItemModelProvider {
                 .texture(LAYERS.get(0), modLoc(ModelProvider.ITEM_FOLDER + "/" + baseItemName.getPath()))
                 .texture(LAYERS.get(1), modLoc(ModelProvider.ITEM_FOLDER + "/" + overlayTexture));
     }
-    
+
     private static ResourceLocation name(Item item) {
         return requireNonNull(ForgeRegistries.ITEMS.getKey(item));
     }

@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
@@ -60,7 +61,7 @@ public class JeiIntegration implements IModPlugin {
                             EMPTY, cone, EMPTY
                     );
                     return new ShapedRecipe(SnowyWeaponry.loc(output.getDescriptionId()),
-                            output.getDescriptionId(), 3, 3, inputs, output);
+                            output.getDescriptionId(), CraftingBookCategory.MISC, 3, 3, inputs, output);
                 })
                 .toList();
     }
