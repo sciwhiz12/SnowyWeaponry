@@ -1,5 +1,7 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
+import com.google.common.collect.Maps;
+import net.minecraft.SharedConstants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
@@ -7,6 +9,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.metadata.PackMetadataGenerator;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.world.damagesource.DamageScaling;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraftforge.common.data.BlockTagsProvider;
@@ -32,6 +38,13 @@ public class DataGen {
         final PackOutput output = event.getGenerator().getPackOutput();
         final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         final ExistingFileHelper helper = event.getExistingFileHelper();
+
+        gen.addProvider(event.includeClient() || event.includeServer(), new PackMetadataGenerator(output)
+                .add(PackMetadataSection.TYPE, new PackMetadataSection(
+                        Component.literal("Snowy Weaponry resources"),
+                        SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES),
+                        Maps.asMap(Set.of(PackType.values()), SharedConstants.getCurrentVersion()::getPackVersion)
+                )));
 
         gen.addProvider(event.includeClient(), new Languages(output));
         gen.addProvider(event.includeClient(), new ItemModels(output, helper));
