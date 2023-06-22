@@ -26,7 +26,7 @@ public class PotionConeItem extends Item {
 
     @Override
     public ItemStack getDefaultInstance() {
-        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.REGENERATION);
+        return PotionUtils.setPotion(super.getDefaultInstance(), Potions.WATER);
     }
 
     @Override
@@ -60,10 +60,5 @@ public class PotionConeItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         PotionUtils.addPotionTooltip(stack, tooltip, 1.0F / DURATION_DIVISOR);
-    }
-
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return super.isFoil(stack) || !PotionUtils.getMobEffects(stack).isEmpty();
     }
 }
