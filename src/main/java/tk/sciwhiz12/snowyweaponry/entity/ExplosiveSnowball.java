@@ -1,5 +1,10 @@
 package tk.sciwhiz12.snowyweaponry.entity;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Snowball;
@@ -7,7 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import tk.sciwhiz12.snowyweaponry.Reference;
-import tk.sciwhiz12.snowyweaponry.Reference.DamageSources;
+import tk.sciwhiz12.snowyweaponry.Reference.DamageTypes;
 import tk.sciwhiz12.snowyweaponry.Reference.EntityTypes;
 
 public class ExplosiveSnowball extends Snowball {
@@ -36,8 +41,10 @@ public class ExplosiveSnowball extends Snowball {
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (!this.level.isClientSide) {
+            final Registry<DamageType> damageTypes = getLevel().registryAccess().registry(Registries.DAMAGE_TYPE).orElseThrow();
+            final Holder.Reference<DamageType> damageType = damageTypes.getHolderOrThrow(DamageTypes.CORED_SNOWBALL_EXPLOSION);
             this.level.explode(this,
-                    DamageSources.causeSnowballExplosionDamage(this.getOwner()),
+                    new DamageSource(damageType, this, this.getOwner()),
                     null,
                     this.getX(),
                     this.getY(),

@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
-import tk.sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
+import tk.sciwhiz12.snowyweaponry.damage.LootingSensitiveDamageSource;
 
 @Mod(SnowyWeaponry.MODID)
 public class SnowyWeaponry {
@@ -26,7 +26,7 @@ public class SnowyWeaponry {
             modBus.register(ClientRegistration.class);
         }
 
-        MinecraftForge.EVENT_BUS.register(CoredSnowballDamageSource.class);
+        MinecraftForge.EVENT_BUS.register(LootingSensitiveDamageSource.class);
     }
 
     public static ResourceLocation loc(String path) {

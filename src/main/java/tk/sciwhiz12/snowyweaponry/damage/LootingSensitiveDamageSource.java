@@ -1,16 +1,19 @@
 package tk.sciwhiz12.snowyweaponry.damage;
 
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
+import net.minecraft.core.Holder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LootingLevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
-public class CoredSnowballDamageSource extends IndirectEntityDamageSource {
+public class LootingSensitiveDamageSource extends DamageSource {
     private final int lootingLevel;
 
-    public CoredSnowballDamageSource(String msgId, Entity entity, @Nullable Entity owner, int lootingLevel) {
-        super(msgId, entity, owner);
+    public LootingSensitiveDamageSource(Holder<DamageType> type, @Nullable Entity directEntity, @Nullable Entity causingEntity, @Nullable Vec3 damageSourcePosition, int lootingLevel) {
+        super(type, directEntity, causingEntity, damageSourcePosition);
         this.lootingLevel = lootingLevel;
     }
 
@@ -20,7 +23,7 @@ public class CoredSnowballDamageSource extends IndirectEntityDamageSource {
 
     @SubscribeEvent
     static void onLootingLevel(LootingLevelEvent event) {
-        if (event.getDamageSource() instanceof CoredSnowballDamageSource source) {
+        if (event.getDamageSource() instanceof LootingSensitiveDamageSource source) {
             int originalLooting = event.getLootingLevel();
             int snowballLooting = source.getLootingLevel();
             event.setLootingLevel(originalLooting + snowballLooting);

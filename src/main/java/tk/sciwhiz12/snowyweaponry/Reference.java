@@ -2,15 +2,15 @@ package tk.sciwhiz12.snowyweaponry;
 
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.food.FoodProperties;
@@ -26,8 +26,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.tags.ITagManager;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
-import tk.sciwhiz12.snowyweaponry.damage.CoredSnowballDamageSource;
 import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
 import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
@@ -147,19 +145,25 @@ public final class Reference {
         }
     }
 
-    public static final class DamageSources {
-        private DamageSources() {
+    public static final class DamageTypes {
+        private DamageTypes() {
         } // Prevent instantiation
 
-        public static DamageSource causeSnowballDamage(Entity entity, @Nullable Entity owner, int lootingLevel) {
-            return (new CoredSnowballDamageSource("snowball", entity, owner, lootingLevel)).setProjectile();
-        }
+        public static final ResourceKey<DamageType> CORED_SNOWBALL = ResourceKey.create(Registries.DAMAGE_TYPE,
+                SnowyWeaponry.loc("cored_snowball"));
 
-        public static DamageSource causeSnowballExplosionDamage(@Nullable Entity entity) {
-            return entity instanceof LivingEntity ?
-                    (new EntityDamageSource("snowball.explosion.player", entity)).setScalesWithDifficulty().setExplosion() :
-                    (new DamageSource("snowball.explosion")).setScalesWithDifficulty().setExplosion();
-        }
+        public static final ResourceKey<DamageType> CORED_SNOWBALL_EXPLOSION = ResourceKey.create(Registries.DAMAGE_TYPE,
+                SnowyWeaponry.loc("cored_snowball_explosion"));
+
+//        public static DamageSource causeSnowballDamage(Entity entity, @Nullable Entity owner, int lootingLevel) {
+//            return (new CoredSnowballDamageSource("snowball", entity, owner, lootingLevel)).setProjectile();
+//        }
+//
+//        public static DamageSource causeSnowballExplosionDamage(@Nullable Entity entity) {
+//            return entity instanceof LivingEntity ?
+//                    (new EntityDamageSource("snowball.explosion.player", entity)).setScalesWithDifficulty().setExplosion() :
+//                    (new DamageSource("snowball.explosion")).setScalesWithDifficulty().setExplosion();
+//        }
     }
 
     public static final class RecipeSerializers {

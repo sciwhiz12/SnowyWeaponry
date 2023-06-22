@@ -1,6 +1,10 @@
 package tk.sciwhiz12.snowyweaponry.entity;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -12,7 +16,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.Reference;
+import tk.sciwhiz12.snowyweaponry.Reference.DamageTypes;
 import tk.sciwhiz12.snowyweaponry.Reference.Items;
+import tk.sciwhiz12.snowyweaponry.damage.LootingSensitiveDamageSource;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 
 public class CoredSnowball extends Snowball {
@@ -64,6 +70,8 @@ public class CoredSnowball extends Snowball {
             }
         }
 
-        entity.hurt(Reference.DamageSources.causeSnowballDamage(this, this.getOwner(), looting), damage);
+        final Registry<DamageType> damageTypes = getLevel().registryAccess().registry(Registries.DAMAGE_TYPE).orElseThrow();
+        final Holder.Reference<DamageType> damageType = damageTypes.getHolderOrThrow(DamageTypes.CORED_SNOWBALL);
+        entity.hurt(new LootingSensitiveDamageSource(damageType, this, this.getOwner(), null, looting), damage);
     }
 }

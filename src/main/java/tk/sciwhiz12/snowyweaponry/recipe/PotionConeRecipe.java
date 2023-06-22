@@ -1,6 +1,7 @@
 package tk.sciwhiz12.snowyweaponry.recipe;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
@@ -47,7 +48,7 @@ public class PotionConeRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container) {
+    public ItemStack assemble(CraftingContainer container, RegistryAccess registry) {
         ItemStack potion = ItemStack.EMPTY;
 
         for (int i = 0; i < container.getWidth(); ++i) {
