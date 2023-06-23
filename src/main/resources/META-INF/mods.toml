@@ -19,13 +19,13 @@ Adds different snow-based weaponry. (and snow cones!)
 [[dependencies.snowyweaponry]]
     modId="forge"
     mandatory=true
-    versionRange="[45.1.0,)"
+    versionRange="[47.0.0,48.0.0)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.snowyweaponry]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.4,1.19.5)"
+    versionRange="[1.20.1,1.20.2)"
     ordering="NONE"
     side="BOTH"

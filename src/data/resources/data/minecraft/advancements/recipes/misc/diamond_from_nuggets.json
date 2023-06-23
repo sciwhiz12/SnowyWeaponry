@@ -28,5 +28,6 @@
     "recipes": [
       "minecraft:diamond_from_nuggets"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

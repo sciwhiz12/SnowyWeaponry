@@ -30,5 +30,6 @@
     "recipes": [
       "snowyweaponry:diamond_cored_snowball"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

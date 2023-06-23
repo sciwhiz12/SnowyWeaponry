@@ -30,5 +30,6 @@
     "recipes": [
       "snowyweaponry:explosive_snowball"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

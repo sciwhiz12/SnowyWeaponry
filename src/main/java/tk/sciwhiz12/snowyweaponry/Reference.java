@@ -3,6 +3,7 @@ package tk.sciwhiz12.snowyweaponry;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -25,7 +26,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.tags.ITagManager;
-import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
 import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 import tk.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
@@ -45,8 +45,12 @@ public final class Reference {
     private Reference() {
     } // Prevent instantiation
 
-    @MonotonicNonNull
-    public static CreativeModeTab ITEM_GROUP = null;
+    static final DeferredRegister<CreativeModeTab> TAB_REGISTER = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SnowyWeaponry.MODID);
+
+    public static final RegistryObject<CreativeModeTab> ITEM_TAB = TAB_REGISTER.register("items", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.snowy_weapons"))
+            .icon(() -> new ItemStack(Items.GOLD_CORED_SNOWBALL.get()))
+            .build());
 
     public static final class Items {
         private Items() {

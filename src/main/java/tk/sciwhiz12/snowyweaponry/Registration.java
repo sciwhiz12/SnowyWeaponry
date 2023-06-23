@@ -1,12 +1,11 @@
 package tk.sciwhiz12.snowyweaponry;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,15 +30,8 @@ public final class Registration {
     }
 
     @SubscribeEvent
-    static void onCreativeModeTabRegisterEvent(CreativeModeTabEvent.Register event) {
-        Reference.ITEM_GROUP = event.registerCreativeModeTab(SnowyWeaponry.loc("items"), builder ->
-                builder.title(Component.translatable("itemGroup.snowy_weapons"))
-                        .icon(() -> new ItemStack(Items.GOLD_CORED_SNOWBALL.get())));
-    }
-
-    @SubscribeEvent
-    static void onCreativeModeTabBuildContentsEvent(CreativeModeTabEvent.BuildContents event) {
-        if (event.getTab() == Reference.ITEM_GROUP) {
+    static void onCreativeModeTabBuildContentsEvent(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey().equals(Reference.ITEM_TAB.getKey())) {
             event.accept(Items.DIAMOND_CHUNK);
             event.accept(Items.NETHERITE_NUGGET);
 

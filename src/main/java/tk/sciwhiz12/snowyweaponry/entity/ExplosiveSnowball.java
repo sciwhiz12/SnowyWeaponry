@@ -40,10 +40,10 @@ public class ExplosiveSnowball extends Snowball {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-        if (!this.level.isClientSide) {
-            final Registry<DamageType> damageTypes = getLevel().registryAccess().registry(Registries.DAMAGE_TYPE).orElseThrow();
+        if (!this.level().isClientSide) {
+            final Registry<DamageType> damageTypes = this.level().registryAccess().registry(Registries.DAMAGE_TYPE).orElseThrow();
             final Holder.Reference<DamageType> damageType = damageTypes.getHolderOrThrow(DamageTypes.CORED_SNOWBALL_EXPLOSION);
-            this.level.explode(this,
+            this.level().explode(this,
                     new DamageSource(damageType, this, this.getOwner()),
                     null,
                     this.getX(),

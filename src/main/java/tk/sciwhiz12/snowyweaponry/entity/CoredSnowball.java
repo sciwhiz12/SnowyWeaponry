@@ -70,7 +70,7 @@ public class CoredSnowball extends Snowball {
             }
         }
 
-        final Registry<DamageType> damageTypes = getLevel().registryAccess().registry(Registries.DAMAGE_TYPE).orElseThrow();
+        final Registry<DamageType> damageTypes = this.level().registryAccess().registry(Registries.DAMAGE_TYPE).orElseThrow();
         final Holder.Reference<DamageType> damageType = damageTypes.getHolderOrThrow(DamageTypes.CORED_SNOWBALL);
         entity.hurt(new LootingSensitiveDamageSource(damageType, this, this.getOwner(), null, looting), damage);
     }
