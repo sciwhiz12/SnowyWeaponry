@@ -29,3 +29,10 @@ Adds different snow-based weaponry. (and snow cones!)
     versionRange="[1.20.1,1.20.2)"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.snowyweaponry]]
+    modId="jei"
+    mandatory=false
+    versionRange="[15.1.0,16.0.0)"
+    ordering="NONE"
+    side="CLIENT"
