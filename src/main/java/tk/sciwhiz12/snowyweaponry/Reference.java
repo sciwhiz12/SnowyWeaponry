@@ -158,16 +158,6 @@ public final class Reference {
 
         public static final ResourceKey<DamageType> CORED_SNOWBALL_EXPLOSION = ResourceKey.create(Registries.DAMAGE_TYPE,
                 SnowyWeaponry.loc("cored_snowball_explosion"));
-
-//        public static DamageSource causeSnowballDamage(Entity entity, @Nullable Entity owner, int lootingLevel) {
-//            return (new CoredSnowballDamageSource("snowball", entity, owner, lootingLevel)).setProjectile();
-//        }
-//
-//        public static DamageSource causeSnowballExplosionDamage(@Nullable Entity entity) {
-//            return entity instanceof LivingEntity ?
-//                    (new EntityDamageSource("snowball.explosion.player", entity)).setScalesWithDifficulty().setExplosion() :
-//                    (new DamageSource("snowball.explosion")).setScalesWithDifficulty().setExplosion();
-//        }
     }
 
     public static final class RecipeSerializers {
