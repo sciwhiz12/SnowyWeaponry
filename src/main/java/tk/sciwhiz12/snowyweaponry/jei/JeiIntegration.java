@@ -13,8 +13,9 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraftforge.common.crafting.PartialNBTIngredient;
+import net.minecraftforge.common.crafting.ingredients.PartialNBTIngredient;
 import net.minecraftforge.registries.ForgeRegistries;
 import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
@@ -42,15 +43,15 @@ public class JeiIntegration implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        final List<CraftingRecipe> recipes = createPotionConeRecipes();
+        final List<RecipeHolder<CraftingRecipe>> recipes = createPotionConeRecipes();
         registration.addRecipes(RecipeTypes.CRAFTING, recipes);
     }
 
-    private static List<CraftingRecipe> createPotionConeRecipes() {
+    private static List<RecipeHolder<CraftingRecipe>> createPotionConeRecipes() {
         final Ingredient cone = Ingredient.of(Reference.Items.SNOW_CONE.get());
 
         return ForgeRegistries.POTIONS.getValues().stream()
-                .<CraftingRecipe>map(potion -> {
+                .map(potion -> {
                     final ItemStack input = PotionUtils.setPotion(new ItemStack(Items.POTION), potion);
                     final Ingredient potionIngredient = PartialNBTIngredient.of(input.getOrCreateTag(), Items.POTION, Items.SPLASH_POTION);
                     final ItemStack output = PotionUtils.setPotion(new ItemStack(Reference.Items.POTION_SNOW_CONE.get(), 4), potion);
@@ -60,8 +61,8 @@ public class JeiIntegration implements IModPlugin {
                             cone, potionIngredient, cone,
                             EMPTY, cone, EMPTY
                     );
-                    return new ShapedRecipe(SnowyWeaponry.loc(output.getDescriptionId()),
-                            output.getDescriptionId(), CraftingBookCategory.MISC, 3, 3, inputs, output);
+                    return new RecipeHolder<CraftingRecipe>(SnowyWeaponry.loc(output.getDescriptionId()),
+                            new ShapedRecipe(output.getDescriptionId(), CraftingBookCategory.MISC, 3, 3, inputs, output));
                 })
                 .toList();
     }

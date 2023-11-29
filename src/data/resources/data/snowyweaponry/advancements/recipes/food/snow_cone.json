@@ -22,8 +22,8 @@
   },
   "requirements": [
     [
-      "has_wafer_cone",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_wafer_cone"
     ]
   ],
   "rewards": {

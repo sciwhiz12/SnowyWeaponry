@@ -2,7 +2,6 @@ package tk.sciwhiz12.snowyweaponry.recipe;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,8 +14,8 @@ import net.minecraft.world.level.Level;
 import tk.sciwhiz12.snowyweaponry.Reference;
 
 public class PotionConeRecipe extends CustomRecipe {
-    public PotionConeRecipe(ResourceLocation id, CraftingBookCategory category) {
-        super(id, category);
+    public PotionConeRecipe(CraftingBookCategory category) {
+        super(category);
     }
 
     @Override

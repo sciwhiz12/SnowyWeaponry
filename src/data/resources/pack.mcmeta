@@ -3,6 +3,7 @@
     "description": {
       "text": "Snowy Weaponry resources"
     },
-    "pack_format": 15
+    "pack_format": 18,
+    "supported_formats": 18
   }
 }
