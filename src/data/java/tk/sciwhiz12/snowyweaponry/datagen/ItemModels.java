@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -35,7 +36,10 @@ public class ItemModels extends ItemModelProvider {
         singleTextureItem(Items.SNOW_CONE.get());
         singleTextureItem(Items.GOLDEN_SNOW_CONE.get());
 
-        itemWithOverlay(Items.POTION_SNOW_CONE.get(), Items.SNOW_CONE.get(), "potion_snow_cone_overlay");
+        getBuilder(Items.POTION_SNOW_CONE.getId().toString())
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture(LAYERS.get(0), modLoc(ITEM_FOLDER + '/' + "potion_snow_cone_base"))
+                .texture(LAYERS.get(1), modLoc(ITEM_FOLDER + '/' + "potion_snow_cone_overlay"));
     }
 
     void singleTextureItem(Item item) {
@@ -46,15 +50,6 @@ public class ItemModels extends ItemModelProvider {
                 LAYERS.get(0),
                 modLoc(ModelProvider.ITEM_FOLDER + "/" + itemName.getPath())
         );
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    void itemWithOverlay(Item item, Item baseItem, String overlayTexture) {
-        final ResourceLocation itemName = name(item);
-        final ResourceLocation baseItemName = name(baseItem);
-        withExistingParent(itemName.getPath(), ITEM_GENERATED)
-                .texture(LAYERS.get(0), modLoc(ModelProvider.ITEM_FOLDER + "/" + baseItemName.getPath()))
-                .texture(LAYERS.get(1), modLoc(ModelProvider.ITEM_FOLDER + "/" + overlayTexture));
     }
 
     private static ResourceLocation name(Item item) {

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "snowyweaponry:item/snow_cone",
+    "layer0": "snowyweaponry:item/potion_snow_cone_base",
     "layer1": "snowyweaponry:item/potion_snow_cone_overlay"
   }
 }
