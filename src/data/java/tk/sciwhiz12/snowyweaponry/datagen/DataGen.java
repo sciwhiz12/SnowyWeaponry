@@ -1,5 +1,6 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
+import com.google.common.collect.Maps;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
@@ -23,7 +24,6 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import tk.sciwhiz12.snowyweaponry.Reference;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -44,12 +44,7 @@ public class DataGen {
                 .add(PackMetadataSection.TYPE, new PackMetadataSection(
                         Component.literal("Snowy Weaponry resources"),
                         SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES),
-                        Optional.of(createRange(
-                                SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES),
-                                SharedConstants.getCurrentVersion().getPackVersion(PackType.SERVER_DATA)
-                        ))
-                        // TODO: when on NeoForge, switch to pack-type-specific versions
-                        // Maps.asMap(Set.of(PackType.values()), SharedConstants.getCurrentVersion()::getPackVersion)
+                        Maps.asMap(Set.of(PackType.values()), SharedConstants.getCurrentVersion()::getPackVersion)
                 )));
 
         gen.addProvider(event.includeClient(), new Languages(output));
@@ -70,10 +65,6 @@ public class DataGen {
                 });
         gen.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, builder, Set.of(MODID)));
         gen.addProvider(event.includeServer(), new DamageTypes(output, lookupProvider.thenApply(o -> append(o, builder)), helper));
-    }
-
-    private static InclusiveRange<Integer> createRange(int a, int b) {
-        return new InclusiveRange<>(Math.min(a, b), Math.max(a, b));
     }
 
     private static HolderLookup.Provider append(HolderLookup.Provider original, RegistrySetBuilder builder) {
