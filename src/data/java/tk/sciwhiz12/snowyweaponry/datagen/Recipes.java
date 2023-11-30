@@ -1,14 +1,17 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.advancements.critereon.ItemPredicate.Builder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
+
+import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
 import static net.minecraft.data.recipes.ShapedRecipeBuilder.shaped;
@@ -16,8 +19,8 @@ import static net.minecraft.data.recipes.ShapelessRecipeBuilder.shapeless;
 import static net.minecraft.data.recipes.SpecialRecipeBuilder.special;
 
 public class Recipes extends RecipeProvider {
-    public Recipes(PackOutput output) {
-        super(output);
+    public Recipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider);
     }
 
     @Override

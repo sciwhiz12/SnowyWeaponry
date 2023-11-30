@@ -5,8 +5,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.living.LootingLevelEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.living.LootingLevelEvent;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class LootingSensitiveDamageSource extends DamageSource {

@@ -1,14 +1,14 @@
 package tk.sciwhiz12.snowyweaponry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import tk.sciwhiz12.snowyweaponry.Reference.Items;
 
 public final class Registration {
@@ -31,7 +31,7 @@ public final class Registration {
 
     @SubscribeEvent
     static void onCreativeModeTabBuildContentsEvent(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey().equals(Reference.ITEM_TAB.getKey())) {
+        if (event.getTabKey().equals(Reference.ITEM_TAB.unwrapKey().orElseThrow())) {
             event.accept(Items.DIAMOND_CHUNK);
             event.accept(Items.NETHERITE_NUGGET);
 
@@ -45,7 +45,7 @@ public final class Registration {
             event.accept(Items.SNOW_CONE);
             event.accept(Items.GOLDEN_SNOW_CONE);
 
-            for (Potion potion : ForgeRegistries.POTIONS) {
+            for (Potion potion : BuiltInRegistries.POTION) {
                 if (potion != Potions.EMPTY) {
                     event.accept(PotionUtils.setPotion(new ItemStack(Items.POTION_SNOW_CONE.get()), potion));
                 }

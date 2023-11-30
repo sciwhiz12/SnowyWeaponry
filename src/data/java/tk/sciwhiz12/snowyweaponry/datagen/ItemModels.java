@@ -1,9 +1,9 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import tk.sciwhiz12.snowyweaponry.Reference.Items;
 import tk.sciwhiz12.snowyweaponry.SnowyWeaponry;
 

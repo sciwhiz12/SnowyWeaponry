@@ -1,9 +1,7 @@
 plugins {
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '6.0.+'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7.+'
     id 'tk.sciwhiz12.gradle.simplversion' version '0.1.0'
+    id 'net.neoforged.gradle.userdev' version '7.0.53'
 }
 
 versions {
@@ -24,38 +22,32 @@ print "Java: ${System.getProperty('java.version')}"
 print ", JVM: ${System.getProperty('java.vm.version')} (${System.getProperty('java.vendor')})"
 println ", Arch: ${System.getProperty('os.arch')}"
 
-minecraft {
-    mappings channel: mappings_channel, version: mappings_version
+runs {
+    configureEach {
+        workingDirectory project.file('run/' + it.name) as File
 
-    runs {
-        configureEach {
-            workingDirectory project.file('run/' + it.name) as File
-
-            property 'forge.logging.markers', logging_markers
-            property 'forge.logging.console.level', logging_console
-
-            ideaModule "${project.name}.main"
-            mods.register(modid as String) {
-                source sourceSets.main as SourceSet
-            }
-        }
-
-        client {
-        }
-
-        server {
-        }
-
-        data {
-            args '--mod', modid, '--all'
-            args '--output', sourceSets.data.resources.srcDirs[0].toString()
-            args '--existing', sourceSets.main.resources.srcDirs[0].toString()
-
-            ideaModule "${project.name}.data"
-            mods.named(modid as String) {
-                sources sourceSets.main as SourceSet, sourceSets.data as SourceSet
-            }
-        }
+        systemProperty 'forge.logging.markers', logging_markers
+        systemProperty 'forge.logging.console.level', logging_console
+        
+        modSource sourceSets.main
+    }
+    
+    client {
+    }
+    
+    server {
+        programArgument '--nogui'
+    }
+    
+    gameTestServer {
+    }
+    
+    data {
+        programArguments.addAll '--mod', modid, '--all'
+        programArguments.addAll '--output', sourceSets.data.resources.srcDirs[0].toString()
+        programArguments.addAll '--existing', sourceSets.main.resources.srcDirs[0].toString()
+        
+        modSource sourceSets.data
     }
 }
 
@@ -75,13 +67,14 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    implementation "net.neoforged:neoforge:${neoforge_version}"
 
     dataImplementation sourceSets.main.output
 
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
+    // Until JEI updates to support NeoForge, leave out the runtime (but still depend on the APIs)
+    // runtimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
 }
 
 java {
@@ -115,16 +108,8 @@ tasks.withType(Jar).configureEach {
     }
 }
 
-tasks.named('jar', Jar).configure {
-    finalizedBy 'reobfJar'
-}
-
-// noinspection UnnecessaryQualifiedReference
-tasks.withType(net.minecraftforge.gradle.userdev.tasks.RenameJarInPlace).configureEach {
-    // Check if the tool is SpecialSource, just in case FG changes to using ForgeAutoRenamingTool in the future
-    if (it.tool.get().contains('SpecialSource')) {
-        args.add('--stable')
-    }
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
 publishing {
@@ -138,7 +123,7 @@ publishing {
     repositories {
         maven {
             name 'projectLocal'
-            url "file://${project.file('repo').absolutePath}"
+            url project.file('repo').absolutePath
         }
     }
 }

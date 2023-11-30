@@ -15,12 +15,12 @@ import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.util.InclusiveRange;
 import net.minecraft.world.damagesource.DamageScaling;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import tk.sciwhiz12.snowyweaponry.Reference;
 
 import java.util.Optional;
@@ -55,7 +55,7 @@ public class DataGen {
         gen.addProvider(event.includeClient(), new Languages(output));
         gen.addProvider(event.includeClient(), new ItemModels(output, helper));
 
-        gen.addProvider(event.includeServer(), new Recipes(output));
+        gen.addProvider(event.includeServer(), new Recipes(output, lookupProvider));
         final BlockTagsProvider blockTags = new BlockTags(output, lookupProvider, helper);
         gen.addProvider(event.includeServer(), blockTags);
         gen.addProvider(event.includeServer(), new ItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
