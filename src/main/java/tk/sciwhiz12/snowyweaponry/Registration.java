@@ -22,11 +22,11 @@ public final class Registration {
 
     static void registerDispenserBehavior() {
         SnowyWeaponry.LOG.debug("Registering dispenser behavior for items");
-        DispenserBlock.registerBehavior(Items.IRON_CORED_SNOWBALL.get(), Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.GOLD_CORED_SNOWBALL.get(), Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.DIAMOND_CORED_SNOWBALL.get(), Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.NETHERITE_CORED_SNOWBALL.get(), Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.EXPLOSIVE_SNOWBALL.get(), Reference.DispenseBehaviors.EXPLOSIVE_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.IRON_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.GOLD_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.DIAMOND_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.NETHERITE_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
+        DispenserBlock.registerBehavior(Items.EXPLOSIVE_SNOWBALL, Reference.DispenseBehaviors.EXPLOSIVE_SNOWBALL);
     }
 
     @SubscribeEvent

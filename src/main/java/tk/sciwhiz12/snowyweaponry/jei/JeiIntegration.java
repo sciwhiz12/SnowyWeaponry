@@ -48,7 +48,7 @@ public class JeiIntegration implements IModPlugin {
     }
 
     private static List<RecipeHolder<CraftingRecipe>> createPotionConeRecipes() {
-        final Ingredient cone = Ingredient.of(Reference.Items.SNOW_CONE.get());
+        final Ingredient cone = Ingredient.of(Reference.Items.SNOW_CONE);
 
         return BuiltInRegistries.POTION.stream()
                 .map(potion -> {
