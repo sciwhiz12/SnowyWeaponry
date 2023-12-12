@@ -59,10 +59,16 @@ repositories {
     maven { // Repository for JEI
         name = 'Progwml6'
         url = 'https://dvs1.progwml6.com/files/maven/'
+        content {
+            includeGroupAndSubgroups 'mezz.jei'
+        }
     }
     maven { // Fallback repository for JEI
         name = 'ModMaven'
         url = 'https://modmaven.dev'
+        content {
+            includeGroupAndSubgroups 'mezz.jei'
+        }
     }
 }
 
