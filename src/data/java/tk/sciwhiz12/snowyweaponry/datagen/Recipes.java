@@ -10,6 +10,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
 import tk.sciwhiz12.snowyweaponry.Reference;
 import tk.sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
+import tk.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -125,7 +126,7 @@ public class Recipes extends RecipeProvider {
                 .define('S', Reference.Items.SNOW_CONE)
                 .unlockedBy("has_snow_cone", hasItems(Reference.Items.SNOW_CONE))
                 .save(output);
-        special(RecipeSerializers.POTION_CONE_RECIPE.get())
+        special(PotionConeRecipe::new)
                 .save(output, RecipeSerializers.POTION_CONE_RECIPE.getId().toString());
     }
 }

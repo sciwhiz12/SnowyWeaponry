@@ -30,6 +30,5 @@
     "recipes": [
       "snowyweaponry:golden_snow_cone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

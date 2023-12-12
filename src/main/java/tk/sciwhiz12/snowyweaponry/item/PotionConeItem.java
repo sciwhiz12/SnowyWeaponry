@@ -1,5 +1,6 @@
 package tk.sciwhiz12.snowyweaponry.item;
 
+import net.minecraft.SharedConstants;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -59,6 +60,7 @@ public class PotionConeItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        PotionUtils.addPotionTooltip(stack, tooltip, 1.0F / DURATION_DIVISOR);
+        PotionUtils.addPotionTooltip(stack, tooltip, 1.0F / DURATION_DIVISOR,
+                level == null ? SharedConstants.TICKS_PER_SECOND : level.tickRateManager().tickrate());
     }
 }

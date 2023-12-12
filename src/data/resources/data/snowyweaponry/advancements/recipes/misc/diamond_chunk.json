@@ -30,6 +30,5 @@
     "recipes": [
       "snowyweaponry:diamond_chunk"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

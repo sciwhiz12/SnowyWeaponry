@@ -28,6 +28,5 @@
     "recipes": [
       "snowyweaponry:wafer_cone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

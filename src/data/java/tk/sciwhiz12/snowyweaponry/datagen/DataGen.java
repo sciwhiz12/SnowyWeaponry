@@ -3,17 +3,16 @@ package tk.sciwhiz12.snowyweaponry.datagen;
 import com.google.common.collect.Maps;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.RegistrySetBuilder.PatchedRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.metadata.PackMetadataGenerator;
+import net.minecraft.data.registries.RegistryPatchGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraft.util.InclusiveRange;
 import net.minecraft.world.damagesource.DamageScaling;
 import net.minecraft.world.damagesource.DamageType;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -64,10 +63,6 @@ public class DataGen {
                             new DamageType("snowball.explosion", DamageScaling.ALWAYS, 0.1F));
                 });
         gen.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, builder, Set.of(MODID)));
-        gen.addProvider(event.includeServer(), new DamageTypes(output, lookupProvider.thenApply(o -> append(o, builder)), helper));
-    }
-
-    private static HolderLookup.Provider append(HolderLookup.Provider original, RegistrySetBuilder builder) {
-        return builder.buildPatch(RegistryAccess.fromRegistryOfRegistries(BuiltInRegistries.REGISTRY), original);
+        gen.addProvider(event.includeServer(), new DamageTypes(output, RegistryPatchGenerator.createLookup(lookupProvider, builder).thenApply(PatchedRegistries::patches), helper));
     }
 }

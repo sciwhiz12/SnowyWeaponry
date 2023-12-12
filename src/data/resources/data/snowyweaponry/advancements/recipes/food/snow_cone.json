@@ -30,6 +30,5 @@
     "recipes": [
       "snowyweaponry:snow_cone"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

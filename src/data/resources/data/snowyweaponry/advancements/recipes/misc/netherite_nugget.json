@@ -30,6 +30,5 @@
     "recipes": [
       "snowyweaponry:netherite_nugget"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -19,20 +19,20 @@ Adds different snow-based weaponry. (and snow cones!)
 [[dependencies.snowyweaponry]]
     modId="neoforge"
     mandatory=true
-    versionRange="[20.2.74-beta,20.3.0-beta)"
+    versionRange="[20.4.17-beta,20.5.0-beta)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.snowyweaponry]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.2,1.20.3)"
+    versionRange="[1.20.4,1.20.5)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.snowyweaponry]]
     modId="jei"
     mandatory=false
-    versionRange="[16.0.0,17.0.0)"
+    versionRange="[16.0.0,18.0.0)"
     ordering="NONE"
     side="CLIENT"
