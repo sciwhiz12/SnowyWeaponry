@@ -28,25 +28,25 @@ runs {
 
         systemProperty 'forge.logging.markers', logging_markers
         systemProperty 'forge.logging.console.level', logging_console
-        
+
         modSource sourceSets.main
     }
-    
+
     client {
     }
-    
+
     server {
         programArgument '--nogui'
     }
-    
+
     gameTestServer {
     }
-    
+
     data {
         programArguments.addAll '--mod', modid, '--all'
         programArguments.addAll '--output', sourceSets.data.resources.srcDirs[0].toString()
         programArguments.addAll '--existing', sourceSets.main.resources.srcDirs[0].toString()
-        
+
         modSource sourceSets.data
     }
 }
