@@ -77,7 +77,7 @@ dependencies {
 
     dataImplementation sourceSets.main.output
 
-    compileOnly "mezz.jei:jei-${jei_mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
     // Until JEI updates to support NeoForge, leave out the runtime (but still depend on the APIs)
 }
 

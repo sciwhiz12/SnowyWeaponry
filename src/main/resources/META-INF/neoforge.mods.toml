@@ -33,6 +33,6 @@ Adds different snow-based weaponry. (and snow cones!)
 [[dependencies.snowyweaponry]]
     modId="jei"
     type="optional"
-    versionRange="[16.0.0,18.0.0)"
+    versionRange="[17.0.0,19.0.0)"
     ordering="NONE"
     side="CLIENT"
