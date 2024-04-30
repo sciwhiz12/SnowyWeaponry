@@ -39,28 +39,32 @@ public class Languages extends LanguageProvider {
     void addPotionConeTranslations() {
         final String baseTranslationKey = Items.POTION_SNOW_CONE.get().getDescriptionId();
 
-        add(baseTranslationKey + ".effect.empty", "Uncraftable Dipped Snow Cone");
-        add(baseTranslationKey + ".effect.water", "Wet Snow Cone");
-        add(baseTranslationKey + ".effect.mundane", "Mundane Dipped Snow Cone");
-        add(baseTranslationKey + ".effect.thick", "Thick Dipped Snow Cone");
         add(baseTranslationKey + ".effect.awkward", "Awkward Dipped Snow Cone");
-        add(baseTranslationKey + ".effect.night_vision", "Snow Cone of Night Vision");
+        add(baseTranslationKey + ".effect.empty", "Uncraftable Dipped Snow Cone");
+        add(baseTranslationKey + ".effect.fire_resistance", "Snow Cone of Fire Resistance");
+        add(baseTranslationKey + ".effect.harming", "Snow Cone of Harming");
+        add(baseTranslationKey + ".effect.healing", "Snow Cone of Healing");
+        add(baseTranslationKey + ".effect.infested", "Snow Cone of Infestation");
         add(baseTranslationKey + ".effect.invisibility", "Snow Cone of Invisibility");
         add(baseTranslationKey + ".effect.leaping", "Snow Cone of Leaping");
-        add(baseTranslationKey + ".effect.fire_resistance", "Snow Cone of Fire Resistance");
-        add(baseTranslationKey + ".effect.swiftness", "Snow Cone of Swiftness");
-        add(baseTranslationKey + ".effect.slowness", "Snow Cone of Slowness");
-        add(baseTranslationKey + ".effect.water_breathing", "Snow Cone of Water Breathing");
-        add(baseTranslationKey + ".effect.healing", "Snow Cone of Healing");
-        add(baseTranslationKey + ".effect.harming", "Snow Cone of Harming");
-        add(baseTranslationKey + ".effect.poison", "Poisonous Snow Cone");
-        add(baseTranslationKey + ".effect.regeneration", "Snow Cone of Regeneration");
-        add(baseTranslationKey + ".effect.strength", "Snow Cone of Strength");
-        add(baseTranslationKey + ".effect.weakness", "Snow Cone of Weakness");
         add(baseTranslationKey + ".effect.levitation", "Snow Cone of Levitation");
         add(baseTranslationKey + ".effect.luck", "Lucky Snow Cone");
-        add(baseTranslationKey + ".effect.turtle_master", "Snow Cone of the Turtle Master");
+        add(baseTranslationKey + ".effect.mundane", "Mundane Dipped Snow Cone");
+        add(baseTranslationKey + ".effect.night_vision", "Snow Cone of Night Vision");
+        add(baseTranslationKey + ".effect.oozing", "Snow Cone of Oozing");
+        add(baseTranslationKey + ".effect.poison", "Poisonous Snow Cone");
+        add(baseTranslationKey + ".effect.regeneration", "Snow Cone of Regeneration");
         add(baseTranslationKey + ".effect.slow_falling", "Snow Cone of Slow Falling");
+        add(baseTranslationKey + ".effect.slowness", "Snow Cone of Slowness");
+        add(baseTranslationKey + ".effect.strength", "Snow Cone of Strength");
+        add(baseTranslationKey + ".effect.swiftness", "Snow Cone of Swiftness");
+        add(baseTranslationKey + ".effect.thick", "Thick Dipped Snow Cone");
+        add(baseTranslationKey + ".effect.turtle_master", "Snow Cone of the Turtle Master");
+        add(baseTranslationKey + ".effect.water", "Wet Snow Cone");
+        add(baseTranslationKey + ".effect.water_breathing", "Snow Cone of Water Breathing");
+        add(baseTranslationKey + ".effect.weakness", "Snow Cone of Weakness");
+        add(baseTranslationKey + ".effect.weaving", "Snow Cone of Weaving");
+        add(baseTranslationKey + ".effect.wind_charged", "Snow Cone of Wind Charging");
     }
 
     void addDamageSourceTranslations() {
