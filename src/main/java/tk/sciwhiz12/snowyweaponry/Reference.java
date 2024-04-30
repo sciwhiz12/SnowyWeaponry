@@ -1,8 +1,6 @@
 package tk.sciwhiz12.snowyweaponry;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -15,14 +13,12 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -92,14 +88,14 @@ public final class Reference {
                         .food(new FoodProperties.Builder()
                                 .fast()
                                 .nutrition(1)
-                                .saturationMod(0.1F)
+                                .saturationModifier(0.1F)
                                 .build())));
         public static final DeferredItem<Item> SNOW_CONE = REGISTER.register("snow_cone", () -> new Item(itemProps()
                 .stacksTo(8)
                 .food(new FoodProperties.Builder()
                         .fast()
                         .nutrition(2)
-                        .saturationMod(0.2F)
+                        .saturationModifier(0.2F)
                         .build())));
         public static final DeferredItem<Item> GOLDEN_SNOW_CONE = REGISTER.register("golden_snow_cone", () ->
                 new Item(itemProps()
@@ -107,8 +103,8 @@ public final class Reference {
                         .food(new FoodProperties.Builder()
                                 .fast()
                                 .nutrition(4)
-                                .saturationMod(1.0F)
-                                .alwaysEat()
+                                .saturationModifier(1.0F)
+                                .alwaysEdible()
                                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 120, 0, false, true), 1)
                                 .build())));
         public static final DeferredItem<PotionConeItem> POTION_SNOW_CONE = REGISTER.register("potion_snow_cone", () ->
@@ -117,8 +113,8 @@ public final class Reference {
                         .food(new FoodProperties.Builder()
                                 .fast()
                                 .nutrition(2)
-                                .saturationMod(0.3F)
-                                .alwaysEat()
+                                .saturationModifier(0.3F)
+                                .alwaysEdible()
                                 .build())));
 
         private static Item.Properties itemProps() {
@@ -176,30 +172,7 @@ public final class Reference {
 
         public static final TagKey<EntityType<?>> FIRE_MOBS = TagKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.loc("fire_mobs"));
 
-        public static final TagKey<Item> NUGGETS_DIAMOND = ItemTags.create(new ResourceLocation("forge", "nuggets/diamond"));
-        public static final TagKey<Item> NUGGETS_NETHERITE = ItemTags.create(new ResourceLocation("forge", "nuggets/netherite"));
-    }
-
-    public static final class DispenseBehaviors {
-        private DispenseBehaviors() {
-        } // Prevent instantiation
-
-        public static final AbstractProjectileDispenseBehavior CORED_SNOWBALL = new AbstractProjectileDispenseBehavior() {
-            @Override
-            protected Projectile getProjectile(Level world, Position pos, ItemStack stack) {
-                CoredSnowball entity = new CoredSnowball(world, pos.x(), pos.y(), pos.z());
-                entity.setItem(stack);
-                return entity;
-            }
-        };
-
-        public static final AbstractProjectileDispenseBehavior EXPLOSIVE_SNOWBALL = new AbstractProjectileDispenseBehavior() {
-            @Override
-            protected Projectile getProjectile(Level world, Position pos, ItemStack stack) {
-                ExplosiveSnowball entity = new ExplosiveSnowball(world, pos.x(), pos.y(), pos.z());
-                entity.setItem(stack);
-                return entity;
-            }
-        };
+        public static final TagKey<Item> NUGGETS_DIAMOND = ItemTags.create(new ResourceLocation("c", "nuggets/diamond"));
+        public static final TagKey<Item> NUGGETS_NETHERITE = ItemTags.create(new ResourceLocation("c", "nuggets/netherite"));
     }
 }

@@ -1,12 +1,10 @@
 {
   "pack": {
     "description": "Snowy Weaponry resources",
-    "neoforge": {
-      "versions": {
-        "client_resources": 22,
-        "server_data": 26
-      }
-    },
-    "pack_format": 22
+    "pack_format": 41,
+    "supported_formats": [
+      32,
+      41
+    ]
   }
 }

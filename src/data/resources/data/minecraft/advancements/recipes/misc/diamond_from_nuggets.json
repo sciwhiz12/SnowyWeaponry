@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:nuggets/diamond"
+            "items": "#c:nuggets/diamond"
           }
         ]
       },

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "tag": "forge:nuggets/netherite"
+      "tag": "c:nuggets/netherite"
     }
   },
   "pattern": [
@@ -12,6 +12,7 @@
     "nnn"
   ],
   "result": {
-    "item": "minecraft:netherite_ingot"
+    "count": 1,
+    "id": "minecraft:netherite_ingot"
   }
 }

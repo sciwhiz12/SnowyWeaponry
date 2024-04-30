@@ -1,10 +1,7 @@
 package tk.sciwhiz12.snowyweaponry;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -22,11 +19,11 @@ public final class Registration {
 
     static void registerDispenserBehavior() {
         SnowyWeaponry.LOG.debug("Registering dispenser behavior for items");
-        DispenserBlock.registerBehavior(Items.IRON_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.GOLD_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.DIAMOND_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.NETHERITE_CORED_SNOWBALL, Reference.DispenseBehaviors.CORED_SNOWBALL);
-        DispenserBlock.registerBehavior(Items.EXPLOSIVE_SNOWBALL, Reference.DispenseBehaviors.EXPLOSIVE_SNOWBALL);
+        DispenserBlock.registerProjectileBehavior(Items.IRON_CORED_SNOWBALL);
+        DispenserBlock.registerProjectileBehavior(Items.GOLD_CORED_SNOWBALL);
+        DispenserBlock.registerProjectileBehavior(Items.DIAMOND_CORED_SNOWBALL);
+        DispenserBlock.registerProjectileBehavior(Items.NETHERITE_CORED_SNOWBALL);
+        DispenserBlock.registerProjectileBehavior(Items.EXPLOSIVE_SNOWBALL);
     }
 
     @SubscribeEvent
@@ -45,11 +42,8 @@ public final class Registration {
             event.accept(Items.SNOW_CONE);
             event.accept(Items.GOLDEN_SNOW_CONE);
 
-            for (Potion potion : BuiltInRegistries.POTION) {
-                if (potion != Potions.EMPTY) {
-                    event.accept(PotionUtils.setPotion(new ItemStack(Items.POTION_SNOW_CONE.get()), potion));
-                }
-            }
+            BuiltInRegistries.POTION.holders()
+                    .forEach(potion -> event.accept(PotionContents.createItemStack(Items.POTION_SNOW_CONE.get(), potion)));
         }
     }
 }

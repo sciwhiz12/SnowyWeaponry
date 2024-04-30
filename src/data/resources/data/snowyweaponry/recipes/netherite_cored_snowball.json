@@ -13,11 +13,11 @@
       "item": "minecraft:snowball"
     },
     {
-      "tag": "forge:nuggets/netherite"
+      "tag": "c:nuggets/netherite"
     }
   ],
   "result": {
     "count": 3,
-    "item": "snowyweaponry:netherite_cored_snowball"
+    "id": "snowyweaponry:netherite_cored_snowball"
   }
 }

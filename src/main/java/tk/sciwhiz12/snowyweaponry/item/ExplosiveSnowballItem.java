@@ -1,17 +1,21 @@
 package tk.sciwhiz12.snowyweaponry.item;
 
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 import tk.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 
-public class ExplosiveSnowballItem extends Item {
+public class ExplosiveSnowballItem extends Item implements ProjectileItem {
     public ExplosiveSnowballItem(Item.Properties properties) {
         super(properties);
     }
@@ -35,5 +39,12 @@ public class ExplosiveSnowballItem extends Item {
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        ExplosiveSnowball snowball = new ExplosiveSnowball(level, pos.x(), pos.y(), pos.z());
+        snowball.setItem(stack);
+        return snowball;
     }
 }

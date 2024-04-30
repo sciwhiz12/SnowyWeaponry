@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "snowyweaponry:wafer_cone"
-            ]
+            "items": "snowyweaponry:wafer_cone"
           }
         ]
       },

@@ -13,14 +13,14 @@
       "item": "minecraft:snowball"
     },
     {
-      "tag": "forge:gunpowder"
+      "tag": "c:gunpowder"
     },
     {
-      "tag": "forge:gunpowder"
+      "tag": "c:gunpowder"
     }
   ],
   "result": {
     "count": 3,
-    "item": "snowyweaponry:explosive_snowball"
+    "id": "snowyweaponry:explosive_snowball"
   }
 }

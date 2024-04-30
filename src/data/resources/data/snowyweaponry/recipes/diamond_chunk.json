@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:gems/diamond"
+      "tag": "c:gems/diamond"
     }
   ],
   "result": {
     "count": 9,
-    "item": "snowyweaponry:diamond_chunk"
+    "id": "snowyweaponry:diamond_chunk"
   }
 }

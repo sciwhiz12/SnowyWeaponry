@@ -1,5 +1,7 @@
 package tk.sciwhiz12.snowyweaponry.item;
 
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -7,15 +9,17 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import tk.sciwhiz12.snowyweaponry.entity.CoredSnowball;
 
 import java.util.function.Supplier;
 
-public class CoredSnowballItem extends Item {
+public class CoredSnowballItem extends Item implements ProjectileItem {
     private final int thrownDamage;
     private final int lootingLevel;
     @Nullable
@@ -65,5 +69,12 @@ public class CoredSnowballItem extends Item {
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        CoredSnowball snowball = new CoredSnowball(level, pos.x(), pos.y(), pos.z());
+        snowball.setItem(stack);
+        return snowball;
     }
 }

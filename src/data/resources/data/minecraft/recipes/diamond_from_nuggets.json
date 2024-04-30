@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "n": {
-      "tag": "forge:nuggets/diamond"
+      "tag": "c:nuggets/diamond"
     }
   },
   "pattern": [
@@ -12,6 +12,7 @@
     "nnn"
   ],
   "result": {
-    "item": "minecraft:diamond"
+    "count": 1,
+    "id": "minecraft:diamond"
   }
 }

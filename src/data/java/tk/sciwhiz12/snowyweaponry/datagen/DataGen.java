@@ -1,6 +1,5 @@
 package tk.sciwhiz12.snowyweaponry.datagen;
 
-import com.google.common.collect.Maps;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -13,37 +12,47 @@ import net.minecraft.data.registries.RegistryPatchGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
+import net.minecraft.util.InclusiveRange;
 import net.minecraft.world.damagesource.DamageScaling;
 import net.minecraft.world.damagesource.DamageType;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import tk.sciwhiz12.snowyweaponry.Reference;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 import static tk.sciwhiz12.snowyweaponry.SnowyWeaponry.LOG;
 import static tk.sciwhiz12.snowyweaponry.SnowyWeaponry.MODID;
 
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGen {
     @SubscribeEvent
-    static void onGatherData(GatherDataEvent event) {
+    public static void onGatherData(GatherDataEvent event) {
         LOG.debug("Gathering data for data generation");
         final DataGenerator gen = event.getGenerator();
         final PackOutput output = event.getGenerator().getPackOutput();
         final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         final ExistingFileHelper helper = event.getExistingFileHelper();
 
+        final int clientVersion = SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES);
+        final int serverVersion = SharedConstants.getCurrentVersion().getPackVersion(PackType.SERVER_DATA);
+        final InclusiveRange<Integer> range;
+        if (clientVersion <= serverVersion) {
+            range = new InclusiveRange<>(clientVersion, serverVersion);
+        } else {
+            range = new InclusiveRange<>(serverVersion, clientVersion);
+        }
         gen.addProvider(event.includeClient() || event.includeServer(), new PackMetadataGenerator(output)
                 .add(PackMetadataSection.TYPE, new PackMetadataSection(
                         Component.literal("Snowy Weaponry resources"),
-                        SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES),
-                        Maps.asMap(Set.of(PackType.values()), SharedConstants.getCurrentVersion()::getPackVersion)
+                        Math.max(clientVersion, serverVersion),
+                        Optional.of(range)
                 )));
 
         gen.addProvider(event.includeClient(), new Languages(output));

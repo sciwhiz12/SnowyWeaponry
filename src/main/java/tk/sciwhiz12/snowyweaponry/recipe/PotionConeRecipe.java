@@ -1,12 +1,12 @@
 package tk.sciwhiz12.snowyweaponry.recipe;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -47,7 +47,7 @@ public class PotionConeRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container, RegistryAccess registry) {
+    public ItemStack assemble(CraftingContainer container, HolderLookup.Provider holderLookup) {
         ItemStack potion = ItemStack.EMPTY;
 
         for (int i = 0; i < container.getWidth(); ++i) {
@@ -64,8 +64,7 @@ public class PotionConeRecipe extends CustomRecipe {
             return ItemStack.EMPTY;
         } else {
             ItemStack ret = new ItemStack(Reference.Items.POTION_SNOW_CONE.get(), 4);
-            PotionUtils.setPotion(ret, PotionUtils.getPotion(potion));
-            PotionUtils.setCustomEffects(ret, PotionUtils.getCustomEffects(potion));
+            ret.copyFrom(potion, DataComponents.POTION_CONTENTS);
             return ret;
         }
     }

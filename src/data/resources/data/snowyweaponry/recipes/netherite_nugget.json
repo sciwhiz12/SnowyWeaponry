@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:ingots/netherite"
+      "tag": "c:ingots/netherite"
     }
   ],
   "result": {
     "count": 9,
-    "item": "snowyweaponry:netherite_nugget"
+    "id": "snowyweaponry:netherite_nugget"
   }
 }

@@ -3,13 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "forge:crops/wheat"
+      "tag": "c:crops/wheat"
     },
     {
-      "tag": "forge:crops/wheat"
+      "tag": "c:crops/wheat"
     },
     {
-      "tag": "forge:crops/wheat"
+      "tag": "c:crops/wheat"
     },
     {
       "item": "minecraft:water_bucket"
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 4,
-    "item": "snowyweaponry:wafer_cone"
+    "id": "snowyweaponry:wafer_cone"
   }
 }

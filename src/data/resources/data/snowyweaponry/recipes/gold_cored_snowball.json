@@ -4,7 +4,7 @@
   "group": "cored_snowballs",
   "key": {
     "G": {
-      "tag": "forge:nuggets/gold"
+      "tag": "c:nuggets/gold"
     },
     "s": {
       "item": "minecraft:snowball"
@@ -17,6 +17,6 @@
   ],
   "result": {
     "count": 8,
-    "item": "snowyweaponry:gold_cored_snowball"
+    "id": "snowyweaponry:gold_cored_snowball"
   }
 }

@@ -97,8 +97,8 @@ public class Recipes extends RecipeProvider {
                 .requires(Items.SNOWBALL)
                 .requires(Items.SNOWBALL)
                 .requires(Items.SNOWBALL)
-                .requires(Tags.Items.GUNPOWDER)
-                .requires(Tags.Items.GUNPOWDER)
+                .requires(Tags.Items.GUNPOWDERS)
+                .requires(Tags.Items.GUNPOWDERS)
                 .unlockedBy("has_snowball", hasItems(Items.SNOWBALL))
                 .group(cored_snowballs)
                 .save(output);
