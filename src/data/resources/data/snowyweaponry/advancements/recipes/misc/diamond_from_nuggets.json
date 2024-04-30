@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_netherite_nuggets": {
+    "has_diamond_nuggets": {
       "conditions": {
         "items": [
           {
-            "items": "#c:nuggets/netherite"
+            "items": "#c:nuggets/diamond"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:netherite_from_nuggets"
+        "recipe": "snowyweaponry:diamond_from_nuggets"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_netherite_nuggets"
+      "has_diamond_nuggets"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:netherite_from_nuggets"
+      "snowyweaponry:diamond_from_nuggets"
     ]
   }
 }
