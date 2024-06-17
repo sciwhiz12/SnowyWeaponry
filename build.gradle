@@ -76,8 +76,11 @@ repositories {
     }
 }
 
+base {
+    archivesName = "${project.name}-${mc_version}"
+}
+
 java {
-    archivesBaseName = "${project.name}-${mc_version}"
     toolchain.languageVersion = JavaLanguageVersion.of(java_version)
     withSourcesJar()
 }
