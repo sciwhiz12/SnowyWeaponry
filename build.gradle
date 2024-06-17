@@ -26,9 +26,6 @@ runs {
     configureEach {
         workingDirectory project.file('run/' + it.name) as File
 
-        systemProperty 'forge.logging.markers', logging_markers
-        systemProperty 'forge.logging.console.level', logging_console
-
         modSource sourceSets.main
     }
 
