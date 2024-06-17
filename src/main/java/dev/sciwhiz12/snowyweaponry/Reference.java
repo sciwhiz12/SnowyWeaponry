@@ -1,5 +1,11 @@
 package dev.sciwhiz12.snowyweaponry;
 
+import dev.sciwhiz12.snowyweaponry.entity.CoredSnowball;
+import dev.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
+import dev.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
+import dev.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
+import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
+import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -22,12 +28,6 @@ import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import dev.sciwhiz12.snowyweaponry.entity.CoredSnowball;
-import dev.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
-import dev.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
-import dev.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
-import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
-import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
 import java.util.function.Supplier;
 
@@ -172,7 +172,7 @@ public final class Reference {
 
         public static final TagKey<EntityType<?>> FIRE_MOBS = TagKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.loc("fire_mobs"));
 
-        public static final TagKey<Item> NUGGETS_DIAMOND = ItemTags.create(new ResourceLocation("c", "nuggets/diamond"));
-        public static final TagKey<Item> NUGGETS_NETHERITE = ItemTags.create(new ResourceLocation("c", "nuggets/netherite"));
+        public static final TagKey<Item> NUGGETS_DIAMOND = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/diamond"));
+        public static final TagKey<Item> NUGGETS_NETHERITE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/netherite"));
     }
 }

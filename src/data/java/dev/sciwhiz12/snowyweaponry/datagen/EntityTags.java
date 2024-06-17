@@ -1,13 +1,13 @@
 package dev.sciwhiz12.snowyweaponry.datagen;
 
+import dev.sciwhiz12.snowyweaponry.Reference;
+import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import dev.sciwhiz12.snowyweaponry.Reference;
-import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 
 import java.util.concurrent.CompletableFuture;
 

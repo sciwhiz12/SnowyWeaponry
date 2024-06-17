@@ -1,5 +1,6 @@
 package dev.sciwhiz12.snowyweaponry.item;
 
+import dev.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundEvents;
@@ -13,7 +14,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
-import dev.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 
 public class ExplosiveSnowballItem extends Item implements ProjectileItem {
     public ExplosiveSnowballItem(Item.Properties properties) {

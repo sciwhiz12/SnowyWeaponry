@@ -3,6 +3,7 @@ package dev.sciwhiz12.snowyweaponry.datagen;
 import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
+import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import net.minecraft.advancements.critereon.ItemPredicate.Builder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -11,7 +12,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
-import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 
 import java.util.concurrent.CompletableFuture;
 

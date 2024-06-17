@@ -1,12 +1,10 @@
 package dev.sciwhiz12.snowyweaponry;
 
 import com.mojang.logging.LogUtils;
-import dev.sciwhiz12.snowyweaponry.damage.LootingSensitiveDamageSource;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 @Mod(SnowyWeaponry.MODID)
@@ -24,11 +22,9 @@ public class SnowyWeaponry {
         if (FMLEnvironment.dist.isClient()) {
             modBus.register(ClientRegistration.class);
         }
-
-        NeoForge.EVENT_BUS.register(LootingSensitiveDamageSource.class);
     }
 
     public static ResourceLocation loc(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

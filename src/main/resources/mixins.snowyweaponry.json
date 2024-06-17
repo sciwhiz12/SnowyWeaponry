@@ -1,0 +1,9 @@
+{
+  "package": "dev.sciwhiz12.snowyweaponry.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EnchantedCountIncreaseFunctionMixin",
+    "LootItemRandomChanceWithEnchantedBonusConditionMixin"
+  ],
+  "required": true
+}
