@@ -38,21 +38,6 @@ public class DataGen {
         final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         final ExistingFileHelper helper = event.getExistingFileHelper();
 
-        final int clientVersion = SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES);
-        final int serverVersion = SharedConstants.getCurrentVersion().getPackVersion(PackType.SERVER_DATA);
-        final InclusiveRange<Integer> range;
-        if (clientVersion <= serverVersion) {
-            range = new InclusiveRange<>(clientVersion, serverVersion);
-        } else {
-            range = new InclusiveRange<>(serverVersion, clientVersion);
-        }
-        gen.addProvider(event.includeClient() || event.includeServer(), new PackMetadataGenerator(output)
-                .add(PackMetadataSection.TYPE, new PackMetadataSection(
-                        Component.literal("Snowy Weaponry resources"),
-                        Math.max(clientVersion, serverVersion),
-                        Optional.of(range)
-                )));
-
         gen.addProvider(event.includeClient(), new Languages(output));
         gen.addProvider(event.includeClient(), new ItemModels(output, helper));
 
