@@ -33,16 +33,16 @@ runs {
     }
 
     server {
-        programArgument '--nogui'
+        argument '--nogui'
     }
 
     gameTestServer {
     }
 
     data {
-        programArguments.addAll '--mod', modid, '--all'
-        programArguments.addAll '--output', sourceSets.data.resources.srcDirs[0].toString()
-        programArguments.addAll '--existing', sourceSets.main.resources.srcDirs[0].toString()
+        arguments.addAll '--mod', modid, '--all'
+        arguments.addAll '--output', sourceSets.data.resources.srcDirs[0].toString()
+        arguments.addAll '--existing', sourceSets.main.resources.srcDirs[0].toString()
 
         modSource sourceSets.data
         
