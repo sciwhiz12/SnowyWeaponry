@@ -2,6 +2,7 @@ package dev.sciwhiz12.snowyweaponry.jei;
 
 import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
+import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -10,6 +11,8 @@ import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -51,15 +54,14 @@ public class JeiIntegration implements IModPlugin {
     private static List<RecipeHolder<CraftingRecipe>> createPotionConeRecipes() {
         final Ingredient cone = Ingredient.of(Reference.Items.SNOW_CONE);
 
-        return BuiltInRegistries.POTION.holders()
+        return BuiltInRegistries.POTION.listElements()
                 .map(potion -> {
                     final Ingredient potionIngredient = DataComponentIngredient.of(false, DataComponentPredicate.builder()
                                     .expect(DataComponents.POTION_CONTENTS, new PotionContents(potion))
                                     .build(),
                             Items.POTION, Items.SPLASH_POTION
                     );
-                    final ItemStack output = PotionContents.createItemStack(Reference.Items.POTION_SNOW_CONE.get(), potion);
-                    output.setCount(4);
+                    final ItemStack output = PotionConeItem.createItemStack(4, potion);
 
                     final ShapedRecipePattern pattern = ShapedRecipePattern.of(
                             Map.of(
@@ -70,8 +72,10 @@ public class JeiIntegration implements IModPlugin {
                                     "CPC",
                                     " C ")
                     );
-                    return new RecipeHolder<CraftingRecipe>(SnowyWeaponry.loc(output.getDescriptionId()),
-                            new ShapedRecipe(output.getDescriptionId(), CraftingBookCategory.MISC, pattern, output));
+                    return new RecipeHolder<CraftingRecipe>(
+                            ResourceKey.create(Registries.RECIPE, SnowyWeaponry.loc(output.getItem().getDescriptionId())),
+                            new ShapedRecipe(output.getItem().getDescriptionId(), CraftingBookCategory.MISC, pattern, output)
+                    );
                 })
                 .toList();
     }

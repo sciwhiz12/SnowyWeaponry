@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "group": "cored_snowballs",
+  "ingredients": [
+    "minecraft:snowball",
+    "minecraft:snowball",
+    "minecraft:snowball",
+    "#c:gunpowders",
+    "#c:gunpowders"
+  ],
+  "result": {
+    "count": 3,
+    "id": "snowyweaponry:explosive_snowball"
+  }
+}

@@ -1,6 +1,7 @@
 package dev.sciwhiz12.snowyweaponry;
 
 import dev.sciwhiz12.snowyweaponry.Reference.Items;
+import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -42,8 +43,10 @@ public final class Registration {
             event.accept(Items.SNOW_CONE);
             event.accept(Items.GOLDEN_SNOW_CONE);
 
-            BuiltInRegistries.POTION.holders()
-                    .forEach(potion -> event.accept(PotionContents.createItemStack(Items.POTION_SNOW_CONE.get(), potion)));
+            BuiltInRegistries.POTION.listElements()
+                    .filter(potion -> potion.value().isEnabled(event.getFlags()))
+                    .map(potion -> PotionConeItem.createItemStack(1, potion))
+                    .forEach(event::accept);
         }
     }
 }

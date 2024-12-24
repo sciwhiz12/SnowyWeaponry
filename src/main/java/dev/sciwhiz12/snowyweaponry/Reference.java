@@ -23,8 +23,11 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
+import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -53,73 +56,82 @@ public final class Reference {
 
         static final DeferredRegister.Items REGISTER = DeferredRegister.createItems(SnowyWeaponry.MODID);
 
-        public static final DeferredItem<Item> DIAMOND_CHUNK = REGISTER.register("diamond_chunk", () ->
-                new Item(itemProps()
+        public static final DeferredItem<Item> DIAMOND_CHUNK = REGISTER.registerItem("diamond_chunk", props ->
+                new Item(props
                         .stacksTo(64)));
-        public static final DeferredItem<Item> NETHERITE_NUGGET = REGISTER.register("netherite_nugget", () ->
-                new Item(itemProps()
+        public static final DeferredItem<Item> NETHERITE_NUGGET = REGISTER.registerItem("netherite_nugget", props ->
+                new Item(props
                         .stacksTo(64)));
 
-        public static final DeferredItem<CoredSnowballItem> IRON_CORED_SNOWBALL = REGISTER.register("iron_cored_snowball", () ->
-                new CoredSnowballItem(itemProps()
+        public static final DeferredItem<CoredSnowballItem> IRON_CORED_SNOWBALL = REGISTER.registerItem("iron_cored_snowball", props ->
+                new CoredSnowballItem(props
                         .stacksTo(16),
                         2, 0));
-        public static final DeferredItem<CoredSnowballItem> GOLD_CORED_SNOWBALL = REGISTER.register("gold_cored_snowball", () ->
-                new CoredSnowballItem(itemProps()
+        public static final DeferredItem<CoredSnowballItem> GOLD_CORED_SNOWBALL = REGISTER.registerItem("gold_cored_snowball", props ->
+                new CoredSnowballItem(props
                         .stacksTo(16),
                         1, 1));
-        public static final DeferredItem<CoredSnowballItem> DIAMOND_CORED_SNOWBALL = REGISTER.register("diamond_cored_snowball", () ->
-                new CoredSnowballItem(itemProps()
+        public static final DeferredItem<CoredSnowballItem> DIAMOND_CORED_SNOWBALL = REGISTER.registerItem("diamond_cored_snowball", props ->
+                new CoredSnowballItem(props
                         .stacksTo(16),
                         3, 0, () ->
                         new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0, false, true, false)));
-        public static final DeferredItem<CoredSnowballItem> NETHERITE_CORED_SNOWBALL = REGISTER.register("netherite_cored_snowball", () ->
-                new CoredSnowballItem(itemProps()
+        public static final DeferredItem<CoredSnowballItem> NETHERITE_CORED_SNOWBALL = REGISTER.registerItem("netherite_cored_snowball", props ->
+                new CoredSnowballItem(props
                         .stacksTo(16),
                         4, 0, () ->
                         new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, true, false)));
-        public static final DeferredItem<ExplosiveSnowballItem> EXPLOSIVE_SNOWBALL = REGISTER.register("explosive_snowball", () ->
-                new ExplosiveSnowballItem(itemProps()
+        public static final DeferredItem<ExplosiveSnowballItem> EXPLOSIVE_SNOWBALL = REGISTER.registerItem("explosive_snowball", props ->
+                new ExplosiveSnowballItem(props
                         .stacksTo(8)));
 
-        public static final DeferredItem<Item> WAFER_CONE = REGISTER.register("wafer_cone", () ->
-                new Item(itemProps()
+        public static final DeferredItem<Item> WAFER_CONE = REGISTER.registerItem("wafer_cone", props ->
+                new Item(props
                         .stacksTo(32)
                         .food(new FoodProperties.Builder()
-                                .fast()
-                                .nutrition(1)
-                                .saturationModifier(0.1F)
-                                .build())));
-        public static final DeferredItem<Item> SNOW_CONE = REGISTER.register("snow_cone", () -> new Item(itemProps()
-                .stacksTo(8)
-                .food(new FoodProperties.Builder()
-                        .fast()
-                        .nutrition(2)
-                        .saturationModifier(0.2F)
-                        .build())));
-        public static final DeferredItem<Item> GOLDEN_SNOW_CONE = REGISTER.register("golden_snow_cone", () ->
-                new Item(itemProps()
+                                        .nutrition(1)
+                                        .saturationModifier(0.1F)
+                                        .build(),
+                                Consumables.defaultFood()
+                                        .consumeSeconds(Consumable.DEFAULT_CONSUME_SECONDS / 2)
+                                        .build()
+                        )));
+        public static final DeferredItem<Item> SNOW_CONE = REGISTER.registerItem("snow_cone", props ->
+                new Item(props
                         .stacksTo(8)
                         .food(new FoodProperties.Builder()
-                                .fast()
-                                .nutrition(4)
-                                .saturationModifier(1.0F)
-                                .alwaysEdible()
-                                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 120, 0, false, true), 1)
-                                .build())));
-        public static final DeferredItem<PotionConeItem> POTION_SNOW_CONE = REGISTER.register("potion_snow_cone", () ->
-                new PotionConeItem(itemProps()
+                                        .nutrition(2)
+                                        .saturationModifier(0.2F)
+                                        .build(),
+                                Consumables.defaultFood()
+                                        .consumeSeconds(Consumable.DEFAULT_CONSUME_SECONDS / 2)
+                                        .build()
+                        )));
+        public static final DeferredItem<Item> GOLDEN_SNOW_CONE = REGISTER.registerItem("golden_snow_cone", props ->
+                new Item(props
                         .stacksTo(8)
                         .food(new FoodProperties.Builder()
-                                .fast()
-                                .nutrition(2)
-                                .saturationModifier(0.3F)
-                                .alwaysEdible()
-                                .build())));
-
-        private static Item.Properties itemProps() {
-            return new Item.Properties();
-        }
+                                        .nutrition(4)
+                                        .saturationModifier(1.0F)
+                                        .alwaysEdible()
+                                        .build(),
+                                Consumables.defaultFood()
+                                        .consumeSeconds(Consumable.DEFAULT_CONSUME_SECONDS / 2)
+                                        .onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 120, 0, false, true)))
+                                        .build()
+                        )));
+        public static final DeferredItem<PotionConeItem> POTION_SNOW_CONE = REGISTER.registerItem("potion_snow_cone", props ->
+                new PotionConeItem(props
+                        .stacksTo(8)
+                        .food(new FoodProperties.Builder()
+                                        .nutrition(2)
+                                        .saturationModifier(0.3F)
+                                        .alwaysEdible()
+                                        .build(),
+                                Consumables.defaultFood()
+                                        .consumeSeconds(Consumable.DEFAULT_CONSUME_SECONDS / 2)
+                                        .build()
+                        )));
     }
 
     public static final class EntityTypes {
@@ -140,7 +152,7 @@ public final class Reference {
                         .updateInterval(10));
 
         private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, Supplier<EntityType.Builder<T>> builder) {
-            return REGISTER.register(name, () -> builder.get().build(SnowyWeaponry.loc(name).toString()));
+            return REGISTER.register(name, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.loc(name))));
         }
     }
 
@@ -161,9 +173,9 @@ public final class Reference {
 
         static final DeferredRegister<RecipeSerializer<?>> REGISTER = DeferredRegister.create(Registries.RECIPE_SERIALIZER, SnowyWeaponry.MODID);
 
-        public static final DeferredHolder<RecipeSerializer<?>, SimpleCraftingRecipeSerializer<PotionConeRecipe>> POTION_CONE_RECIPE =
+        public static final DeferredHolder<RecipeSerializer<?>, CustomRecipe.Serializer<PotionConeRecipe>> POTION_CONE_RECIPE =
                 REGISTER.register("potion_cone_recipe", () ->
-                        new SimpleCraftingRecipeSerializer<>(PotionConeRecipe::new));
+                        new CustomRecipe.Serializer<>(PotionConeRecipe::new));
     }
 
     public static final class Tags {

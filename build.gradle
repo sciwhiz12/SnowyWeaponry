@@ -12,7 +12,10 @@ version = versions.version
 println "Mod version: $version"
 
 sourceSets {
-    data
+    data.resources {
+        srcDirs += 'src/data/clientResources'
+        srcDirs += 'src/data/serverResources'
+    }
     main.resources {
         srcDirs += data.resources.srcDirs
         exclude '.cache/'
@@ -48,11 +51,28 @@ neoForge {
             programArgument '--nogui'
         }
 
-        data {
-            data()
+        clientData {
+            clientData()
             programArguments.addAll '--mod', modid, '--all'
-            programArguments.addAll '--output', sourceSets.data.resources.srcDirs[0].toString()
-            programArguments.addAll '--existing', sourceSets.main.resources.srcDirs[0].toString()
+            var srcDir = sourceSets.data.resources.srcDirs[1]
+
+            programArguments.addAll '--output', srcDir.toString()
+            for (var existingDir : (sourceSets.main.resources.srcDirs - srcDir)) {
+                programArguments.addAll '--existing', existingDir.toString()
+            }
+
+            sourceSet = sourceSets.data
+        }
+
+        serverData {
+            serverData()
+            programArguments.addAll '--mod', modid, '--all'
+            var srcDir = sourceSets.data.resources.srcDirs[2]
+
+            programArguments.addAll '--output', srcDir.toString()
+            for (var existingDir : (sourceSets.main.resources.srcDirs - srcDir)) {
+                programArguments.addAll '--existing', existingDir.toString()
+            }
 
             sourceSet = sourceSets.data
         }
@@ -100,7 +120,8 @@ dependencies {
     dataImplementation sourceSets.main.output
 
     compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+    // Commented out until JEI for 1.21.3 is released
+    // runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
 }
 
 var manifestAttributes = [

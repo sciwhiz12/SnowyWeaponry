@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": "snowyweaponry:snow_cone",
+    "g": "#c:nuggets/gold"
+  },
+  "pattern": [
+    "ggg",
+    "gSg",
+    "ggg"
+  ],
+  "result": {
+    "count": 1,
+    "id": "snowyweaponry:golden_snow_cone"
+  }
+}

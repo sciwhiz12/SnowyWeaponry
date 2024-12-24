@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#c:crops/wheat",
+    "#c:crops/wheat",
+    "#c:crops/wheat",
+    "minecraft:water_bucket"
+  ],
+  "result": {
+    "count": 4,
+    "id": "snowyweaponry:wafer_cone"
+  }
+}

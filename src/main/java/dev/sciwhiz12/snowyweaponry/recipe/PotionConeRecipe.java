@@ -1,17 +1,20 @@
 package dev.sciwhiz12.snowyweaponry.recipe;
 
 import dev.sciwhiz12.snowyweaponry.Reference;
+import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class PotionConeRecipe extends CustomRecipe {
     public PotionConeRecipe(CraftingBookCategory category) {
@@ -64,7 +67,10 @@ public class PotionConeRecipe extends CustomRecipe {
             return ItemStack.EMPTY;
         } else {
             ItemStack ret = new ItemStack(Reference.Items.POTION_SNOW_CONE.get(), 4);
-            ret.copyFrom(potion, DataComponents.POTION_CONTENTS);
+            @Nullable PotionContents potionContents = potion.get(DataComponents.POTION_CONTENTS);
+            if (potionContents != null) {
+                ret.set(DataComponents.POTION_CONTENTS, PotionConeItem.modifyEffects(potionContents));
+            }
             return ret;
         }
     }
@@ -75,10 +81,10 @@ public class PotionConeRecipe extends CustomRecipe {
 
         for (int i = 0; i < remaining.size(); ++i) {
             ItemStack item = input.getItem(i);
-            if (item.hasCraftingRemainingItem()) {
-                remaining.set(i, item.getCraftingRemainingItem());
-            } else if (item.is(Items.POTION)) { // Special case: remaining item for potion bottle is a glass bottle 
+            if (item.is(Items.POTION)) { // Special case: remaining item for potion bottle is a glass bottle
                 remaining.set(i, new ItemStack(Items.GLASS_BOTTLE));
+            } else {
+                remaining.set(i, item.getCraftingRemainder());
             }
         }
 
@@ -86,12 +92,7 @@ public class PotionConeRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= 5;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<? extends CustomRecipe> getSerializer() {
         return Reference.RecipeSerializers.POTION_CONE_RECIPE.get();
     }
 }

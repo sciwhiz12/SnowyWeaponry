@@ -6,27 +6,33 @@ import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import net.minecraft.advancements.critereon.ItemPredicate.Builder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
-import static net.minecraft.data.recipes.ShapedRecipeBuilder.shaped;
-import static net.minecraft.data.recipes.ShapelessRecipeBuilder.shapeless;
 import static net.minecraft.data.recipes.SpecialRecipeBuilder.special;
 
 public class Recipes extends RecipeProvider {
-    public Recipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider);
+    private final RegistryLookup<Item> items;
+
+    public Recipes(HolderLookup.Provider lookupProvider, RecipeOutput output) {
+        super(lookupProvider, output);
+        this.items = lookupProvider.lookupOrThrow(Registries.ITEM);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
+    protected void buildRecipes() {
         shapeless(RecipeCategory.MISC, Reference.Items.DIAMOND_CHUNK, 9)
                 .requires(Tags.Items.GEMS_DIAMOND)
                 .unlockedBy("has_diamond", hasItems(Reference.Items.DIAMOND_CHUNK))
@@ -36,7 +42,7 @@ public class Recipes extends RecipeProvider {
                 .pattern("nnn")
                 .pattern("nnn")
                 .define('n', Reference.Tags.NUGGETS_DIAMOND)
-                .unlockedBy("has_diamond_nuggets", hasItems(Builder.item().of(Reference.Tags.NUGGETS_DIAMOND).build()))
+                .unlockedBy("has_diamond_nuggets", hasItems(Builder.item().of(this.items, Reference.Tags.NUGGETS_DIAMOND).build()))
                 .save(output, SnowyWeaponry.loc("diamond_from_nuggets").toString());
 
         shapeless(RecipeCategory.MISC, Reference.Items.NETHERITE_NUGGET, 9)
@@ -48,7 +54,7 @@ public class Recipes extends RecipeProvider {
                 .pattern("nnn")
                 .pattern("nnn")
                 .define('n', Reference.Tags.NUGGETS_NETHERITE)
-                .unlockedBy("has_netherite_nuggets", hasItems(Builder.item().of(Reference.Tags.NUGGETS_NETHERITE).build()))
+                .unlockedBy("has_netherite_nuggets", hasItems(Builder.item().of(this.items, Reference.Tags.NUGGETS_NETHERITE).build()))
                 .save(output, SnowyWeaponry.loc("netherite_from_nuggets").toString());
 
         registerSnowballs(output);
@@ -111,7 +117,7 @@ public class Recipes extends RecipeProvider {
                 .requires(Tags.Items.CROPS_WHEAT)
                 .requires(Tags.Items.CROPS_WHEAT)
                 .requires(Items.WATER_BUCKET)
-                .unlockedBy("has_wheat", hasItems(Builder.item().of(Tags.Items.CROPS_WHEAT).build()))
+                .unlockedBy("has_wheat", hasItems(Builder.item().of(this.items, Tags.Items.CROPS_WHEAT).build()))
                 .save(output);
         shapeless(RecipeCategory.FOOD, Reference.Items.SNOW_CONE)
                 .requires(Reference.Items.WAFER_CONE)
@@ -130,4 +136,21 @@ public class Recipes extends RecipeProvider {
         special(PotionConeRecipe::new)
                 .save(output, RecipeSerializers.POTION_CONE_RECIPE.getId().toString());
     }
+
+    public static class Runner extends RecipeProvider.Runner {
+        public Runner(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+            super(packOutput, lookupProvider);
+        }
+
+        @Override
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
+            return new Recipes(lookupProvider, recipeOutput);
+        }
+
+        @Override
+        public String getName() {
+            return SnowyWeaponry.MODID + " Recipes";
+        }
+    }
+
 }

@@ -13,7 +13,7 @@ public class LootingHelper {
     public static int handleSnowballLooting(LootContext context) {
         // The attacker passed to this method is not the attacker we need -- we need the direct attacker
         // We obtain it directly from the LootContext instead (only if it's available)
-        if (context.getParamOrNull(LootContextParams.DIRECT_ATTACKING_ENTITY) instanceof CoredSnowball snowball
+        if (context.getOptionalParameter(LootContextParams.DIRECT_ATTACKING_ENTITY) instanceof CoredSnowball snowball
             && snowball.getItem().is(Items.GOLD_CORED_SNOWBALL)
             && snowball.getItem().getItem() instanceof CoredSnowballItem snowballItem) {
 

@@ -21,13 +21,15 @@ public class CoredSnowball extends Snowball {
         super(entityType, level);
     }
 
-    public CoredSnowball(Level level, double x, double y, double z) {
+    public CoredSnowball(Level level, double x, double y, double z, ItemStack stack) {
         super(Reference.EntityTypes.CORED_SNOWBALL.get(), level);
-        setPos(x, y, z);
+        setPos(x, y, z); // Copied from ThrowableProjectile constructor
+        setItem(stack); // Copied from ThrowableItemProjectile constructor
     }
 
-    public CoredSnowball(Level level, LivingEntity thrower) {
-        this(level, thrower.getX(), thrower.getEyeY() - 0.1D, thrower.getZ());
+    public CoredSnowball(Level level, LivingEntity thrower, ItemStack stack) {
+        // Copied from ThrowableItemProjectile constructor
+        this(level, thrower.getX(), thrower.getEyeY() - 0.1D, thrower.getZ(), stack);
         setOwner(thrower);
     }
 
