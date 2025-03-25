@@ -1,7 +1,6 @@
 package dev.sciwhiz12.snowyweaponry.recipe;
 
 import dev.sciwhiz12.snowyweaponry.Reference;
-import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
@@ -66,10 +65,10 @@ public class PotionConeRecipe extends CustomRecipe {
         if (potion.isEmpty()) {
             return ItemStack.EMPTY;
         } else {
-            ItemStack ret = new ItemStack(Reference.Items.POTION_SNOW_CONE.get(), 4);
+            ItemStack ret = Reference.Items.POTION_SNOW_CONE.toStack(4);
             @Nullable PotionContents potionContents = potion.get(DataComponents.POTION_CONTENTS);
             if (potionContents != null) {
-                ret.set(DataComponents.POTION_CONTENTS, PotionConeItem.modifyEffects(potionContents));
+                ret.set(DataComponents.POTION_CONTENTS, potionContents);
             }
             return ret;
         }

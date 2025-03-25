@@ -8,7 +8,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
-import net.minecraft.core.component.DataComponentPredicate;
+import net.minecraft.core.component.DataComponentExactPredicate;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -56,9 +56,8 @@ public class JeiIntegration implements IModPlugin {
 
         return BuiltInRegistries.POTION.listElements()
                 .map(potion -> {
-                    final Ingredient potionIngredient = DataComponentIngredient.of(false, DataComponentPredicate.builder()
-                                    .expect(DataComponents.POTION_CONTENTS, new PotionContents(potion))
-                                    .build(),
+                    final Ingredient potionIngredient = DataComponentIngredient.of(false,
+                            DataComponentExactPredicate.expect(DataComponents.POTION_CONTENTS, new PotionContents(potion)),
                             Items.POTION, Items.SPLASH_POTION
                     );
                     final ItemStack output = PotionConeItem.createItemStack(4, potion);

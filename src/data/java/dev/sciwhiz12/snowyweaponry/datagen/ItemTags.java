@@ -8,16 +8,13 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ItemTags extends ItemTagsProvider {
     public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                    CompletableFuture<TagsProvider.TagLookup<Block>> blockTags,
-                    @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, blockTags, SnowyWeaponry.MODID, existingFileHelper);
+                    CompletableFuture<TagsProvider.TagLookup<Block>> blockTags) {
+        super(output, lookupProvider, blockTags, SnowyWeaponry.MODID);
     }
 
     @Override

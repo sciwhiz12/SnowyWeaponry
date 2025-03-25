@@ -7,6 +7,7 @@ import dev.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -23,6 +24,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
@@ -75,7 +77,7 @@ public final class Reference {
                 new CoredSnowballItem(props
                         .stacksTo(16),
                         3, 0, () ->
-                        new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0, false, true, false)));
+                        new MobEffectInstance(MobEffects.SLOWNESS, 30, 0, false, true, false)));
         public static final DeferredItem<CoredSnowballItem> NETHERITE_CORED_SNOWBALL = REGISTER.registerItem("netherite_cored_snowball", props ->
                 new CoredSnowballItem(props
                         .stacksTo(16),
@@ -123,6 +125,8 @@ public final class Reference {
         public static final DeferredItem<PotionConeItem> POTION_SNOW_CONE = REGISTER.registerItem("potion_snow_cone", props ->
                 new PotionConeItem(props
                         .stacksTo(8)
+                        .component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY)
+                        .component(DataComponents.POTION_DURATION_SCALE, 1F / PotionConeItem.DURATION_DIVISOR)
                         .food(new FoodProperties.Builder()
                                         .nutrition(2)
                                         .saturationModifier(0.3F)
