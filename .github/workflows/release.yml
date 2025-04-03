@@ -1,0 +1,55 @@
+name: Publish Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+          filter: 'blob:none'
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          check-latest: true
+
+      - uses: gradle/actions/setup-gradle@v3
+        with:
+          # Read-only cache if not on repo's default branch: https://stackoverflow.com/a/68414395
+          cache-read-only: ${{ format('refs/heads/{0}', github.event.repository.default_branch) != github.ref }}
+
+      - run: ./gradlew build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Build artifacts
+          path: build/libs/*.jar
+
+      - name: Publish to GitHub Release
+        uses: Kira-NT/mc-publish@v3.3.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to Modrinth
+        if: ${{ vars.MODRINTH_ID != '' }}
+        uses: Kira-NT/mc-publish@v3.3.0
+        with:
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+      - name: Publish to CurseForge
+        if: ${{ vars.CURSEFORGE_ID != '' }}
+        uses: Kira-NT/mc-publish@v3.3.0
+        with:
+          curseforge-id: ${{ vars.CURSEFORGE_ID }}
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
