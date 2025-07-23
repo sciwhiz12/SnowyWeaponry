@@ -25,7 +25,7 @@ public class EnchantedCountIncreaseFunctionMixin {
     private int snowyweaponry$lootingOnGoldSnowball(Holder<Enchantment> enchantment, LivingEntity attacker, Operation<Integer> original, @Local(argsOnly = true) LootContext context) {
         final int lootingLevel = LootingHelper.handleSnowballLooting(context);
         if (lootingLevel >= 0) {
-            return lootingLevel;
+            return Math.max(original.call(enchantment, attacker), lootingLevel);
         }
         return original.call(enchantment, attacker);
     }
