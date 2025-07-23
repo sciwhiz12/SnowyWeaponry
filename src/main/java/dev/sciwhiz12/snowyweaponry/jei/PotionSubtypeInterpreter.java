@@ -2,7 +2,6 @@ package dev.sciwhiz12.snowyweaponry.jei;
 
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -20,15 +19,5 @@ public class PotionSubtypeInterpreter implements ISubtypeInterpreter<ItemStack> 
         if (contents == null) return null;
 
         return contents.potion().orElse(null);
-    }
-
-    @Override
-    public String getLegacyStringSubtypeInfo(ItemStack ingredient, UidContext context) {
-        if (ingredient.getComponentsPatch().isEmpty()) return "";
-
-        PotionContents contents = ingredient.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-        String itemDescriptionId = ingredient.getItem().getDescriptionId();
-        String potionEffectId = contents.potion().map(Holder::getRegisteredName).orElse("none");
-        return itemDescriptionId + ".effect_id." + potionEffectId;
     }
 }

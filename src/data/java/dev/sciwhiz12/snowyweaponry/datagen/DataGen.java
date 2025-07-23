@@ -19,7 +19,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = SnowyWeaponry.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = SnowyWeaponry.MODID)
 public class DataGen {
     @SubscribeEvent
     public static void onGatherDataClient(GatherDataEvent.Client event) {
@@ -39,7 +39,7 @@ public class DataGen {
         event.addProvider(new Recipes.Runner(output, lookupProvider));
         final BlockTagsProvider blockTags = new BlockTags(output, lookupProvider);
         event.addProvider(blockTags);
-        event.addProvider(new ItemTags(output, lookupProvider, blockTags.contentsGetter()));
+        event.addProvider(new ItemTags(output, lookupProvider));
         event.addProvider(new EntityTags(output, lookupProvider));
 
         final RegistrySetBuilder builder = new RegistrySetBuilder()

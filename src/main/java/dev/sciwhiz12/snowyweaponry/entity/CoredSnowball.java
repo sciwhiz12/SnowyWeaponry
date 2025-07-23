@@ -47,6 +47,7 @@ public class CoredSnowball extends Snowball {
         return super.getTypeName();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void onHitEntity(EntityHitResult result) {
         ItemStack stack = this.getItem();

@@ -14,6 +14,7 @@ public class DamageTypes extends DamageTypeTagsProvider {
         super(output, lookupProvider, SnowyWeaponry.MODID);
     }
 
+    @SuppressWarnings("unchecked")
     protected void addTags(HolderLookup.Provider lookupProvider) {
         this.tag(DamageTypeTags.IS_EXPLOSION).add(Reference.DamageTypes.CORED_SNOWBALL_EXPLOSION);
         this.tag(DamageTypeTags.IS_FREEZING).add(Reference.DamageTypes.CORED_SNOWBALL, Reference.DamageTypes.CORED_SNOWBALL_EXPLOSION);

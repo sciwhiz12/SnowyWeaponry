@@ -4,17 +4,14 @@ import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
 
 public class ItemTags extends ItemTagsProvider {
-    public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                    CompletableFuture<TagsProvider.TagLookup<Block>> blockTags) {
-        super(output, lookupProvider, blockTags, SnowyWeaponry.MODID);
+    public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, SnowyWeaponry.MODID);
     }
 
     @Override
