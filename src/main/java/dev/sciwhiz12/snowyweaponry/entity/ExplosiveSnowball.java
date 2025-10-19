@@ -44,7 +44,7 @@ public class ExplosiveSnowball extends Snowball {
         super.onHit(result);
         //noinspection resource
         final Level level = this.level();
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             final Registry<DamageType> damageTypes = level.registryAccess().lookup(Registries.DAMAGE_TYPE).orElseThrow();
             final Holder.Reference<DamageType> damageType = damageTypes.getOrThrow(DamageTypes.CORED_SNOWBALL_EXPLOSION);
             level.explode(this,
