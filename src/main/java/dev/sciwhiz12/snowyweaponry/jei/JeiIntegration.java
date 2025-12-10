@@ -1,5 +1,6 @@
 package dev.sciwhiz12.snowyweaponry.jei;
 /*
+TODO: Re-enable this when JEI 1.21.11 releases
 import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;

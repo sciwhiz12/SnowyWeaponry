@@ -1,5 +1,6 @@
 package dev.sciwhiz12.snowyweaponry.jei;
 /*
+TODO: Re-enable this when JEI 1.21.11 releases
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.core.component.DataComponents;
