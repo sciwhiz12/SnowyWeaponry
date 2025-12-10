@@ -1,5 +1,4 @@
-@DefaultQualifier(NonNull.class)
+@NullMarked
 package dev.sciwhiz12.snowyweaponry;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.framework.qual.DefaultQualifier;
+import org.jspecify.annotations.NullMarked;

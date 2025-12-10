@@ -1,5 +1,5 @@
 package dev.sciwhiz12.snowyweaponry.jei;
-
+/*
 import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
@@ -13,7 +13,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -30,13 +30,13 @@ import java.util.Map;
 
 @JeiPlugin
 public class JeiIntegration implements IModPlugin {
-    private static final ResourceLocation PLUGIN_UID = SnowyWeaponry.loc("jei_plugin");
+    private static final Identifier PLUGIN_UID = SnowyWeaponry.loc("jei_plugin");
 
     public JeiIntegration() { // Required for JEI plugins, see annotation javadocs
     }
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public Identifier getPluginUid() {
         return PLUGIN_UID;
     }
 
@@ -79,3 +79,4 @@ public class JeiIntegration implements IModPlugin {
                 .toList();
     }
 }
+*/

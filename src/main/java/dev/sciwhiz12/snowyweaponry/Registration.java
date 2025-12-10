@@ -3,7 +3,6 @@ package dev.sciwhiz12.snowyweaponry;
 import dev.sciwhiz12.snowyweaponry.Reference.Items;
 import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;

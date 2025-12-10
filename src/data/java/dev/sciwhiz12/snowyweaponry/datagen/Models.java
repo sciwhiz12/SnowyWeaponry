@@ -8,7 +8,7 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 
 public class Models extends ModelProvider {
@@ -35,7 +35,7 @@ public class Models extends ModelProvider {
     }
 
     private void generatePotionCone(ItemModelGenerators itemModels, Item item) {
-        ResourceLocation layeredModel = itemModels.generateLayeredItem(
+        Identifier layeredModel = itemModels.generateLayeredItem(
                 item,
                 ModelLocationUtils.getModelLocation(item, "_overlay"),
                 ModelLocationUtils.getModelLocation(item, "_base")

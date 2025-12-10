@@ -2,7 +2,7 @@ plugins {
     id 'maven-publish'
     id 'idea'
     id 'dev.sciwhiz12.gradle.simplversion' version '0.2.0'
-    id 'net.neoforged.moddev' version '2.0.115'
+    id 'net.neoforged.moddev' version '2.0.123'
 }
 
 versions {
@@ -119,8 +119,9 @@ java {
 dependencies {
     dataImplementation sourceSets.main.output
 
-    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+//    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
+//    Uncomment once JEI for 1.21.11 is out
+//    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
 }
 
 var manifestAttributes = [

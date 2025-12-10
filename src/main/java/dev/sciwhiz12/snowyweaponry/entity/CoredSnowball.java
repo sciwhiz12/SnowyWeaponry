@@ -9,12 +9,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.Snowball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 public class CoredSnowball extends Snowball {
     public CoredSnowball(EntityType<CoredSnowball> entityType, Level level) {
@@ -60,7 +59,7 @@ public class CoredSnowball extends Snowball {
 
         if (stack.getItem() instanceof CoredSnowballItem item) {
             damage = item.getDamage();
-            @Nullable MobEffectInstance effect = item.getHitEffect();
+            MobEffectInstance effect = item.getHitEffect();
             if (effect != null && entity instanceof LivingEntity livingEntity) {
                 livingEntity.addEffect(new MobEffectInstance(effect));
             }

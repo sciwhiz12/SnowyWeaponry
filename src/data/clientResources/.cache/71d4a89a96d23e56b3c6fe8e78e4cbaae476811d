@@ -1,9 +1,9 @@
-// 1.21.10	2025-10-19T19:01:01.6204049	Model Definitions - snowyweaponry
+// 1.21.11	2025-12-11T00:15:03.286499163	Model Definitions - snowyweaponry
 802238be0e467eb274aff0a92f6b76df46f002f0 assets/snowyweaponry/items/diamond_chunk.json
 0dc3d1c4b17366a26b1d2daff841ebbc18607e8e assets/snowyweaponry/items/diamond_cored_snowball.json
 977157d2ec46906273ad58f2db63c34b9f69c8b6 assets/snowyweaponry/items/explosive_snowball.json
-d16c9f3f285dd7219e28e0291d495ed953ead720 assets/snowyweaponry/items/golden_snow_cone.json
 c8d79c6f77ac815d876544bc71d53123c891b73e assets/snowyweaponry/items/gold_cored_snowball.json
+d16c9f3f285dd7219e28e0291d495ed953ead720 assets/snowyweaponry/items/golden_snow_cone.json
 6eb19527ff19579c67d1c91b14f4ae2885743ccf assets/snowyweaponry/items/iron_cored_snowball.json
 12c8360cf95f6190af5d8a760c6cda8b62503db7 assets/snowyweaponry/items/netherite_cored_snowball.json
 091804fcd017a75ef3284e5b042463804655dd63 assets/snowyweaponry/items/netherite_nugget.json
@@ -13,8 +13,8 @@ e154c095e6fd6d313a8fcaa84c7973cfefb037c7 assets/snowyweaponry/items/potion_snow_
 72e7c53a80c291eff6401d6a225e74d3c3b62294 assets/snowyweaponry/models/item/diamond_chunk.json
 1c18c50df4e8629bdfbe5a898007fdd738464ad5 assets/snowyweaponry/models/item/diamond_cored_snowball.json
 a806c557bf7bb636b272167ef7571ba2fcccb6b5 assets/snowyweaponry/models/item/explosive_snowball.json
-38929f28103fa03a8b49db3ba124a01060d8c0b6 assets/snowyweaponry/models/item/golden_snow_cone.json
 47f11937cbd4eb943d6fb4443d7bb0967bcd10dc assets/snowyweaponry/models/item/gold_cored_snowball.json
+38929f28103fa03a8b49db3ba124a01060d8c0b6 assets/snowyweaponry/models/item/golden_snow_cone.json
 4a8cffb82619e7e15ddb1a3082f840b9b2692f63 assets/snowyweaponry/models/item/iron_cored_snowball.json
 3e2e78509315014822cf398f9a0322be242de725 assets/snowyweaponry/models/item/netherite_cored_snowball.json
 b5c71555afca6ecdd02fdc1df235ce433a45fe29 assets/snowyweaponry/models/item/netherite_nugget.json

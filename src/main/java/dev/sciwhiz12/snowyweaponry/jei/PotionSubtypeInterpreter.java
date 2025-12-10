@@ -1,5 +1,5 @@
 package dev.sciwhiz12.snowyweaponry.jei;
-
+/*
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.core.component.DataComponents;
@@ -21,3 +21,4 @@ public class PotionSubtypeInterpreter implements ISubtypeInterpreter<ItemStack> 
         return contents.potion().orElse(null);
     }
 }
+*/

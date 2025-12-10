@@ -10,8 +10,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -188,7 +188,7 @@ public final class Reference {
 
         public static final TagKey<EntityType<?>> FIRE_MOBS = TagKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.loc("fire_mobs"));
 
-        public static final TagKey<Item> NUGGETS_DIAMOND = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/diamond"));
-        public static final TagKey<Item> NUGGETS_NETHERITE = ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", "nuggets/netherite"));
+        public static final TagKey<Item> NUGGETS_DIAMOND = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/diamond"));
+        public static final TagKey<Item> NUGGETS_NETHERITE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/netherite"));
     }
 }

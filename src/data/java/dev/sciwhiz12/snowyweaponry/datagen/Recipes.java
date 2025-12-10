@@ -4,23 +4,21 @@ import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
-import net.minecraft.advancements.critereon.ItemPredicate.Builder;
+import net.minecraft.advancements.criterion.ItemPredicate.Builder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
-import static net.minecraft.advancements.critereon.InventoryChangeTrigger.TriggerInstance.hasItems;
+import static net.minecraft.advancements.criterion.InventoryChangeTrigger.TriggerInstance.hasItems;
 import static net.minecraft.data.recipes.SpecialRecipeBuilder.special;
 
 public class Recipes extends RecipeProvider {
