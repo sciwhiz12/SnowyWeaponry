@@ -13,7 +13,7 @@ public class BlockTags extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
+    protected void addTags(HolderLookup.Provider lookupProvider) {
         // We don't add block tags of our own, but we need this instance for creating ItemTags
     }
 }
