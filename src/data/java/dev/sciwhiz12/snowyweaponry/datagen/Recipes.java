@@ -41,7 +41,7 @@ public class Recipes extends RecipeProvider {
                 .pattern("nnn")
                 .define('n', Reference.Tags.NUGGETS_DIAMOND)
                 .unlockedBy("has_diamond_nuggets", hasItems(Builder.item().of(this.items, Reference.Tags.NUGGETS_DIAMOND).build()))
-                .save(output, SnowyWeaponry.loc("diamond_from_nuggets").toString());
+                .save(output, SnowyWeaponry.id("diamond_from_nuggets").toString());
 
         shapeless(RecipeCategory.MISC, Reference.Items.NETHERITE_NUGGET, 9)
                 .requires(Tags.Items.INGOTS_NETHERITE)
@@ -53,7 +53,7 @@ public class Recipes extends RecipeProvider {
                 .pattern("nnn")
                 .define('n', Reference.Tags.NUGGETS_NETHERITE)
                 .unlockedBy("has_netherite_nuggets", hasItems(Builder.item().of(this.items, Reference.Tags.NUGGETS_NETHERITE).build()))
-                .save(output, SnowyWeaponry.loc("netherite_from_nuggets").toString());
+                .save(output, SnowyWeaponry.id("netherite_from_nuggets").toString());
 
         registerSnowballs(output);
 

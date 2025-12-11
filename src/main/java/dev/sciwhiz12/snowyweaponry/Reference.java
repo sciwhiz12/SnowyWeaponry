@@ -156,7 +156,7 @@ public final class Reference {
                         .updateInterval(10));
 
         private static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, Supplier<EntityType.Builder<T>> builder) {
-            return REGISTER.register(name, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.loc(name))));
+            return REGISTER.register(name, () -> builder.get().build(ResourceKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.id(name))));
         }
     }
 
@@ -165,10 +165,10 @@ public final class Reference {
         } // Prevent instantiation
 
         public static final ResourceKey<DamageType> CORED_SNOWBALL = ResourceKey.create(Registries.DAMAGE_TYPE,
-                SnowyWeaponry.loc("cored_snowball"));
+                SnowyWeaponry.id("cored_snowball"));
 
         public static final ResourceKey<DamageType> CORED_SNOWBALL_EXPLOSION = ResourceKey.create(Registries.DAMAGE_TYPE,
-                SnowyWeaponry.loc("cored_snowball_explosion"));
+                SnowyWeaponry.id("cored_snowball_explosion"));
     }
 
     public static final class RecipeSerializers {
@@ -186,7 +186,7 @@ public final class Reference {
         private Tags() {
         } // Prevent instantiation
 
-        public static final TagKey<EntityType<?>> FIRE_MOBS = TagKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.loc("fire_mobs"));
+        public static final TagKey<EntityType<?>> FIRE_MOBS = TagKey.create(Registries.ENTITY_TYPE, SnowyWeaponry.id("fire_mobs"));
 
         public static final TagKey<Item> NUGGETS_DIAMOND = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/diamond"));
         public static final TagKey<Item> NUGGETS_NETHERITE = ItemTags.create(Identifier.fromNamespaceAndPath("c", "nuggets/netherite"));

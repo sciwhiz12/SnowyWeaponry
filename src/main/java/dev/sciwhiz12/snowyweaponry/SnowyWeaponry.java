@@ -24,7 +24,7 @@ public class SnowyWeaponry {
         }
     }
 
-    public static Identifier loc(String path) {
+    public static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(MODID, path);
     }
 }
