@@ -1,6 +1,5 @@
 package dev.sciwhiz12.snowyweaponry.jei;
-/*
-TODO: Re-enable this when JEI 1.21.11 releases
+
 import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
@@ -31,7 +30,7 @@ import java.util.Map;
 
 @JeiPlugin
 public class JeiIntegration implements IModPlugin {
-    private static final Identifier PLUGIN_UID = SnowyWeaponry.loc("jei_plugin");
+    private static final Identifier PLUGIN_UID = SnowyWeaponry.id("jei_plugin");
 
     public JeiIntegration() { // Required for JEI plugins, see annotation javadocs
     }
@@ -73,11 +72,10 @@ public class JeiIntegration implements IModPlugin {
                                     " C ")
                     );
                     return new RecipeHolder<CraftingRecipe>(
-                            ResourceKey.create(Registries.RECIPE, SnowyWeaponry.loc(output.getItem().getDescriptionId())),
+                            ResourceKey.create(Registries.RECIPE, SnowyWeaponry.id(output.getItem().getDescriptionId())),
                             new ShapedRecipe(output.getItem().getDescriptionId(), CraftingBookCategory.MISC, pattern, output)
                     );
                 })
                 .toList();
     }
 }
-*/

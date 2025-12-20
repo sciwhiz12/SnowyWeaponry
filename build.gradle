@@ -119,9 +119,8 @@ java {
 dependencies {
     dataImplementation sourceSets.main.output
 
-//    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
-//    Uncomment once JEI for 1.21.11 is out
-//    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
 }
 
 var manifestAttributes = [
