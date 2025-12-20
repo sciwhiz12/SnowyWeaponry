@@ -13,7 +13,6 @@ import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import org.jspecify.annotations.Nullable;
 
 public class PotionConeRecipe extends CustomRecipe {
     public PotionConeRecipe(CraftingBookCategory category) {
@@ -66,7 +65,7 @@ public class PotionConeRecipe extends CustomRecipe {
             return ItemStack.EMPTY;
         } else {
             ItemStack ret = Reference.Items.POTION_SNOW_CONE.toStack(4);
-            @Nullable PotionContents potionContents = potion.get(DataComponents.POTION_CONTENTS);
+            PotionContents potionContents = potion.get(DataComponents.POTION_CONTENTS);
             if (potionContents != null) {
                 ret.set(DataComponents.POTION_CONTENTS, potionContents);
             }
