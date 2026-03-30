@@ -1,3 +1,4 @@
+/*
 package dev.sciwhiz12.snowyweaponry.jei;
 
 import dev.sciwhiz12.snowyweaponry.Reference;
@@ -79,3 +80,4 @@ public class JeiIntegration implements IModPlugin {
                 .toList();
     }
 }
+*/

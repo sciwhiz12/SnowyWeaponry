@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_imbue",
+  "category": "misc",
+  "material": "snowyweaponry:snow_cone",
+  "result": {
+    "count": 8,
+    "id": "snowyweaponry:potion_snow_cone"
+  },
+  "source": [
+    "minecraft:potion",
+    "minecraft:splash_potion"
+  ]
+}

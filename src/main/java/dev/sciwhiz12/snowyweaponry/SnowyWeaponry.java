@@ -16,7 +16,6 @@ public class SnowyWeaponry {
         Reference.TAB_REGISTER.register(modBus);
         Reference.Items.REGISTER.register(modBus);
         Reference.EntityTypes.REGISTER.register(modBus);
-        Reference.RecipeSerializers.REGISTER.register(modBus);
 
         modBus.register(Registration.class);
         if (FMLEnvironment.getDist().isClient()) {

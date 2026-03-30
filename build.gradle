@@ -31,11 +31,6 @@ neoForge {
 
     addModdingDependenciesTo(sourceSets.data)
 
-    parchment {
-        minecraftVersion = project.parchment_minecraft_version
-        mappingsVersion = project.parchment_mappings_version
-    }
-
     runs {
         configureEach {
             gameDirectory.set(project.file('run/' + it.name))
@@ -119,8 +114,9 @@ java {
 dependencies {
     dataImplementation sourceSets.main.output
 
-    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+    // Uncomment this once JEI for 26.1 is released
+//    compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
+//    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
 }
 
 var manifestAttributes = [

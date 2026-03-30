@@ -5,7 +5,6 @@ import dev.sciwhiz12.snowyweaponry.entity.ExplosiveSnowball;
 import dev.sciwhiz12.snowyweaponry.item.CoredSnowballItem;
 import dev.sciwhiz12.snowyweaponry.item.ExplosiveSnowballItem;
 import dev.sciwhiz12.snowyweaponry.item.PotionConeItem;
-import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -28,8 +27,6 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -169,17 +166,6 @@ public final class Reference {
 
         public static final ResourceKey<DamageType> CORED_SNOWBALL_EXPLOSION = ResourceKey.create(Registries.DAMAGE_TYPE,
                 SnowyWeaponry.id("cored_snowball_explosion"));
-    }
-
-    public static final class RecipeSerializers {
-        private RecipeSerializers() {
-        } // Prevent instantiation
-
-        static final DeferredRegister<RecipeSerializer<?>> REGISTER = DeferredRegister.create(Registries.RECIPE_SERIALIZER, SnowyWeaponry.MODID);
-
-        public static final DeferredHolder<RecipeSerializer<?>, CustomRecipe.Serializer<PotionConeRecipe>> POTION_CONE_RECIPE =
-                REGISTER.register("potion_cone_recipe", () ->
-                        new CustomRecipe.Serializer<>(PotionConeRecipe::new));
     }
 
     public static final class Tags {

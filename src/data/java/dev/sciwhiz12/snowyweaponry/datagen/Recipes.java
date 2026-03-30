@@ -1,9 +1,7 @@
 package dev.sciwhiz12.snowyweaponry.datagen;
 
 import dev.sciwhiz12.snowyweaponry.Reference;
-import dev.sciwhiz12.snowyweaponry.Reference.RecipeSerializers;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
-import dev.sciwhiz12.snowyweaponry.recipe.PotionConeRecipe;
 import net.minecraft.advancements.criterion.ItemPredicate.Builder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.RegistryLookup;
@@ -13,13 +11,16 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.ImbueRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.advancements.criterion.InventoryChangeTrigger.TriggerInstance.hasItems;
-import static net.minecraft.data.recipes.SpecialRecipeBuilder.special;
+import static net.minecraft.data.recipes.CustomCraftingRecipeBuilder.customCrafting;
 
 public class Recipes extends RecipeProvider {
     private final RegistryLookup<Item> items;
@@ -131,8 +132,18 @@ public class Recipes extends RecipeProvider {
                 .define('S', Reference.Items.SNOW_CONE)
                 .unlockedBy("has_snow_cone", hasItems(Reference.Items.SNOW_CONE))
                 .save(output);
-        special(PotionConeRecipe::new)
-                .save(output, RecipeSerializers.POTION_CONE_RECIPE.getId().toString());
+        customCrafting(
+                        RecipeCategory.MISC,
+                        (commonInfo, bookInfo) -> new ImbueRecipe(
+                                commonInfo,
+                                bookInfo,
+                                Ingredient.of(Items.POTION, Items.SPLASH_POTION),
+                                Ingredient.of(Reference.Items.SNOW_CONE),
+                                new ItemStackTemplate(Reference.Items.POTION_SNOW_CONE, 8)
+                        )
+                )
+                .unlockedBy("has_snow_cone", this.has(Reference.Items.SNOW_CONE))
+                .save(this.output, "potion_cone");
     }
 
     public static class Runner extends RecipeProvider.Runner {

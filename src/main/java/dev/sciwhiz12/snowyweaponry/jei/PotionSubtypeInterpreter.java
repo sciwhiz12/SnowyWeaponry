@@ -1,3 +1,4 @@
+/*
 package dev.sciwhiz12.snowyweaponry.jei;
 
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
@@ -21,3 +22,4 @@ public class PotionSubtypeInterpreter implements ISubtypeInterpreter<ItemStack> 
         return contents.potion().orElse(null);
     }
 }
+*/

@@ -5,8 +5,8 @@ import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
@@ -37,8 +37,8 @@ public class Models extends ModelProvider {
     private void generatePotionCone(ItemModelGenerators itemModels, Item item) {
         Identifier layeredModel = itemModels.generateLayeredItem(
                 item,
-                ModelLocationUtils.getModelLocation(item, "_overlay"),
-                ModelLocationUtils.getModelLocation(item, "_base")
+                TextureMapping.getItemTexture(item, "_overlay"),
+                TextureMapping.getItemTexture(item, "_base")
         );
         itemModels.addPotionTint(item, layeredModel);
     }

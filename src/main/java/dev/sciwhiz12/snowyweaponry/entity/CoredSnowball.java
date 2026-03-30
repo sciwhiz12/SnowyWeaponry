@@ -53,7 +53,7 @@ public class CoredSnowball extends Snowball {
         Entity entity = result.getEntity();
 
         int damage = 0;
-        if (entity.getType().is(Reference.Tags.FIRE_MOBS)) {
+        if (entity.is(Reference.Tags.FIRE_MOBS)) {
             damage += 3; // Fire mobs damage modifier
         }
 
