@@ -2,7 +2,7 @@ package dev.sciwhiz12.snowyweaponry.datagen;
 
 import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
-import net.minecraft.advancements.criterion.ItemPredicate.Builder;
+import net.minecraft.advancements.predicates.ItemPredicate.Builder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
-import static net.minecraft.advancements.criterion.InventoryChangeTrigger.TriggerInstance.hasItems;
+import static net.minecraft.advancements.triggers.InventoryChangeTrigger.TriggerInstance.hasItems;
 import static net.minecraft.data.recipes.CustomCraftingRecipeBuilder.customCrafting;
 
 public class Recipes extends RecipeProvider {

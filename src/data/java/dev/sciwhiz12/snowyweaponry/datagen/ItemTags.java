@@ -21,9 +21,9 @@ public class ItemTags extends ItemTagsProvider {
                 .addTag(Reference.Tags.NUGGETS_NETHERITE);
 
         tag(Reference.Tags.NUGGETS_DIAMOND)
-                .add(Reference.Items.DIAMOND_CHUNK.get());
+                .add(Reference.Items.DIAMOND_CHUNK.getKey());
         tag(Reference.Tags.NUGGETS_NETHERITE)
-                .add(Reference.Items.NETHERITE_NUGGET.get());
+                .add(Reference.Items.NETHERITE_NUGGET.getKey());
     }
 
     public String getName() {

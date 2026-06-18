@@ -5,7 +5,7 @@ import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypeIds;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,6 +17,6 @@ public class EntityTags extends EntityTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         tag(Reference.Tags.FIRE_MOBS)
-                .add(EntityType.BLAZE);
+                .add(EntityTypeIds.BLAZE);
     }
 }

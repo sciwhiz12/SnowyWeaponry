@@ -115,7 +115,9 @@ dependencies {
     dataImplementation sourceSets.main.output
 
     compileOnly "mezz.jei:jei-${jei_mc_version}-neoforge-api:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+    if (jei_mc_version == mc_version) {
+        runtimeOnly "mezz.jei:jei-${jei_mc_version}-neoforge:${jei_version}"
+    }
 }
 
 var manifestAttributes = [

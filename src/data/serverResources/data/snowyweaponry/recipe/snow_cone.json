@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "snowyweaponry:wafer_cone",
     "minecraft:snowball",
