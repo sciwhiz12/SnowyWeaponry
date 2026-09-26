@@ -40,14 +40,14 @@ jobs:
           path: build/libs/*.jar
 
       - name: Publish to GitHub Release
-        uses: Kira-NT/mc-publish@v3.3.0
+        uses: Kira-NT/mc-publish@v3.3.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           version: ${{ steps.version.outputs.version }}
 
       - name: Publish to Modrinth
         if: ${{ vars.MODRINTH_ID != '' }}
-        uses: Kira-NT/mc-publish@v3.3.0
+        uses: Kira-NT/mc-publish@v3.3.1
         with:
           modrinth-id: ${{ vars.MODRINTH_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
@@ -55,7 +55,7 @@ jobs:
 
       - name: Publish to CurseForge
         if: ${{ vars.CURSEFORGE_ID != '' }}
-        uses: Kira-NT/mc-publish@v3.3.0
+        uses: Kira-NT/mc-publish@v3.3.1
         with:
           curseforge-id: ${{ vars.CURSEFORGE_ID }}
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
