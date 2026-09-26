@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:golden_snow_cone"
+        "recipes": "snowyweaponry:golden_snow_cone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

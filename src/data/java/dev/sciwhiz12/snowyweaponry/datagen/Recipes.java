@@ -2,32 +2,25 @@ package dev.sciwhiz12.snowyweaponry.datagen;
 
 import dev.sciwhiz12.snowyweaponry.Reference;
 import dev.sciwhiz12.snowyweaponry.SnowyWeaponry;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.predicates.ItemPredicate.Builder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderLookup.RegistryLookup;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.world.item.Item;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.ImbueRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.neoforged.neoforge.common.Tags;
-
-import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.advancements.triggers.InventoryChangeTrigger.TriggerInstance.hasItems;
 import static net.minecraft.data.recipes.CustomCraftingRecipeBuilder.customCrafting;
 
 public class Recipes extends RecipeProvider {
-    private final RegistryLookup<Item> items;
-
-    public Recipes(HolderLookup.Provider lookupProvider, RecipeOutput output) {
-        super(lookupProvider, output);
-        this.items = lookupProvider.lookupOrThrow(Registries.ITEM);
+    public Recipes(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+        super(recipeOutput, advancementOutput);
     }
 
     @Override
@@ -143,23 +136,6 @@ public class Recipes extends RecipeProvider {
                         )
                 )
                 .unlockedBy("has_snow_cone", this.has(Reference.Items.SNOW_CONE))
-                .save(this.output, "potion_cone");
+                .save(this.output, Reference.Items.POTION_SNOW_CONE.getRegisteredName());
     }
-
-    public static class Runner extends RecipeProvider.Runner {
-        public Runner(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-            super(packOutput, lookupProvider);
-        }
-
-        @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
-            return new Recipes(lookupProvider, recipeOutput);
-        }
-
-        @Override
-        public String getName() {
-            return SnowyWeaponry.MODID + " Recipes";
-        }
-    }
-
 }

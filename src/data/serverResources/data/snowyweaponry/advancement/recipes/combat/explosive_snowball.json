@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:explosive_snowball"
+        "recipes": "snowyweaponry:explosive_snowball"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

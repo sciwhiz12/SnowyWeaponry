@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:snow_cone"
+        "recipes": "snowyweaponry:snow_cone"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

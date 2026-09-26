@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:diamond_chunk"
+        "recipes": "snowyweaponry:diamond_chunk"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

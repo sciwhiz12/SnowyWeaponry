@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:gold_cored_snowball"
+        "recipes": "snowyweaponry:gold_cored_snowball"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

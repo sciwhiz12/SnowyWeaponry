@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:netherite_from_nuggets"
+        "recipes": "snowyweaponry:netherite_from_nuggets"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

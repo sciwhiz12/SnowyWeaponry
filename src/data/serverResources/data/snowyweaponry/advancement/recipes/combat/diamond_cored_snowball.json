@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:diamond_cored_snowball"
+        "recipes": "snowyweaponry:diamond_cored_snowball"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

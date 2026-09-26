@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "snowyweaponry:diamond_from_nuggets"
+        "recipes": "snowyweaponry:diamond_from_nuggets"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
