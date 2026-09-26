@@ -5,6 +5,7 @@ import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 @Mod(SnowyWeaponry.MODID)
@@ -21,6 +22,8 @@ public class SnowyWeaponry {
         if (FMLEnvironment.getDist().isClient()) {
             modBus.register(ClientRegistration.class);
         }
+
+        NeoForge.EVENT_BUS.addListener(LootingHelper::onEnchantedEntityLoot);
     }
 
     public static Identifier id(String path) {

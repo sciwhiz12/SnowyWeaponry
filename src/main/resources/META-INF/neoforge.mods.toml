@@ -16,9 +16,6 @@ Adds different snow-based weaponry. (and snow cones!)
 §oThis mod was an entry for §2MMD§r's §bWinterJam 2020§r.
 '''
 
-[[mixins]]
-    config="mixins.snowyweaponry.json"
-
 [[dependencies.snowyweaponry]]
     modId="neoforge"
     type="required"
